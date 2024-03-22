@@ -1,6 +1,6 @@
 export const personalData = {
   name: "HẢI PHẠM",
-  profile: '/profile.png',
+  profile: '/haiphamcoder.github.io/profile.png',
   designation: "Software Developer",
   description: "My name is Hai. I am a professional and enthusiastic programmer in my daily life. I am a quick learner with a self-learning attitude. I love to learn and explore new technologies and am passionate about problem-solving. I am available for any kind of job opportunity that suits my skills and interests.",
   email: 'ngochai285@gmail.com',
