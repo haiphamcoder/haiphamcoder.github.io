@@ -65,6 +65,7 @@ import swift from '/public/svg/skills/swift.svg';
 import tailwind from '/public/svg/skills/tailwind.svg';
 import tensorflow from '/public/svg/skills/tensorflow.svg';
 import typescript from '/public/svg/skills/typescript.svg';
+import ubuntu from '/public/svg/skills/ubuntu.svg';
 import unity from '/public/svg/skills/unity.svg';
 import vitejs from '/public/svg/skills/vitejs.svg';
 import vue from '/public/svg/skills/vue.svg';
@@ -219,6 +220,8 @@ export const skillsImage = (skill) => {
       return picsart;
     case 'sketch':
       return sketch;
+    case 'ubuntu':
+      return ubuntu;
     case 'unity':
       return unity;
     case 'wolframalpha':
