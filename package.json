@@ -1,6 +1,6 @@
 {
   "name": "developer-portfolio",
-  "description": "Portfolio of Abu Said",
+  "description": "Hải Phạm's Portfolio",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -27,6 +27,6 @@
     "eslint-config-next": "latest",
     "postcss": "latest",
     "sass": "^1.69.5",
-    "tailwindcss": "latest"
+    "tailwindcss": "^3.4.1"
   }
 }
