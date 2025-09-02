@@ -1,0 +1,14 @@
+{
+  "posts": [
+    {
+      "slug": "hello-world",
+      "date": "2025-09-02",
+      "tags": ["intro", "meta"],
+      "title": { "vi": "Hello World", "en": "Hello World" },
+      "excerpt": { "vi": "Bài viết mở màn cho blog: mục tiêu, nội dung và lộ trình.", "en": "Kickoff post for the blog: goals, topics and roadmap." },
+      "files": { "vi": "hello-world.md", "en": "hello-world.en.md" }
+    }
+  ]
+}
+
+

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Blog cá nhân của Hải Phạm - Backend Engineer (Java, Spring Boot)" />
+  <title>Hải Phạm | Backend Blog</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script src="js/i18n.js"></script>
+  <script defer src="js/theme.js"></script>
+  <script defer src="js/nav.js"></script>
+  <script defer src="js/main.js"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="/" data-i18n="brand">Hải Phạm</a>
+      <div class="header-actions">
+        <nav class="nav" aria-label="Primary">
+          <a href="index.html" class="active" data-i18n="nav.home">Home</a>
+          <a href="blog.html" data-i18n="nav.blog">Blog</a>
+          <a href="about.html" data-i18n="nav.about">About</a>
+          <a href="contact.html" data-i18n="nav.contact">Contact</a>
+        </nav>
+        <button class="nav-toggle" id="navToggle" aria-label="Menu" aria-expanded="false"><span class="burger"></span></button>
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme"></button>
+        <button class="theme-toggle" id="langToggle" aria-label="Toggle language">VI</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <img src="assets/avatar.jpg" alt="Avatar" class="avatar" onerror="this.onerror=null;this.src='assets/avatar.svg'" />
+      <div class="hero-text">
+        <h1 data-i18n="hero.title">Xin chào, mình là Hải Phạm</h1>
+        <p data-i18n="hero.subtitle">Backend Engineer • Java & Spring Boot • Quan tâm hệ thống phân tán, Big Data, hiệu năng và kiến trúc.</p>
+        <div class="hero-actions">
+          <a class="btn" href="blog.html" data-i18n="hero.readBlog">Đọc blog</a>
+          <a class="btn-outline" href="about.html" data-i18n="hero.learnMore">Tìm hiểu thêm</a>
+        </div>
+        <div class="socials">
+          <a href="https://github.com/haiphamcoder" target="_blank" rel="noopener" data-i18n="socials.github">GitHub</a>
+          <span>·</span>
+          <a href="https://www.linkedin.com/in/haiphamcoder" target="_blank" rel="noopener" data-i18n="socials.linkedin">LinkedIn</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="latest">
+      <div class="section-header">
+        <h2 data-i18n="section.latest">Bài viết mới</h2>
+        <a class="link" href="blog.html" data-i18n="viewAll">Xem tất cả →</a>
+      </div>
+      <div id="latestPosts" class="post-grid" aria-live="polite"></div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-copy">© <span id="year"></span> Hải Phạm.</div>
+    </div>
+  </footer>
+
+  <script>
+    // Update year
+    document.getElementById('year').textContent = new Date().getFullYear();
+    // Load latest posts preview
+    window.addEventListener('DOMContentLoaded', () => {
+      if (window.I18N) I18N.render();
+      if (window.Blog && Blog.loadLatestPostsPreview) {
+        Blog.loadLatestPostsPreview('#latestPosts');
+      }
+    });
+  </script>
+</body>
+</html>
+
+
