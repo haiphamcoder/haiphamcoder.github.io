@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Giới thiệu về Hải Phạm - Backend Engineer" />
+  <meta name="description" content="CV Online - Hải Phạm | Junior Backend Engineer | Java | Spring Boot" />
   <title>About | Hải Phạm</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -34,22 +34,178 @@
   </header>
 
   <main class="container">
-    <article class="prose">
-      <h1 data-i18n="about.title">Về tôi</h1>
-      <p data-i18n="about.p1">Tôi là <strong>Hải Phạm</strong>, Backend Engineer tập trung vào <strong>Java</strong> và <strong>Spring Boot</strong>. Tôi yêu thích kiến trúc hệ thống, hiệu năng, tối ưu hóa cơ sở dữ liệu và các hệ phân tán.</p>
-      <p data-i18n="about.p2">Blog này là nơi tôi tổng hợp kiến thức, kinh nghiệm thực chiến, và ghi chú kỹ thuật khi làm việc với microservices, big data, message queue, và các bài toán hiệu năng.</p>
+    <div class="cv-layout">
+      <!-- Sidebar -->
+      <aside class="cv-sidebar">
+        <div class="cv-avatar">
+          <img src="assets/avatar.jpg" alt="Hải Phạm" onerror="this.src='assets/avatar.svg'" />
+        </div>
+        
+        <div class="cv-contact">
+          <h3 data-i18n="cv.contact">Liên hệ</h3>
+          <div class="contact-item">
+            <span class="contact-icon">📧</span>
+            <a href="mailto:ngochai285nd@gmail.com">ngochai285nd@gmail.com</a>
+          </div>
+          <div class="contact-item">
+            <span class="contact-icon">📍</span>
+            <span data-i18n="cv.location">Hà Nội, Việt Nam</span>
+          </div>
+          <div class="contact-item">
+            <span class="contact-icon">💼</span>
+            <a href="https://www.linkedin.com/in/hai-pham-ngoc-b095041b4" target="_blank" rel="noopener">LinkedIn</a>
+          </div>
+          <div class="contact-item">
+            <span class="contact-icon">💻</span>
+            <a href="https://github.com/haiphamcoder" target="_blank" rel="noopener">GitHub</a>
+          </div>
+        </div>
 
-      <h2 data-i18n="about.skills">Kỹ năng chính</h2>
-      <ul>
-        <li data-i18n="about.skills.items">Java, Spring Boot, Spring Cloud; Kafka, Redis, Elasticsearch; MySQL/PostgreSQL; Thiết kế API, bảo mật, observability</li>
-      </ul>
+        <div class="cv-skills">
+          <h3 data-i18n="cv.skills">Kỹ năng</h3>
+          <div class="skill-category">
+            <h4 data-i18n="cv.skills.programming">Ngôn ngữ lập trình</h4>
+            <div class="skill-tags">
+              <span class="skill-tag primary">Java</span>
+              <span class="skill-tag">SQL</span>
+              <span class="skill-tag learning">Rust</span>
+            </div>
+          </div>
+          <div class="skill-category">
+            <h4 data-i18n="cv.skills.frameworks">Framework & Tools</h4>
+            <div class="skill-tags">
+              <span class="skill-tag">Spring Boot</span>
+              <span class="skill-tag">Hibernate</span>
+              <span class="skill-tag">Docker</span>
+              <span class="skill-tag">Apache Kafka</span>
+              <span class="skill-tag">Git</span>
+              <span class="skill-tag">Linux</span>
+            </div>
+          </div>
+          <div class="skill-category">
+            <h4 data-i18n="cv.skills.knowledge">Kiến thức</h4>
+            <div class="skill-tags">
+              <span class="skill-tag">OOP</span>
+              <span class="skill-tag">REST API</span>
+              <span class="skill-tag">Database</span>
+              <span class="skill-tag">Message Queue</span>
+              <span class="skill-tag">Distributed Systems</span>
+              <span class="skill-tag">Cryptography</span>
+              <span class="skill-tag">Security</span>
+            </div>
+          </div>
+        </div>
+      </aside>
 
-      <h2 data-i18n="about.contact">Liên hệ</h2>
-      <p>
-        GitHub: <a href="https://github.com/haiphamcoder" target="_blank" rel="noopener">@haiphamcoder</a><br/>
-        LinkedIn: <a href="https://www.linkedin.com/in/hai-pham-ngoc-b095041b4" target="_blank" rel="noopener">haiphamcoder</a>
-      </p>
-    </article>
+      <!-- Main Content -->
+      <section class="cv-content">
+        <header class="cv-header">
+          <h1>Hải Phạm</h1>
+          <p class="cv-title" data-i18n="cv.title">Junior Backend Engineer | Java | Spring Boot</p>
+          <p class="cv-intro" data-i18n="cv.intro">
+            Tôi là một Junior Backend Engineer đam mê phát triển các hệ thống backend mạnh mẽ và hiệu quả. 
+            Với nền tảng vững chắc về Java và Spring Boot, tôi luôn tìm hiểu và áp dụng các công nghệ mới 
+            để xây dựng những giải pháp phần mềm chất lượng cao.
+          </p>
+        </header>
+
+        <div class="cv-section">
+          <h2 data-i18n="cv.education.title">🎓 Học vấn</h2>
+          <div class="cv-item">
+            <div class="cv-item-header">
+              <h3 data-i18n="cv.education.school">Trường Công nghệ Thông tin và Truyền Thông - Đại học Bách khoa Hà Nội</h3>
+              <span class="cv-date">2020 - 2025</span>
+            </div>
+            <p class="cv-item-desc" data-i18n="cv.education.degree">Kỹ sư Công nghệ Thông tin</p>
+          </div>
+        </div>
+
+        <div class="cv-section">
+          <h2 data-i18n="cv.projects.title">🚀 Dự án cá nhân</h2>
+          <div class="cv-item">
+            <div class="cv-item-header">
+              <h3 data-i18n="cv.projects.crypto.title">Crypto Utils - Java Cryptography Library</h3>
+              <span class="cv-date">2025</span>
+            </div>
+            <p class="cv-item-desc" data-i18n="cv.projects.crypto.desc">
+              Thư viện Java toàn diện cho cryptography, hashing, encoding và xử lý dữ liệu. 
+              Hỗ trợ CRC algorithms, hash functions (MD, SHA, Keccak, RIPEMD, BLAKE), 
+              encryption (AES, DES, RC4), digital signatures (ECDSA, RSA) và text processing utilities.
+            </p>
+            <div class="project-tech">
+              <span class="tech-tag">Java</span>
+              <span class="tech-tag">Maven</span>
+              <span class="tech-tag">Cryptography</span>
+              <span class="tech-tag">AES</span>
+              <span class="tech-tag">SHA-3</span>
+              <span class="tech-tag">RSA</span>
+            </div>
+            <div class="project-links">
+              <a href="https://github.com/haiphamcoder/crypto-utils" target="_blank" rel="noopener">
+                🔗 <span data-i18n="cv.projects.github">GitHub Repository</span>
+              </a>
+            </div>
+          </div>
+
+          <div class="cv-item">
+            <div class="cv-item-header">
+              <h3 data-i18n="cv.projects.kafka.title">Kafka KRaft with SCRAM Authentication</h3>
+              <span class="cv-date">2025</span>
+            </div>
+            <p class="cv-item-desc" data-i18n="cv.projects.kafka.desc">
+              Thiết kế và triển khai cluster Kafka sử dụng KRaft consensus protocol thay thế ZooKeeper, 
+              tích hợp SASL/SCRAM authentication. Hệ thống containerized với Docker Compose, 
+              hỗ trợ 3 brokers cho high availability và development/testing environments.
+            </p>
+            <div class="project-tech">
+              <span class="tech-tag">Apache Kafka</span>
+              <span class="tech-tag">KRaft</span>
+              <span class="tech-tag">Docker</span>
+              <span class="tech-tag">SASL/SCRAM</span>
+              <span class="tech-tag">Shell Scripts</span>
+            </div>
+            <div class="project-links">
+              <a href="https://github.com/haiphamcoder/kafka-kraft-scram" target="_blank" rel="noopener">
+                🔗 <span data-i18n="cv.projects.github">GitHub Repository</span>
+              </a>
+            </div>
+          </div>
+
+          
+        </div>
+
+        <div class="cv-section">
+          <h2 data-i18n="cv.goals.title">🎯 Định hướng nghề nghiệp</h2>
+          <div class="goals-grid">
+            <div class="goal-item">
+              <h4 data-i18n="cv.goals.short.title">Ngắn hạn (6-12 tháng)</h4>
+              <ul>
+                <li data-i18n="cv.goals.short.item1">Nâng cao kỹ năng Spring Boot và Spring Security</li>
+                <li data-i18n="cv.goals.short.item2">Học thêm về microservices architecture</li>
+                <li data-i18n="cv.goals.short.item3">Thực hành với Docker và containerization</li>
+              </ul>
+            </div>
+            <div class="goal-item">
+              <h4 data-i18n="cv.goals.long.title">Dài hạn (1-3 năm)</h4>
+              <ul>
+                <li data-i18n="cv.goals.long.item1">Trở thành Senior Backend Engineer</li>
+                <li data-i18n="cv.goals.long.item2">Chuyên sâu về distributed systems</li>
+                <li data-i18n="cv.goals.long.item3">Khám phá big data và cloud technologies</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="cv-section">
+          <h2 data-i18n="cv.interests.title">💡 Sở thích & Quan tâm</h2>
+          <p data-i18n="cv.interests.desc">
+            Tôi đặc biệt quan tâm đến <strong>hệ thống phân tán</strong>, <strong>big data</strong>, 
+            và <strong>kiến trúc phần mềm</strong>. Luôn tìm hiểu các best practices trong 
+            phát triển backend, tối ưu hóa hiệu năng và đảm bảo tính bảo mật của hệ thống.
+          </p>
+        </div>
+      </section>
+    </div>
   </main>
 
   <footer class="site-footer">
@@ -61,5 +217,3 @@
   <script>document.getElementById('year').textContent = new Date().getFullYear(); if (window.I18N) I18N.render();</script>
 </body>
 </html>
-
-
