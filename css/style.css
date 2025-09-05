@@ -495,4 +495,25 @@ html[data-theme="dark"] .theme-toggle { background: #1f2937; color: #f9fafb; bor
   .btn, .btn-outline { width: 100%; text-align: center; }
 }
 
+/* Mermaid diagrams styling */
+.mermaid {
+  text-align: center;
+  margin: 1.5rem 0;
+  background: var(--card);
+  border-radius: 8px;
+  padding: 1rem;
+  border: 1px solid var(--border);
+}
+
+.mermaid svg {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Dark mode for Mermaid */
+html[data-theme="dark"] .mermaid {
+  background: var(--card);
+  border-color: var(--border);
+}
+
 

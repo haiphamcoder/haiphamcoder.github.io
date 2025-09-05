@@ -10,6 +10,9 @@
 
     // Code blocks ```lang
     md = md.replace(/```(\w+)?\n([\s\S]*?)```/g, (m, lang, code) => {
+      if (lang === 'mermaid') {
+        return `<div class="mermaid">${code}</div>`;
+      }
       return `<pre><code class="language-${lang || 'text'}">${code}</code></pre>`;
     });
 
@@ -215,6 +218,10 @@
         }
         // Add copy buttons to code blocks
         addCopyButtons();
+        // Render Mermaid diagrams
+        if (window.Blog && window.Blog.renderMermaidDiagrams) {
+          window.Blog.renderMermaidDiagrams();
+        }
       });
     }
     window.addEventListener('langchange', onLangChange);
@@ -234,11 +241,39 @@
     } catch (e) { /* ignore on homepage */ }
   }
 
+  // Initialize Mermaid
+  function initMermaid() {
+    if (window.mermaid) {
+      mermaid.initialize({
+        startOnLoad: true,
+        theme: 'default',
+        securityLevel: 'loose'
+      });
+    }
+  }
+
+  // Re-render Mermaid diagrams after content changes
+  function renderMermaidDiagrams() {
+    if (window.mermaid) {
+      const mermaidElements = document.querySelectorAll('.mermaid');
+      mermaidElements.forEach(element => {
+        if (!element.hasAttribute('data-processed')) {
+          mermaid.init(undefined, element);
+        }
+      });
+    }
+  }
+
   window.Blog = {
     initListPage,
     loadSinglePost,
-    loadLatestPostsPreview
+    loadLatestPostsPreview,
+    initMermaid,
+    renderMermaidDiagrams
   };
+
+  // Initialize Mermaid when DOM is ready
+  document.addEventListener('DOMContentLoaded', initMermaid);
 })();
 
 
