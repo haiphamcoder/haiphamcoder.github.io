@@ -151,7 +151,7 @@
     }
 
     function update() {
-      let filtered = data.posts.slice();
+      let filtered = data.posts.slice().sort((a, b) => new Date(b.date) - new Date(a.date));
       if (currentTag) filtered = filtered.filter(p => p.tags.includes(currentTag));
       if (query) {
         const q = query.toLowerCase();
@@ -246,7 +246,7 @@
       const data = await fetchJSON(POSTS_INDEX_URL);
       const container = document.querySelector(selector);
       container.innerHTML = '';
-      const latest = data.posts.slice(0, 3);
+      const latest = data.posts.slice().sort((a, b) => new Date(b.date) - new Date(a.date)).slice(0, 3);
       latest.forEach(p => container.appendChild(createPostCard(p)));
       window.addEventListener('langchange', () => {
         container.innerHTML = '';
