@@ -8,11 +8,16 @@
     // Escape HTML
     md = md.replace(/[&<>]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
 
-    // Code blocks ```lang
+    // Handle Mermaid blocks first (before paragraph processing)
+    const mermaidBlocks = [];
+    md = md.replace(/```mermaid\n([\s\S]*?)```/g, (match, code) => {
+      const id = `MERMAID_BLOCK_${mermaidBlocks.length}`;
+      mermaidBlocks.push(`<div class="mermaid">${code}</div>`);
+      return id;
+    });
+
+    // Code blocks ```lang (non-mermaid)
     md = md.replace(/```(\w+)?\n([\s\S]*?)```/g, (m, lang, code) => {
-      if (lang === 'mermaid') {
-        return `<div class="mermaid">${code}</div>`;
-      }
       return `<pre><code class="language-${lang || 'text'}">${code}</code></pre>`;
     });
 
@@ -45,8 +50,13 @@
       return `<ul>${items.map(i => `<li>${i}</li>`).join('')}</ul>`;
     });
 
-    // Paragraphs (simple) - exclude mermaid divs
-    md = md.replace(/^(?!<h\d|<ul>|<pre>|<blockquote|<img|<p>|<\/|<div class="mermaid">)(.+)$/gm, '<p>$1</p>');
+    // Paragraphs (simple)
+    md = md.replace(/^(?!<h\d|<ul>|<pre>|<blockquote|<img|<p>|<\/)(.+)$/gm, '<p>$1</p>');
+
+    // Restore Mermaid blocks
+    mermaidBlocks.forEach((block, index) => {
+      md = md.replace(`MERMAID_BLOCK_${index}`, block);
+    });
 
     return md;
   }
