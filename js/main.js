@@ -45,8 +45,8 @@
       return `<ul>${items.map(i => `<li>${i}</li>`).join('')}</ul>`;
     });
 
-    // Paragraphs (simple)
-    md = md.replace(/^(?!<h\d|<ul>|<pre>|<blockquote|<img|<p>|<\/)(.+)$/gm, '<p>$1</p>');
+    // Paragraphs (simple) - exclude mermaid divs
+    md = md.replace(/^(?!<h\d|<ul>|<pre>|<blockquote|<img|<p>|<\/|<div class="mermaid">)(.+)$/gm, '<p>$1</p>');
 
     return md;
   }
@@ -199,6 +199,10 @@
     }
     // Add copy buttons to code blocks
     addCopyButtons();
+    // Render Mermaid diagrams
+    if (window.Blog && window.Blog.renderMermaidDiagrams) {
+      window.Blog.renderMermaidDiagrams();
+    }
 
     // Re-render on language change (reload body and title)
     function onLangChange() {
@@ -257,9 +261,10 @@
     if (window.mermaid) {
       const mermaidElements = document.querySelectorAll('.mermaid');
       mermaidElements.forEach(element => {
-        if (!element.hasAttribute('data-processed')) {
-          mermaid.init(undefined, element);
-        }
+        // Clear any existing content and data attributes
+        element.removeAttribute('data-processed');
+        // Re-render the diagram
+        mermaid.init(undefined, element);
       });
     }
   }
