@@ -119,6 +119,7 @@ console.log(`🕒 Build time: ${now.toLocaleString()}`);
 console.log(`🔄 Cache busting: Enabled`);
 console.log(`\n📝 Next steps:`);
 console.log(`1. git add .`);
-console.log(`2. git commit -m "Update version ${version}"`);
+console.log(`2. git commit -m "Deploy version ${version} to GitHub Pages"`);
 console.log(`3. git push origin main`);
 console.log(`\n🌐 Your site will be available at: https://haiphamcoder.github.io`);
+console.log(`⏱️  GitHub Pages will auto-deploy in 1-2 minutes`);
