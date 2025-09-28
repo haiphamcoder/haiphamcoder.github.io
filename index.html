@@ -14,13 +14,34 @@
   <!-- Version Info -->
   <meta name="version" content="1.0.0" />
   <meta name="build-time" content="1704067200000" />
+  
+  <!-- Critical CSS - Load first -->
+  <link rel="stylesheet" href="css/critical.css" />
+  <link rel="stylesheet" href="css/style.css" />
+  
+  <!-- Preconnect to external domains -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+  
+  <!-- Preload critical resources -->
+  <link rel="preload" href="assets/avatar.jpg" as="image" type="image/jpeg">
+  <link rel="preload" href="js/main.js" as="script">
+  <link rel="preload" href="js/i18n.js" as="script">
+  
+  <!-- Non-critical CSS - Load after critical -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+  <noscript>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  </noscript>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css" media="print" onload="this.media='all'">
+  <noscript>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+  </noscript>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script>
+  <script src="js/performance.js"></script>
   <script src="js/i18n.js"></script>
   <script defer src="js/theme.js"></script>
   <script defer src="js/nav.js"></script>
@@ -48,7 +69,7 @@
 
   <main class="container">
     <section class="hero">
-      <img src="assets/avatar.jpg" alt="Avatar" class="avatar" onerror="this.onerror=null;this.src='assets/avatar.svg'" />
+      <img src="assets/avatar.jpg" alt="Avatar" class="avatar loaded" onerror="this.onerror=null;this.src='assets/avatar.svg'" />
       <div class="hero-text">
         <h1 data-i18n="hero.title">Xin chào, mình là Hải Phạm</h1>
         <p data-i18n="hero.subtitle">Backend Engineer • Java & Spring Boot • Quan tâm hệ thống phân tán, Big Data, hiệu năng và kiến trúc.</p>
