@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cache Busting Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .test-section {
+            background: white;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .status {
+            padding: 10px;
+            border-radius: 4px;
+            margin: 10px 0;
+        }
+        .success { background: #d4edda; color: #155724; }
+        .error { background: #f8d7da; color: #721c24; }
+        .info { background: #d1ecf1; color: #0c5460; }
+        button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover { background: #0056b3; }
+        .code {
+            background: #f8f9fa;
+            padding: 10px;
+            border-radius: 4px;
+            font-family: monospace;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>🧪 Cache Busting Test Page</h1>
+    
+    <div class="test-section">
+        <h2>📊 Current Status</h2>
+        <div id="version-info" class="status info">Loading version info...</div>
+        <div id="cache-status" class="status info">Checking cache status...</div>
+    </div>
+
+    <div class="test-section">
+        <h2>🔄 Cache Tests</h2>
+        <button onclick="testCSSLoad()">Test CSS Loading</button>
+        <button onclick="testJSLoad()">Test JS Loading</button>
+        <button onclick="testVersionCheck()">Check Version</button>
+        <button onclick="clearCache()">Clear Cache</button>
+        <div id="test-results"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>🛠️ Developer Tools</h2>
+        <h3>Check Cache Headers:</h3>
+        <div class="code">
+            # Open DevTools > Network tab<br>
+            # Reload page and check response headers<br>
+            # Look for Cache-Control headers
+        </div>
+        
+        <h3>Service Worker Status:</h3>
+        <div class="code">
+            # DevTools > Application > Service Workers<br>
+            # Check if SW is registered and active<br>
+            # Monitor cache storage
+        </div>
+    </div>
+
+    <div class="test-section">
+        <h2>📝 Test Results</h2>
+        <div id="results"></div>
+    </div>
+
+    <script>
+        // Test functions
+        function testCSSLoad() {
+            const link = document.createElement('link');
+            link.rel = 'stylesheet';
+            link.href = 'css/style.css?v=' + Date.now();
+            link.onload = () => addResult('✅ CSS loaded successfully', 'success');
+            link.onerror = () => addResult('❌ CSS failed to load', 'error');
+            document.head.appendChild(link);
+        }
+
+        function testJSLoad() {
+            const script = document.createElement('script');
+            script.src = 'js/version.js?v=' + Date.now();
+            script.onload = () => addResult('✅ JS loaded successfully', 'success');
+            script.onerror = () => addResult('❌ JS failed to load', 'error');
+            document.head.appendChild(script);
+        }
+
+        function testVersionCheck() {
+            fetch('version.json?t=' + Date.now())
+                .then(response => response.json())
+                .then(data => {
+                    addResult(`📋 Version: ${data.version}`, 'info');
+                    addResult(`🕒 Build Time: ${new Date(data.buildTime).toLocaleString()}`, 'info');
+                })
+                .catch(error => {
+                    addResult('❌ Version check failed: ' + error.message, 'error');
+                });
+        }
+
+        function clearCache() {
+            if ('caches' in window) {
+                caches.keys().then(names => {
+                    return Promise.all(names.map(name => caches.delete(name)));
+                }).then(() => {
+                    addResult('🗑️ Cache cleared successfully', 'success');
+                });
+            } else {
+                addResult('⚠️ Cache API not supported', 'error');
+            }
+        }
+
+        function addResult(message, type) {
+            const div = document.createElement('div');
+            div.className = `status ${type}`;
+            div.textContent = `${new Date().toLocaleTimeString()}: ${message}`;
+            document.getElementById('results').appendChild(div);
+        }
+
+        // Load version info on page load
+        window.addEventListener('load', () => {
+            // Check if version.js is available
+            if (window.CacheBuster) {
+                document.getElementById('version-info').innerHTML = 
+                    `✅ Version: ${window.CacheBuster.VERSION}<br>
+                     🕒 Build Time: ${new Date(window.CacheBuster.BUILD_TIME).toLocaleString()}`;
+            } else {
+                document.getElementById('version-info').innerHTML = 
+                    '⚠️ Version.js not loaded - check console for errors';
+            }
+
+            // Check Service Worker
+            if ('serviceWorker' in navigator) {
+                navigator.serviceWorker.getRegistration().then(registration => {
+                    if (registration) {
+                        document.getElementById('cache-status').innerHTML = 
+                            '✅ Service Worker registered and active';
+                    } else {
+                        document.getElementById('cache-status').innerHTML = 
+                            '⚠️ Service Worker not registered';
+                    }
+                });
+            } else {
+                document.getElementById('cache-status').innerHTML = 
+                    '❌ Service Worker not supported';
+            }
+        });
+    </script>
+</body>
+</html>

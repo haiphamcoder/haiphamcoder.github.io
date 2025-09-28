@@ -64,7 +64,14 @@
       'cv.goals.long.item2': 'Chuyên sâu về distributed systems',
       'cv.goals.long.item3': 'Khám phá big data và cloud technologies',
       'cv.interests.title': '💡 Sở thích & Quan tâm',
-      'cv.interests.desc': 'Tôi đặc biệt quan tâm đến hệ thống phân tán, big data, và kiến trúc phần mềm. Luôn tìm hiểu các best practices trong phát triển backend, tối ưu hóa hiệu năng và đảm bảo tính bảo mật của hệ thống.'
+      'cv.interests.desc': 'Tôi đặc biệt quan tâm đến hệ thống phân tán, big data, và kiến trúc phần mềm. Luôn tìm hiểu các best practices trong phát triển backend, tối ưu hóa hiệu năng và đảm bảo tính bảo mật của hệ thống.',
+      'footer.about': 'Về tôi',
+      'footer.desc': 'Backend Engineer chuyên Java & Spring Boot, đam mê hệ thống phân tán và kiến trúc phần mềm.',
+      'footer.links': 'Liên kết',
+      'footer.connect': 'Kết nối',
+      'footer.rights': 'Tất cả quyền được bảo lưu.',
+      'footer.built': 'Được xây dựng với',
+      'footer.tech': 'HTML, CSS & JavaScript'
     },
     en: {
       'brand': 'Hai Pham',
@@ -127,7 +134,14 @@
       'cv.goals.long.item2': 'Specialize in distributed systems',
       'cv.goals.long.item3': 'Explore big data and cloud technologies',
       'cv.interests.title': '💡 Interests & Focus',
-      'cv.interests.desc': 'I am particularly interested in distributed systems, big data, and software architecture. Always exploring best practices in backend development, performance optimization and system security.'
+      'cv.interests.desc': 'I am particularly interested in distributed systems, big data, and software architecture. Always exploring best practices in backend development, performance optimization and system security.',
+      'footer.about': 'About me',
+      'footer.desc': 'Backend Engineer specializing in Java & Spring Boot, passionate about distributed systems and software architecture.',
+      'footer.links': 'Links',
+      'footer.connect': 'Connect',
+      'footer.rights': 'All rights reserved.',
+      'footer.built': 'Built with',
+      'footer.tech': 'HTML, CSS & JavaScript'
     }
   };
 

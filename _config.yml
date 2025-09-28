@@ -1,0 +1,77 @@
+# GitHub Pages Configuration
+# This file configures GitHub Pages settings
+
+# Site settings
+title: "Hải Phạm | Backend Engineer"
+description: "Personal blog and portfolio of Hai Pham - Backend Engineer specializing in Java & Spring Boot"
+author: "Hai Pham"
+email: "ngochai285nd@gmail.com"
+url: "https://haiphamcoder.github.io"
+baseurl: ""
+
+# Build settings
+markdown: kramdown
+highlighter: rouge
+theme: minima
+
+# Collections
+collections:
+  posts:
+    output: true
+    permalink: /:year/:month/:day/:title/
+
+# Defaults
+defaults:
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+    values:
+      layout: "default"
+
+# Exclude files from processing
+exclude:
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor
+  - .sass-cache
+  - .jekyll-cache
+  - .git
+  - .gitignore
+  - .htaccess
+  - update-version.js
+  - package.json
+  - package-lock.json
+  - test-cache.html
+  - CACHE-BUSTING.md
+  - IMPROVEMENTS.md
+
+# Include files
+include:
+  - _redirects
+
+# Plugins
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+  - jekyll-seo-tag
+
+# SEO
+seo:
+  type: "Person"
+  name: "Hai Pham"
+  description: "Backend Engineer specializing in Java & Spring Boot"
+  url: "https://haiphamcoder.github.io"
+  image: "/assets/avatar.jpg"
+  twitter:
+    username: "haiphamcoder"
+  social:
+    name: "Hai Pham"
+    links:
+      - "https://github.com/haiphamcoder"
+      - "https://www.linkedin.com/in/hai-pham-ngoc-b095041b4"
