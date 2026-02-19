@@ -49,8 +49,8 @@ export const ui = {
     "about.experience.vccorp.intern": "Thực tập sinh Backend",
     "about.experience.vccorp.collaborator": "Cộng tác viên Backend",
     "about.experience.vccorp.developer": "Lập trình viên Backend",
-    "about.experience.vccorp.dept": "Bộ phận Data Mining - Atech - Admicro",
-    "about.experience.vccorp.company": "Công ty CP VCCorp",
+    "about.experience.vccorp.dept": "Bộ phận Data Mining, Phòng Adtech, Khối Admicro",
+    "about.experience.vccorp.company": "Công ty cổ phần VCCorp",
     "contact.title": "Liên hệ",
     "contact.intro":
       "Mình luôn sẵn sàng trao đổi về công nghệ hoặc các cơ hội hợp tác.",
@@ -110,7 +110,7 @@ export const ui = {
     "about.experience.vccorp.intern": "Backend Intern",
     "about.experience.vccorp.collaborator": "Backend Collaborator",
     "about.experience.vccorp.developer": "Backend Developer",
-    "about.experience.vccorp.dept": "Data Mining - Atech - Admicro Department",
+    "about.experience.vccorp.dept": "Data Mining Unit, Adtech Center, Admicro Division",
     "about.experience.vccorp.company": "VCCorp Corporation",
     "contact.title": "Contact",
     "contact.intro":
