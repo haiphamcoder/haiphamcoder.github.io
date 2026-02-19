@@ -133,50 +133,106 @@ if (post.data.series) {
   src="https://cdn.jsdelivr.net/npm/mermaid@11.4.0/dist/mermaid.min.js"
 ></script>
 <script is:inline>
-  // Mermaid Configuration
-  mermaid.initialize({
-    startOnLoad: false,
-    theme: "default",
-    securityLevel: "loose",
-    htmlLabels: true,
-    flowchart: { useMaxWidth: true, htmlLabels: true },
-    sequence: { useMaxWidth: true },
-    gantt: { useMaxWidth: true },
-  });
+  function renderPostFeatures() {
+    // Mermaid Configuration
+    if (typeof mermaid !== "undefined") {
+      mermaid.initialize({
+        startOnLoad: false,
+        theme: "default",
+        securityLevel: "loose",
+        htmlLabels: true,
+        flowchart: { useMaxWidth: true, htmlLabels: true },
+        sequence: { useMaxWidth: true },
+        gantt: { useMaxWidth: true },
+      });
 
-  // Find all code blocks with language-mermaid
-  const mermaidBlocks = document.querySelectorAll(
-    'pre.mermaid, pre > code.language-mermaid, pre[data-language="mermaid"]',
-  );
+      const mermaidBlocks = document.querySelectorAll(
+        "pre.mermaid, pre > code.language-mermaid, pre[data-language=\"mermaid\"]",
+      );
 
-  if (mermaidBlocks.length > 0) {
-    console.log(`[Mermaid] Found ${mermaidBlocks.length} blocks`);
-    mermaidBlocks.forEach((block, index) => {
-      const pre = block.tagName === "CODE" ? block.parentElement : block;
-      if (!pre) return;
+      if (mermaidBlocks.length > 0) {
+        console.log(`[Mermaid] Found ${mermaidBlocks.length} blocks`);
+        mermaidBlocks.forEach((block, index) => {
+          const pre = block.tagName === "CODE" ? block.parentElement : block;
+          if (!pre || pre.closest(".mermaid-wrapper")) return;
 
-      const code = pre.textContent || "";
-      const wrapper = document.createElement("div");
-      wrapper.className = "mermaid-wrapper";
-      const div = document.createElement("div");
-      div.className = "mermaid";
-      div.id = `mermaid-${index}`;
-      div.textContent = code;
+          const code = pre.textContent || "";
+          const wrapper = document.createElement("div");
+          wrapper.className = "mermaid-wrapper";
+          const div = document.createElement("div");
+          div.className = "mermaid";
+          div.id = `mermaid-${index}`;
+          div.textContent = code;
 
-      const expandBtn = document.createElement("button");
-      expandBtn.className = "mermaid-expand-btn";
-      expandBtn.innerHTML = "⤢";
-      expandBtn.title = "Expand Diagram";
-      expandBtn.onclick = () => openMermaidModal(`mermaid-${index}`);
+          const expandBtn = document.createElement("button");
+          expandBtn.className = "mermaid-expand-btn";
+          expandBtn.innerHTML = "⤢";
+          expandBtn.title = "Expand Diagram";
+          expandBtn.onclick = () => openMermaidModal(`mermaid-${index}`);
 
-      wrapper.appendChild(expandBtn);
-      wrapper.appendChild(div);
-      pre.replaceWith(wrapper);
+          wrapper.appendChild(expandBtn);
+          wrapper.appendChild(div);
+          pre.replaceWith(wrapper);
+        });
+
+        mermaid.run({
+          nodes: document.querySelectorAll(".mermaid"),
+        });
+      }
+    }
+
+    // Callouts (Transform GitHub Alerts to style)
+    const blockquotes = document.querySelectorAll("blockquote");
+    blockquotes.forEach((bq) => {
+      if (bq.classList.contains("callout")) return;
+      const firstP = bq.querySelector("p");
+      if (!firstP) return;
+      const text = firstP.innerHTML;
+      const match = text.match(/^\[!(NOTE|TIP|IMPORTANT|WARNING|CAUTION)\]/);
+      if (match) {
+        const type = match[1].toLowerCase();
+        bq.classList.add("callout", type);
+        firstP.innerHTML = text.replace(
+          /^\[!(NOTE|TIP|IMPORTANT|WARNING|CAUTION)\]\s?/,
+          "",
+        );
+        const title = document.createElement("div");
+        title.className = "callout-title";
+        title.textContent = type.charAt(0).toUpperCase() + type.slice(1);
+        bq.prepend(title);
+      }
     });
 
-    // Run mermaid
-    mermaid.run({
-      nodes: document.querySelectorAll(".mermaid"),
+    // Copy Code Button
+    document.querySelectorAll("pre").forEach((pre) => {
+      if (
+        pre.closest(".mermaid-wrapper") ||
+        pre.classList.contains("mermaid") ||
+        pre.closest(".code-wrapper")
+      )
+        return;
+
+      const wrapper = document.createElement("div");
+      wrapper.className = "code-wrapper";
+      pre.parentNode?.insertBefore(wrapper, pre);
+      wrapper.appendChild(pre);
+
+      const button = document.createElement("button");
+      button.className = "copy-btn";
+      button.textContent = "Copy";
+      button.addEventListener("click", async () => {
+        const code =
+          pre.querySelector("code")?.textContent || pre.textContent || "";
+        try {
+          await navigator.clipboard.writeText(code);
+          button.textContent = "Copied!";
+          setTimeout(() => (button.textContent = "Copy"), 2000);
+        } catch (err) {
+          console.error("Failed to copy", err);
+          button.textContent = "Error";
+        }
+      });
+      wrapper.appendChild(button);
     });
   }
 
@@ -191,16 +247,12 @@ if (post.data.series) {
     if (!original) return;
 
     modalBody.innerHTML = original.innerHTML;
-
-    // JS scaling is handled by CSS now (.mermaid-modal-content svg)
-    // But we remove explicit height/width attributes that might block CSS
     const svg = modalBody.querySelector("svg");
     if (svg) {
       svg.removeAttribute("height");
       svg.removeAttribute("width");
-      svg.removeAttribute("style"); // Clear inline styles from mermaid
+      svg.removeAttribute("style");
     }
-
     modal.style.display = "flex";
   }
 
@@ -216,61 +268,10 @@ if (post.data.series) {
     });
   }
 
-  // Callouts (Transform GitHub Alerts to style)
-  // ... existing callout logic ...
-  const blockquotes = document.querySelectorAll("blockquote");
-  // ... keep callout logic ...
-  blockquotes.forEach((bq) => {
-    const firstP = bq.querySelector("p");
-    if (!firstP) return;
-    const text = firstP.innerHTML;
-    const match = text.match(/^\[!(NOTE|TIP|IMPORTANT|WARNING|CAUTION)\]/);
-    if (match) {
-      const type = match[1].toLowerCase();
-      bq.classList.add("callout", type);
-      // Remove the [!NOTE] part from text
-      firstP.innerHTML = text.replace(
-        /^\[!(NOTE|TIP|IMPORTANT|WARNING|CAUTION)\]\s?/,
-        "",
-      );
-      // Add title
-      const title = document.createElement("div");
-      title.className = "callout-title";
-      title.textContent = type.charAt(0).toUpperCase() + type.slice(1);
-      bq.prepend(title);
-    }
-  });
-
-  // Copy Code Button
-  document.querySelectorAll("pre").forEach((pre) => {
-    // Check if it's inside a mermaid wrapper (don't add copy there)
-    if (pre.closest(".mermaid-wrapper")) return;
-    // ...
-    // Check if it's inside a mermaid block (don't add copy there)
-    if (pre.classList.contains("mermaid")) return;
-
-    const wrapper = document.createElement("div");
-    wrapper.className = "code-wrapper";
-    pre.parentNode?.insertBefore(wrapper, pre);
-    wrapper.appendChild(pre);
-
-    const button = document.createElement("button");
-    button.className = "copy-btn";
-    button.textContent = "Copy";
-    button.addEventListener("click", async () => {
-      const code =
-        pre.querySelector("code")?.textContent || pre.textContent || "";
-      try {
-        await navigator.clipboard.writeText(code);
-        button.textContent = "Copied!";
-        setTimeout(() => (button.textContent = "Copy"), 2000);
-      } catch (err) {
-        console.error("Failed to copy class", err);
-        button.textContent = "Error";
-      }
-    });
-    wrapper.appendChild(button);
-  });
+  // Initial load or transition
+  renderPostFeatures();
+  document.addEventListener("astro:page-load", renderPostFeatures);
+</script>
 </script>
 
 <style>
