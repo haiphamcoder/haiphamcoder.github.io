@@ -249,6 +249,13 @@ html[data-theme="dark"] .site-header {
   box-shadow: var(--shadow-lg);
 }
 
+.flag-icon {
+  width: 24px;
+  height: auto;
+  border-radius: 2px;
+  display: block;
+}
+
 /* Mobile header */
 .nav-toggle {
   display: none;
