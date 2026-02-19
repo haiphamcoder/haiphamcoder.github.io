@@ -256,4 +256,4 @@ Bạn đã hoàn thành việc đưa dự án local lên "mây"!
 - Đẩy code bằng `git push`.
 - Hiểu về `origin` và các nhánh `remotes/origin/*`.
 
-Trong [Chương 8](/blog/git-08-cloning), chúng ta sẽ đóng vai "người bạn" để `clone` dự án này về máy khác và bắt đầu cộng tác.
+Trong [Chương 8](/vi/blog/git-08-cloning), chúng ta sẽ đóng vai "người bạn" để `clone` dự án này về máy khác và bắt đầu cộng tác.

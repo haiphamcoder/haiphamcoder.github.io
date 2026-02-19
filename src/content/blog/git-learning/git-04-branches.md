@@ -481,4 +481,4 @@ Chương này đã giới thiệu về Branch (Nhánh) - các dòng phát triể
 
 Quan trọng nhất, bạn đã thấy rằng khi làm việc trên một nhánh riêng (`feature`), các thay đổi của bạn không ảnh hưởng đến nhánh chính (`main`).
 
-Trong [Chương 5](/blog/git-05-merging), chúng ta sẽ học cách gộp (merge) những thay đổi từ nhánh `feature` trở lại nhánh `main`.
+Trong [Chương 5](/vi/blog/git-05-merging), chúng ta sẽ học cách gộp (merge) những thay đổi từ nhánh `feature` trở lại nhánh `main`.

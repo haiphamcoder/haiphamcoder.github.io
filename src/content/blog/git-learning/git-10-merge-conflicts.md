@@ -234,4 +234,4 @@ Lệnh này cực kỳ hữu ích khi bạn lỡ tay xóa nhầm file hoặc mu�
 - **Conflict Markers** (`<<<`, `===`, `>>>`) giúp bạn biết sự khác biệt nằm ở đâu.
 - Quy trình giải quyết: **Sửa file** -> **Git Add** -> **Git Commit**.
 
-Trong [Chương 11](/blog/git-11-rebasing), chúng ta sẽ khám phá **Rebasing** - một cách khác để hợp nhất lịch sử, giúp timeline thẳng tắp và sạch sẽ hơn, nhưng cũng đi kèm những quy tắc nghiêm ngặt.
+Trong [Chương 11](/vi/blog/git-11-rebasing), chúng ta sẽ khám phá **Rebasing** - một cách khác để hợp nhất lịch sử, giúp timeline thẳng tắp và sạch sẽ hơn, nhưng cũng đi kèm những quy tắc nghiêm ngặt.

@@ -282,4 +282,4 @@ Date:   Sat Feb 19 09:23:18 2022 +0100
 
 Chương này đã giới thiệu quy trình 2 bước để tạo commit: `git add` (thêm vào Staging Area) và `git commit` (lưu vào Commit History). Bạn cũng đã làm quen với `git status` để kiểm tra trạng thái và `git log` để xem lịch sử.
 
-Trong chương tiếp theo, chúng ta sẽ đi sâu vào khái niệm **Branch** (nhánh) và tìm hiểu `HEAD` thực sự là gì. Hẹn gặp lại bạn ở [Chương 4](/blog/git-04-branches)!
+Trong chương tiếp theo, chúng ta sẽ đi sâu vào khái niệm **Branch** (nhánh) và tìm hiểu `HEAD` thực sự là gì. Hẹn gặp lại bạn ở [Chương 4](/vi/blog/git-04-branches)!

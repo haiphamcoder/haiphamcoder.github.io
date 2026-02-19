@@ -216,4 +216,4 @@ Giao diện ditor sẽ hiện ra danh sách các commit với các lệnh:
 - Giải quyết conflict từng commit một -> `git rebase --continue`.
 - Luôn tuân thủ **Luật Vàng**: Không rebase nhánh public.
 
-Ở chương tiếp theo, chúng ta sẽ tìm hiểu về **[Pull Requests](/blog/git-12-pull-requests)** - quy trình chuẩn để review và hợp nhất code trong các dự án lớn.
+Ở chương tiếp theo, chúng ta sẽ tìm hiểu về **[Pull Requests](/vi/blog/git-12-pull-requests)** - quy trình chuẩn để review và hợp nhất code trong các dự án lớn.

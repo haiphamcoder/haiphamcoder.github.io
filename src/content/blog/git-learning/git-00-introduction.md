@@ -25,27 +25,27 @@ Series này bao gồm 12 chương chính và các phụ lục, dẫn dắt bạn
 
 ### Phần 1: Nền tảng (Foundations)
 
-- **[Chương 1: Git và Command Line](/blog/git-01-command-line)**: Làm quen với giao diện dòng lệnh, cài đặt Git và các thao tác cơ bản.
-- **[Chương 2: Local Repositories](/blog/git-02-local-repositories)**: Khởi tạo kho chứa, hiểu về Working Directory và Staging Area.
-- **[Chương 3: Making a Commit](/blog/git-03-making-commit)**: Quy trình tạo commit và lưu trữ phiên bản.
+- **[Chương 1: Git và Command Line](/vi/blog/git-01-command-line)**: Làm quen với giao diện dòng lệnh, cài đặt Git và các thao tác cơ bản.
+- **[Chương 2: Local Repositories](/vi/blog/git-02-local-repositories)**: Khởi tạo kho chứa, hiểu về Working Directory và Staging Area.
+- **[Chương 3: Making a Commit](/vi/blog/git-03-making-commit)**: Quy trình tạo commit và lưu trữ phiên bản.
 
 ### Phần 2: Phân nhánh và Hợp nhất (Branching & Merging)
 
-- **[Chương 4: Branches](/blog/git-04-branches)**: Tạo, chuyển đổi và quản lý các nhánh phát triển song song.
-- **[Chương 5: Merging](/blog/git-05-merging)**: Hợp nhất các nhánh và xử lý Fast-forward merge.
+- **[Chương 4: Branches](/vi/blog/git-04-branches)**: Tạo, chuyển đổi và quản lý các nhánh phát triển song song.
+- **[Chương 5: Merging](/vi/blog/git-05-merging)**: Hợp nhất các nhánh và xử lý Fast-forward merge.
 
 ### Phần 3: Remote & Collaboration
 
-- **[Chương 6: Hosting Services & Authentication](/blog/git-06-hosting-auth)**: Làm việc với GitHub/GitLab và cơ chế xác thực.
-- **[Chương 7: Remote Repositories](/blog/git-07-remote-repos)**: Đẩy code lên kho chứa từ xa.
-- **[Chương 8: Cloning & Fetching](/blog/git-08-cloning)**: Sao chép kho chứa và đồng bộ dữ liệu.
+- **[Chương 6: Hosting Services & Authentication](/vi/blog/git-06-hosting-auth)**: Làm việc với GitHub/GitLab và cơ chế xác thực.
+- **[Chương 7: Remote Repositories](/vi/blog/git-07-remote-repos)**: Đẩy code lên kho chứa từ xa.
+- **[Chương 8: Cloning & Fetching](/vi/blog/git-08-cloning)**: Sao chép kho chứa và đồng bộ dữ liệu.
 
 ### Phần 4: Kỹ thuật nâng cao (Advanced Techniques)
 
-- **[Chương 9: Three-Way Merges](/blog/git-09-three-way-merge)**: Hợp nhất phức tạp khi lịch sử không tuyến tính.
-- **[Chương 10: Merge Conflicts](/blog/git-10-merge-conflicts)**: Xử lý xung đột mã nguồn—kỹ năng quan trọng nhất của developer.
-- **[Chương 11: Rebasing](/blog/git-11-rebasing)**: Viết lại lịch sử commit để có một timeline sạch đẹp.
-- **[Chương 12: Pull Requests](/blog/git-12-pull-requests)**: Quy trình review code và hợp tác trong nhóm lớn.
+- **[Chương 9: Three-Way Merges](/vi/blog/git-09-three-way-merge)**: Hợp nhất phức tạp khi lịch sử không tuyến tính.
+- **[Chương 10: Merge Conflicts](/vi/blog/git-10-merge-conflicts)**: Xử lý xung đột mã nguồn—kỹ năng quan trọng nhất của developer.
+- **[Chương 11: Rebasing](/vi/blog/git-11-rebasing)**: Viết lại lịch sử commit để có một timeline sạch đẹp.
+- **[Chương 12: Pull Requests](/vi/blog/git-12-pull-requests)**: Quy trình review code và hợp tác trong nhóm lớn.
 
 ## Công cụ cần thiết
 

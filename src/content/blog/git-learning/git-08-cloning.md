@@ -242,4 +242,4 @@ Trong chương này, bạn đã học được quy trình cộng tác cơ bản:
 3. **Fetch**: Tải thông tin mới về.
 4. **Merge**: Gộp thông tin mới vào code hiện tại.
 
-Trong [Chương 9](/blog/git-09-three-way-merge), chúng ta sẽ xem xét trường hợp phức tạp hơn: Khi cả hai người cùng sửa một file và gây ra sự phân nhánh (diverge).
+Trong [Chương 9](/vi/blog/git-09-three-way-merge), chúng ta sẽ xem xét trường hợp phức tạp hơn: Khi cả hai người cùng sửa một file và gây ra sự phân nhánh (diverge).

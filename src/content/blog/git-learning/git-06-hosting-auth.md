@@ -18,7 +18,7 @@ excerpt: "Bài 6 trong series Learning Git: Chương 6: Hosting & Authentication
 
 ## Hosting Services và Remote Repositories
 
-Trong [Chương 2](/blog/git-02-local-repositories), tôi đã đề cập đến hai loại repository:
+Trong [Chương 2](/vi/blog/git-02-local-repositories), tôi đã đề cập đến hai loại repository:
 
 - **Local Repository**: Nằm trên máy tính cá nhân của bạn.
 - **Remote Repository**: Được lưu trữ trên một dịch vụ hosting "trên mây" (cloud).
@@ -29,7 +29,7 @@ Trong [Chương 2](/blog/git-02-local-repositories), tôi đã đề cập đế
 2. **GitLab** (Mạnh về DevOps/CI/CD).
 3. **Bitbucket** (Sở hữu bởi Atlassian, tích hợp tốt với Jira).
 
-Để chuyển dữ liệu giữa Local và Remote repository, bạn cần kết nối và xác thực danh tính. Từ [Chương 7](/blog/git-07-remote-repos) trở đi, bạn sẽ sử dụng các lệnh như `git push`, `git clone`, `git fetch`, và `git pull` để tải lên và tải xuống dữ liệu. Để làm được điều đó, bạn cần thiết lập xác thực ngay bây giờ.
+Để chuyển dữ liệu giữa Local và Remote repository, bạn cần kết nối và xác thực danh tính. Từ [Chương 7](/vi/blog/git-07-remote-repos) trở đi, bạn sẽ sử dụng các lệnh như `git push`, `git clone`, `git fetch`, và `git pull` để tải lên và tải xuống dữ liệu. Để làm được điều đó, bạn cần thiết lập xác thực ngay bây giờ.
 
 ## Thiết lập tài khoản Hosting Service
 
@@ -161,4 +161,4 @@ Trong chương này, bạn đã thực hiện hai bước chuẩn bị quan tr�
 2. Thiết lập xác thực an toàn bằng SSH (hoặc HTTPS).
 
 Giờ đây, bạn đã có "giấy thông hành" để kết nối máy tính của mình với thế giới mã nguồn mở.
-Trong [Chương 7](/blog/git-07-remote-repos), chúng ta sẽ bắt tay vào tạo Remote Repository đầu tiên và đẩy code của dự án `rainbow` lên đó.
+Trong [Chương 7](/vi/blog/git-07-remote-repos), chúng ta sẽ bắt tay vào tạo Remote Repository đầu tiên và đẩy code của dự án `rainbow` lên đó.

@@ -214,4 +214,4 @@ Vì `rainbow` đang ở commit "Brown", mà "Brown" là tổ tiên trực tiếp
 - **Three-Way Merge**: Cơ chế của Git để hợp nhất sự phân nhánh này, tạo ra một **Merge Commit**.
 - **Git Pull**: Lệnh tắt cho `Fetch` + `Merge`. Nên dùng khi bạn muốn cập nhật code mới nhất về máy để tiếp tục làm việc.
 
-Trong [Chương 10](/blog/git-10-merge-conflicts), chúng ta sẽ đối mặt với "cơn ác mộng" của mọi lập trình viên: **Merge Conflicts** (Xung đột mã nguồn) - khi cả hai cùng sửa **một dòng** trong **cùng một file**.
+Trong [Chương 10](/vi/blog/git-10-merge-conflicts), chúng ta sẽ đối mặt với "cơn ác mộng" của mọi lập trình viên: **Merge Conflicts** (Xung đột mã nguồn) - khi cả hai cùng sửa **một dòng** trong **cùng một file**.
