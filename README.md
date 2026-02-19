@@ -1,124 +1,43 @@
-# haiphamcoder.github.io
+# Astro Starter Kit: Minimal
 
-Blog cá nhân của Hải Phạm - Backend Engineer chuyên Java/Spring Boot, chia sẻ kiến thức thực chiến về hệ thống phân tán, hiệu năng và kiến trúc.
+```sh
+npm create astro@latest -- --template minimal
+```
 
-## ✨ Tính năng
+> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
 
-- 🌙 **Dark/Light Mode** - Tự động phát hiện theme hệ thống
-- 🌍 **Đa ngôn ngữ** - Hỗ trợ tiếng Việt và tiếng Anh
-- 📱 **Responsive** - Tối ưu cho desktop, tablet, mobile
-- 🔍 **Tìm kiếm & Filter** - Theo tiêu đề, nội dung, tags
-- 📝 **Code Highlighting** - Syntax highlighting với highlight.js
-- 📋 **Copy Code** - Nút copy cho code blocks
-- 🎨 **Minimalist Design** - Giao diện tối giản, dễ đọc
+## 🚀 Project Structure
 
-## 📁 Cấu trúc
+Inside of your Astro project, you'll see the following folders and files:
 
 ```text
-.
-├── index.html        # Trang chủ
-├── blog.html         # Trang blog (danh sách + xem bài)
-├── about.html        # Trang giới thiệu
-├── contact.html      # Trang liên hệ
-├── posts/            # Markdown các bài viết
-│   ├── index.json    # Danh mục bài viết (metadata)
-│   ├── hello-world.md          # VI
-│   └── hello-world.en.md       # EN
-├── css/
-│   └── style.css     # Style global + dark mode + responsive
-├── js/
-│   ├── main.js       # Logic blog (render, search, tags, paginate)
-│   ├── theme.js      # Toggle theme (light/dark)
-│   ├── i18n.js       # Đa ngôn ngữ (VI/EN)
-│   └── nav.js        # Mobile navigation
-└── assets/
-    └── avatar.svg    # Ảnh đại diện (SVG fallback)
+/
+├── public/
+├── src/
+│   └── pages/
+│       └── index.astro
+└── package.json
 ```
 
-## 🚀 Chạy local
+Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
 
-Sử dụng bất kỳ static server nào
+There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
 
-## 📝 Thêm bài viết mới
+Any static assets, like images, can be placed in the `public/` directory.
 
-### 1. Tạo file Markdown
+## 🧞 Commands
 
-```bash
-# Tạo file tiếng Việt
-touch posts/my-new-post.md
+All commands are run from the root of the project, from a terminal:
 
-# Tạo file tiếng Anh (tùy chọn)
-touch posts/my-new-post.en.md
-```
+| Command                   | Action                                           |
+| :------------------------ | :----------------------------------------------- |
+| `npm install`             | Installs dependencies                            |
+| `npm run dev`             | Starts local dev server at `localhost:4321`      |
+| `npm run build`           | Build your production site to `./dist/`          |
+| `npm run preview`         | Preview your build locally, before deploying     |
+| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
+| `npm run astro -- --help` | Get help using the Astro CLI                     |
 
-### 2. Cập nhật metadata
+## 👀 Want to learn more?
 
-Thêm entry vào `posts/index.json`:
-
-```json
-{
-  "slug": "my-new-post",
-  "date": "2025-01-15",
-  "tags": ["java", "spring-boot", "performance"],
-  "title": { 
-    "vi": "Tối ưu Spring Boot Performance", 
-    "en": "Spring Boot Performance Optimization" 
-  },
-  "excerpt": { 
-    "vi": "Các kỹ thuật tối ưu hiệu năng Spring Boot trong production", 
-    "en": "Production-ready Spring Boot performance optimization techniques" 
-  },
-  "files": { 
-    "vi": "my-new-post.md", 
-    "en": "my-new-post.en.md" 
-  }
-}
-```
-
-### 3. Viết nội dung
-
-Sử dụng Markdown với syntax highlighting:
-
-````markdown
-# Tiêu đề bài viết
-
-Nội dung bài viết...
-
-```java
-@RestController
-public class ExampleController {
-    @GetMapping("/api/data")
-    public ResponseEntity<String> getData() {
-        return ResponseEntity.ok("Hello World!");
-    }
-}
-```
-````
-
-## 🛠️ Công nghệ sử dụng
-
-- **Frontend**: HTML5, CSS3, Vanilla JavaScript
-- **Styling**: CSS Custom Properties (CSS Variables)
-- **Code Highlighting**: [highlight.js](https://highlightjs.org/)
-- **Fonts**: [Inter](https://fonts.google.com/specimen/Inter)
-- **Deployment**: GitHub Pages
-
-## 🌍 Đa ngôn ngữ
-
-- **Toggle**: Nút 🇻🇳/🇬🇧 ở header
-- **Auto-detect**: Tự phát hiện ngôn ngữ trình duyệt
-- **Persistence**: Lưu lựa chọn trong localStorage
-- **Translation**: Chỉnh sửa `js/i18n.js` để thêm/bổ sung bản dịch
-
-## 📱 Responsive Design
-
-- **Desktop**: Layout 2 cột với sidebar
-- **Tablet**: Layout 1 cột, grid 2 cột cho bài viết
-- **Mobile**: Layout 1 cột, hamburger menu, full-width buttons
-
-## 🎨 Theme System
-
-- **Light Mode**: Màu sáng, dễ đọc ban ngày
-- **Dark Mode**: Màu tối, bảo vệ mắt ban đêm
-- **Auto-switch**: Theo system preference
-- **Manual toggle**: Nút ☼/☾ ở header
+Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).

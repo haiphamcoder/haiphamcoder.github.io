@@ -1,0 +1,180 @@
+---
+
+---
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="/">Hải Phạm</a>
+    <div class="header-actions">
+      <nav class="nav" aria-label="Primary" id="navMenu">
+        <a href="/" class="nav-link" data-i18n="nav.home">Home</a>
+        <a href="/blog" class="nav-link" data-i18n="nav.blog">Blog</a>
+        <a href="/about" class="nav-link" data-i18n="nav.about">About</a>
+        <a href="/contact" class="nav-link" data-i18n="nav.contact">Contact</a>
+      </nav>
+      <button
+        class="nav-toggle"
+        id="navToggle"
+        aria-label="Menu"
+        aria-expanded="false"
+      >
+        <span class="burger"></span>
+      </button>
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+        <!-- Icon will be set by JS -->
+      </button>
+      <button class="theme-toggle" id="langToggle" aria-label="Toggle language">
+        VI
+      </button>
+    </div>
+  </div>
+</header>
+<script>
+  import { ui } from "../i18n/ui";
+
+  const langToggle = document.getElementById("langToggle");
+  const html = document.documentElement;
+  const STORAGE_KEY_LANG = "lang-preference";
+
+  // Get lang from HTML attribute (set by Layout for detail pages) or use storage
+  const pageLang = html.getAttribute("lang");
+  // Check if we are on a detail page (translated-slug is present or null explicitly checked)
+  const isDetailPage = html.hasAttribute("data-translated-slug");
+
+  function getLangPreference() {
+    return localStorage.getItem(STORAGE_KEY_LANG) || "vi";
+  }
+
+  function setLangPreference(lang: string) {
+    localStorage.setItem(STORAGE_KEY_LANG, lang);
+  }
+
+  function toggleLang() {
+    const current = getLangPreference();
+    const next = current === "vi" ? "en" : "vi";
+
+    // Always save preference
+    setLangPreference(next);
+
+    // If Detail Page with translation: Navigate
+    const translatedSlug = html.getAttribute("data-translated-slug");
+    if (isDetailPage && translatedSlug) {
+      window.location.href = `/blog/${translatedSlug}`;
+      return;
+    }
+
+    // Otherwise (List page or Detail page without translation): Just update UI
+    applyLangFilter(next);
+  }
+
+  function applyLangFilter(lang: string) {
+    // Update button text
+    if (langToggle) langToggle.textContent = lang.toUpperCase();
+
+    // Setup i18n text
+    const i18nText = ui[lang as keyof typeof ui] || ui["vi"];
+
+    // Update UI text (nav, footer, etc matching data-i18n)
+    const elements = document.querySelectorAll("[data-i18n]");
+    elements.forEach((el) => {
+      const key = el.getAttribute("data-i18n");
+      if (key && key in i18nText) {
+        el.textContent = i18nText[key as keyof typeof i18nText];
+      }
+    });
+
+    // If Detail Page, we stop here (don't filter content, as it's static)
+    if (isDetailPage) {
+      return;
+    }
+
+    // List page filtering
+    const posts = document.querySelectorAll<HTMLElement>(".post-card");
+    posts.forEach((post) => {
+      const postLang = post.getAttribute("data-lang");
+      // Show if lang matches OR if post has no lang (legacy/universal)
+      if (!postLang || postLang === lang) {
+        post.style.display = "";
+      } else {
+        post.style.display = "none";
+      }
+    });
+  }
+
+  // Init
+  const savedLang = getLangPreference();
+
+  // Apply saved language to UI immediately
+  applyLangFilter(savedLang);
+
+  langToggle?.addEventListener("click", toggleLang);
+</script>
+
+<script>
+  // Active Link Logic
+  const navLinks = document.querySelectorAll(".nav-link");
+  const currentPath = window.location.pathname;
+
+  navLinks.forEach((link) => {
+    if (
+      link.getAttribute("href") === currentPath ||
+      (link.getAttribute("href") !== "/" &&
+        currentPath.startsWith(link.getAttribute("href") as string))
+    ) {
+      link.classList.add("active");
+    }
+  });
+
+  // Mobile Menu Logic
+  const toggle = document.getElementById("navToggle");
+  const nav = document.getElementById("navMenu");
+
+  if (toggle && nav) {
+    toggle.addEventListener("click", () => {
+      const isOpen = nav.classList.toggle("open");
+      toggle.setAttribute("aria-expanded", String(isOpen));
+    });
+
+    document.addEventListener("click", (e) => {
+      if (
+        !nav.contains(e.target as Node) &&
+        !toggle.contains(e.target as Node) &&
+        nav.classList.contains("open")
+      ) {
+        nav.classList.remove("open");
+        toggle.setAttribute("aria-expanded", "false");
+      }
+    });
+  }
+
+  // Theme Toggle Logic
+  const themeToggle = document.getElementById("themeToggle");
+  const html = document.documentElement;
+  const STORAGE_KEY = "theme-preference";
+
+  function getPreference() {
+    return (
+      localStorage.getItem(STORAGE_KEY) ||
+      (window.matchMedia("(prefers-color-scheme: dark)").matches
+        ? "dark"
+        : "light")
+    );
+  }
+
+  function setTheme(theme: string) {
+    html.setAttribute("data-theme", theme);
+    localStorage.setItem(STORAGE_KEY, theme);
+    if (themeToggle) {
+      themeToggle.textContent = theme === "dark" ? "☼" : "☾";
+      themeToggle.setAttribute("aria-pressed", String(theme === "dark"));
+    }
+  }
+
+  // Init
+  setTheme(getPreference());
+
+  themeToggle?.addEventListener("click", () => {
+    const current = getPreference();
+    setTheme(current === "dark" ? "light" : "dark");
+  });
+</script>

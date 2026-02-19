@@ -1,8 +1,0 @@
-# GitHub Pages Redirects
-# This file handles URL redirects for GitHub Pages
-
-# Redirect old URLs to new ones (if any)
-# /old-page /new-page 301
-
-# SPA fallback - redirect all 404s to index.html
-/* /index.html 200

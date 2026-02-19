@@ -1,37 +1,27 @@
 {
-  "name": "haiphamcoder-blog",
-  "version": "1.0.0",
-  "description": "Personal blog and portfolio website for Hai Pham - Backend Engineer",
-  "main": "index.html",
+  "name": "bizarre-binary",
+  "type": "module",
+  "version": "0.0.1",
   "scripts": {
-    "start": "python -m http.server 8000",
-    "serve": "python3 -m http.server 8000",
-    "update-version": "node update-version.js",
-    "update-github": "node update-github-pages.js",
-    "build": "node update-version.js && echo 'Build completed'",
-    "build-github": "node update-github-pages.js && echo 'GitHub Pages build completed'",
-    "deploy": "node update-version.js && git add . && git commit -m 'Update version and cache busting' && git push",
-    "deploy-github": "node update-github-pages.js && git add . && git commit -m 'Deploy to GitHub Pages' && git push origin main",
-    "clear-cache": "echo 'Clearing browser cache...' && echo 'Please hard refresh your browser (Ctrl+F5 or Cmd+Shift+R)'"
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
   },
-  "keywords": [
-    "blog",
-    "portfolio",
-    "backend",
-    "java",
-    "spring-boot",
-    "static-site"
-  ],
-  "author": "Hai Pham <ngochai285nd@gmail.com>",
-  "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/haiphamcoder/haiphamcoder.github.io.git"
+  "dependencies": {
+    "@astrojs/mdx": "^4.3.13",
+    "@astrojs/sitemap": "^3.7.0",
+    "@tailwindcss/vite": "^4.2.0",
+    "astro": "^5.17.1",
+    "mermaid": "^11.12.3",
+    "rehype-autolink-headings": "^7.1.0",
+    "rehype-slug": "^6.0.0",
+    "tailwindcss": "^4.2.0"
   },
-  "homepage": "https://haiphamcoder.github.io",
-  "devDependencies": {},
-  "dependencies": {},
-  "engines": {
-    "node": ">=14.0.0"
+  "devDependencies": {
+    "prettier": "^3.8.1",
+    "prettier-plugin-astro": "^0.14.1"
   }
 }

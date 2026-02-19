@@ -1,0 +1,538 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+import TableOfContents from "../../components/TableOfContents.astro";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("blog");
+  return posts.map((post) => {
+    const slug = post.slug;
+    const isEn = slug.endsWith(".en");
+    const targetSlug = isEn ? slug.replace(/\.en$/, "") : `${slug}.en`;
+    const hasTranslation = posts.some((p) => p.slug === targetSlug);
+
+    return {
+      params: { slug: post.slug },
+      props: {
+        post,
+        translatedSlug: hasTranslation ? targetSlug : undefined,
+      },
+    };
+  });
+}
+
+const { post, translatedSlug } = Astro.props;
+const { Content, headings } = await post.render();
+
+// Series Logic
+let seriesPosts: any[] = [];
+let prevPost = null;
+let nextPost = null;
+
+if (post.data.series) {
+  const allPosts = await getCollection("blog");
+  seriesPosts = allPosts
+    .filter(
+      (p) =>
+        p.data.series === post.data.series && p.data.lang === post.data.lang,
+    )
+    .sort((a, b) => (a.data.seriesOrder || 0) - (b.data.seriesOrder || 0));
+
+  const currentIndex = seriesPosts.findIndex((p) => p.slug === post.slug);
+  if (currentIndex > 0) prevPost = seriesPosts[currentIndex - 1];
+  if (currentIndex < seriesPosts.length - 1)
+    nextPost = seriesPosts[currentIndex + 1];
+}
+---
+
+<Layout
+  title={post.data.title}
+  description={post.data.excerpt}
+  lang={post.data.lang}
+  translatedSlug={translatedSlug}
+>
+  <div class="layout">
+    <div class="main-content">
+      <article class="content markdown-body">
+        <div class="post-header">
+          <h1>{post.data.title}</h1>
+          <div class="meta">
+            <span>📅 {post.data.date.toISOString().split("T")[0]}</span>
+            <span>🏷️ {post.data.tags.join(", ")}</span>
+          </div>
+        </div>
+        <div id="post-content">
+          <Content />
+        </div>
+      </article>
+
+      {
+        post.data.series && (
+          <div class="series-nav">
+            <hr />
+            <h3>Series: {post.data.series}</h3>
+
+            <div class="series-content">
+              <ul class="series-list">
+                {seriesPosts.map((p) => (
+                  <li class={p.slug === post.slug ? "active" : ""}>
+                    <a href={`/blog/${p.slug}`}>
+                      <span class="order">{p.data.seriesOrder}.</span>
+                      <span class="title">{p.data.title}</span>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div class="series-links">
+              {prevPost && (
+                <a href={`/blog/${prevPost.slug}`} class="series-link prev">
+                  <span>← Bài trước</span>
+                  <span class="link-title">{prevPost.data.title}</span>
+                </a>
+              )}
+              {nextPost && (
+                <a href={`/blog/${nextPost.slug}`} class="series-link next">
+                  <span>Bài tiếp theo →</span>
+                  <span class="link-title">{nextPost.data.title}</span>
+                </a>
+              )}
+            </div>
+          </div>
+        )
+      }
+    </div>
+
+    <aside class="sidebar">
+      <TableOfContents headings={headings} />
+    </aside>
+  </div>
+</Layout>
+<div id="mermaid-modal" class="mermaid-modal">
+  <div class="mermaid-modal-content">
+    <span class="close-modal">&times;</span>
+    <div id="mermaid-modal-body"></div>
+  </div>
+</div>
+
+<!-- Mermaid & Callouts Scripts -->
+<script>
+  // Mermaid
+  import mermaid from "mermaid";
+  mermaid.initialize({
+    startOnLoad: false,
+    theme: "default",
+    securityLevel: "loose",
+    htmlLabels: true,
+    flowchart: { useMaxWidth: true, htmlLabels: true },
+    sequence: { useMaxWidth: true },
+    gantt: { useMaxWidth: true },
+  });
+
+  // Find all code blocks with language-mermaid
+  const mermaidBlocks = document.querySelectorAll(
+    'pre.mermaid, pre > code.language-mermaid, pre[data-language="mermaid"]',
+  );
+
+  if (mermaidBlocks.length > 0) {
+    mermaidBlocks.forEach((block, index) => {
+      // If block is 'code', get parent 'pre'. If block is 'pre', use it.
+      const pre = block.tagName === "CODE" ? block.parentElement : block;
+      if (!pre) return;
+
+      const code = pre.textContent || "";
+
+      // Create wrapper
+      const wrapper = document.createElement("div");
+      wrapper.className = "mermaid-wrapper";
+
+      // Create mermaid div
+      const div = document.createElement("div");
+      div.className = "mermaid";
+      div.id = `mermaid-${index}`;
+      div.textContent = code;
+
+      // Create expand button
+      const expandBtn = document.createElement("button");
+      expandBtn.className = "mermaid-expand-btn";
+      expandBtn.innerHTML = "⤢";
+      expandBtn.title = "Expand Diagram";
+      expandBtn.onclick = () => openMermaidModal(`mermaid-${index}`);
+
+      wrapper.appendChild(expandBtn);
+      wrapper.appendChild(div);
+
+      pre.replaceWith(wrapper);
+    });
+
+    // Run mermaid
+    await mermaid.run({
+      nodes: document.querySelectorAll(".mermaid"),
+    });
+  }
+
+  // Mermaid Modal Logic
+  const modal = document.getElementById("mermaid-modal");
+  const modalBody = document.getElementById("mermaid-modal-body");
+  const closeBtn = document.querySelector(".close-modal");
+
+  function openMermaidModal(id: string) {
+    if (!modal || !modalBody) return;
+    const original = document.getElementById(id);
+    if (!original) return;
+
+    modalBody.innerHTML = original.innerHTML;
+
+    // JS scaling is handled by CSS now (.mermaid-modal-content svg)
+    // But we remove explicit height/width attributes that might block CSS
+    const svg = modalBody.querySelector("svg");
+    if (svg) {
+      svg.removeAttribute("height");
+      svg.removeAttribute("width");
+      svg.removeAttribute("style"); // Clear inline styles from mermaid
+    }
+
+    modal.style.display = "flex";
+  }
+
+  if (closeBtn) {
+    closeBtn.addEventListener("click", () => {
+      if (modal) modal.style.display = "none";
+    });
+  }
+
+  if (modal) {
+    modal.addEventListener("click", (e) => {
+      if (e.target === modal) modal.style.display = "none";
+    });
+  }
+
+  // Callouts (Transform GitHub Alerts to style)
+  // ... existing callout logic ...
+  const blockquotes = document.querySelectorAll("blockquote");
+  // ... keep callout logic ...
+  blockquotes.forEach((bq) => {
+    const firstP = bq.querySelector("p");
+    if (!firstP) return;
+    const text = firstP.innerHTML;
+    const match = text.match(/^\[!(NOTE|TIP|IMPORTANT|WARNING|CAUTION)\]/);
+    if (match) {
+      const type = match[1].toLowerCase();
+      bq.classList.add("callout", type);
+      // Remove the [!NOTE] part from text
+      firstP.innerHTML = text.replace(
+        /^\[!(NOTE|TIP|IMPORTANT|WARNING|CAUTION)\]\s?/,
+        "",
+      );
+      // Add title
+      const title = document.createElement("div");
+      title.className = "callout-title";
+      title.textContent = type.charAt(0).toUpperCase() + type.slice(1);
+      bq.prepend(title);
+    }
+  });
+
+  // Copy Code Button
+  document.querySelectorAll("pre").forEach((pre) => {
+    // Check if it's inside a mermaid wrapper (don't add copy there)
+    if (pre.closest(".mermaid-wrapper")) return;
+    // ...
+    // Check if it's inside a mermaid block (don't add copy there)
+    if (pre.classList.contains("mermaid")) return;
+
+    const wrapper = document.createElement("div");
+    wrapper.className = "code-wrapper";
+    pre.parentNode?.insertBefore(wrapper, pre);
+    wrapper.appendChild(pre);
+
+    const button = document.createElement("button");
+    button.className = "copy-btn";
+    button.textContent = "Copy";
+    button.addEventListener("click", async () => {
+      const code =
+        pre.querySelector("code")?.textContent || pre.textContent || "";
+      try {
+        await navigator.clipboard.writeText(code);
+        button.textContent = "Copied!";
+        setTimeout(() => (button.textContent = "Copy"), 2000);
+      } catch (err) {
+        console.error("Failed to copy class", err);
+        button.textContent = "Error";
+      }
+    });
+    wrapper.appendChild(button);
+  });
+</script>
+
+<style>
+  /* ... existing styles ... */
+  .main-content {
+    min-width: 0; /* Important for grid responsiveness */
+    width: 100%;
+  }
+
+  .post-header {
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border);
+    word-break: break-word;
+  }
+
+  .post-header h1 {
+    margin-bottom: 0.5rem;
+    color: var(--brand);
+  }
+
+  .meta {
+    color: var(--muted);
+    font-size: 0.9rem;
+    display: flex;
+    gap: 1rem;
+  }
+
+  /* Series Nav */
+  .series-nav {
+    margin-top: 3rem;
+  }
+
+  .series-links {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-top: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .series-link {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    flex: 1;
+    min-width: 250px;
+    text-decoration: none;
+    transition: border-color 0.2s;
+  }
+
+  .series-link:hover {
+    border-color: var(--brand);
+  }
+
+  .series-link span:first-child {
+    font-size: 0.85rem;
+    color: var(--muted);
+    margin-bottom: 0.5rem;
+  }
+
+  .series-link .link-title {
+    font-weight: 600;
+    color: var(--brand);
+  }
+
+  /* Series List Styling */
+  .series-content {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+  }
+
+  .series-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .series-list li {
+    padding: 0.5rem;
+    border-radius: 4px;
+    transition: background 0.2s;
+  }
+
+  .series-list li:hover {
+    background: rgba(var(--brand-rgb), 0.1);
+  }
+
+  .series-list li.active {
+    background: var(--brand);
+    color: white;
+  }
+
+  .series-list li.active a {
+    color: white;
+  }
+
+  .series-list a {
+    text-decoration: none;
+    display: flex;
+    gap: 0.75rem;
+    color: var(--text);
+    font-size: 0.95rem;
+  }
+
+  .series-list .order {
+    color: var(--muted);
+    font-weight: 600;
+    min-width: 1.5rem;
+  }
+
+  .series-list li.active .order {
+    color: rgba(255, 255, 255, 0.8);
+  }
+</style>
+
+<style is:global>
+  .mermaid-wrapper {
+    position: relative;
+    margin: 2rem 0;
+  }
+
+  .mermaid {
+    display: flex;
+    justify-content: center;
+    background: var(--card);
+    padding: 1rem;
+    border-radius: 8px;
+    overflow-x: auto; /* allow scroll if scaling fails */
+    width: 100%;
+  }
+
+  .mermaid svg {
+    max-width: 100% !important;
+    max-height: 500px !important; /* Limit vertical diagrams - synchronized with previous intended JS value */
+    height: auto !important;
+    width: auto !important;
+  }
+
+  .mermaid-expand-btn {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 10;
+    opacity: 0.5;
+    transition: opacity 0.2s;
+  }
+
+  .mermaid-wrapper:hover .mermaid-expand-btn {
+    opacity: 1;
+  }
+
+  /* Modal Styles */
+  .mermaid-modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    align-items: center;
+    justify-content: center;
+  }
+
+  .mermaid-modal-content {
+    background-color: var(--card);
+    margin: auto;
+    padding: 20px;
+    border: 1px solid var(--border);
+    width: 98vw; /* Wider */
+    max-width: none; /* remove limit */
+    height: 95vh; /* Taller */
+    overflow: auto;
+    border-radius: 8px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center; /* Center vertically */
+    flex-direction: column;
+  }
+
+  #mermaid-modal-body {
+    width: 100%;
+    height: 100%;
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+  }
+
+  #mermaid-modal-body svg {
+    width: auto !important;
+    height: auto !important;
+    max-width: 100% !important;
+    max-height: 100% !important;
+    min-width: 50%; /* Force it to start somewhat big */
+  }
+
+  .close-modal {
+    color: var(--muted);
+    position: absolute;
+    top: 10px;
+    right: 25px;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 100;
+  }
+
+  .close-modal:hover,
+  .close-modal:focus {
+    color: var(--text);
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  /* Copy Button Styles - GLOBAL */
+  .code-wrapper {
+    position: relative;
+    margin: 1.5rem 0;
+  }
+  .copy-btn {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(4px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 6px;
+    padding: 0.35rem 0.7rem;
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: #e2e8f0;
+    cursor: pointer;
+    opacity: 0;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 10;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .code-wrapper:hover .copy-btn {
+    opacity: 1;
+  }
+  .copy-btn:hover {
+    background: var(--brand);
+    border-color: var(--brand);
+    color: white;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(49, 130, 206, 0.3);
+  }
+  .copy-btn:active {
+    transform: translateY(0);
+  }
+</style>

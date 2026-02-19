@@ -1,0 +1,449 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout title="About | Hải Phạm">
+  <div class="container cv-container">
+    <div class="cv-layout">
+      <!-- Sidebar -->
+      <aside class="cv-sidebar">
+        <div class="cv-avatar-wrapper">
+          <img src="/assets/avatar.jpg" alt="Hải Phạm" class="cv-avatar" />
+        </div>
+
+        <div class="cv-contact">
+          <h3 data-i18n="about.contact">Liên hệ</h3>
+          <div class="contact-item">
+            <span class="icon">📧</span>
+            <a href="mailto:ngochai285nd@gmail.com">ngochai285nd@gmail.com</a>
+          </div>
+          <div class="contact-item">
+            <span class="icon">📍</span>
+            <span>Hà Nội, Việt Nam</span>
+          </div>
+          <div class="contact-item">
+            <span class="icon">💼</span>
+            <a
+              href="https://www.linkedin.com/in/hai-pham-ngoc-b095041b4"
+              target="_blank">LinkedIn</a
+            >
+          </div>
+          <div class="contact-item">
+            <span class="icon">💻</span>
+            <a href="https://github.com/haiphamcoder" target="_blank">GitHub</a>
+          </div>
+        </div>
+
+        <div class="cv-skills">
+          <h3 data-i18n="about.skills">Kỹ năng</h3>
+
+          <div class="skill-group">
+            <h4 data-i18n="about.skills.languages">Ngôn ngữ lập trình</h4>
+            <div class="tags">
+              <span class="tag">Java</span>
+              <span class="tag">SQL</span>
+              <span class="tag">Rust</span>
+              <span class="tag">JavaScript</span>
+            </div>
+          </div>
+
+          <div class="skill-group">
+            <h4 data-i18n="about.skills.frameworks">Frameworks</h4>
+            <div class="tags">
+              <span class="tag">Spring Boot</span>
+              <span class="tag">Hibernate</span>
+              <span class="tag">Apache Kafka</span>
+            </div>
+          </div>
+
+          <div class="skill-group">
+            <h4 data-i18n="about.skills.tools">Tools & DevOps</h4>
+            <div class="tags">
+              <span class="tag">Docker</span>
+              <span class="tag">Git</span>
+              <span class="tag">Linux</span>
+              <span class="tag">Maven</span>
+            </div>
+          </div>
+
+          <div class="skill-group">
+            <h4 data-i18n="about.skills.knowledge">Kiến thức</h4>
+            <div class="tags">
+              <span class="tag">OOP</span>
+              <span class="tag">REST API</span>
+              <span class="tag">Distributed Systems</span>
+              <span class="tag">Security</span>
+            </div>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Main Content -->
+      <main class="cv-content">
+        <header class="cv-header">
+          <h1>Hải Phạm</h1>
+          <p class="cv-title" data-i18n="about.role">
+            Junior Backend Engineer | Java | Spring Boot
+          </p>
+          <p class="cv-summary" data-i18n="about.summary">
+            Tôi là một Junior Backend Engineer đam mê phát triển các hệ thống
+            backend mạnh mẽ và hiệu quả. Với nền tảng vững chắc về Java và
+            Spring Boot, tôi luôn tìm hiểu và áp dụng các công nghệ mới để xây
+            dựng những giải pháp phần mềm chất lượng cao.
+          </p>
+        </header>
+
+        <section class="cv-section">
+          <h2 data-i18n="about.education">🎓 Học vấn</h2>
+          <div class="cv-item">
+            <div class="cv-item-header">
+              <h3 data-i18n="about.education.school">
+                Đại học Bách khoa Hà Nội
+              </h3>
+              <span class="date">2020 - 2025</span>
+            </div>
+            <p class="sub-title" data-i18n="about.education.program">
+              Trường Công nghệ Thông tin và Truyền Thông
+            </p>
+            <p class="role" data-i18n="about.education.degree">
+              Kỹ sư Công nghệ Thông tin
+            </p>
+          </div>
+        </section>
+
+        <section class="cv-section">
+          <h2 data-i18n="about.projects">🚀 Dự án cá nhân</h2>
+
+          <div class="cv-item">
+            <div class="cv-item-header">
+              <h3>Crypto Utils - Java Cryptography Library</h3>
+              <span class="date">2025</span>
+            </div>
+            <p data-i18n="about.projects.crypto.desc">
+              Thư viện Java toàn diện cho cryptography, hashing, encoding và xử
+              lý dữ liệu.
+            </p>
+            <div class="tech-stack">
+              <span class="tech">Java</span>
+              <span class="tech">Cryptography</span>
+              <span class="tech">RSA/AES</span>
+            </div>
+            <a
+              href="https://github.com/haiphamcoder/crypto-utils"
+              target="_blank"
+              class="project-link">🔗 GitHub Repository</a
+            >
+          </div>
+
+          <div class="cv-item">
+            <div class="cv-item-header">
+              <h3>Kafka KRaft with SCRAM</h3>
+              <span class="date">2025</span>
+            </div>
+            <p data-i18n="about.projects.kafka.desc">
+              Triển khai cluster Kafka sử dụng KRaft protocal và SCRAM
+              authentication với Docker.
+            </p>
+            <div class="tech-stack">
+              <span class="tech">Kafka</span>
+              <span class="tech">Docker</span>
+              <span class="tech">Shell</span>
+            </div>
+            <a
+              href="https://github.com/haiphamcoder/kafka-kraft-scram"
+              target="_blank"
+              class="project-link">🔗 GitHub Repository</a
+            >
+          </div>
+
+          <div class="cv-item">
+            <div class="cv-item-header">
+              <h3>XSS Clean</h3>
+              <span class="date">2025</span>
+            </div>
+            <p data-i18n="about.projects.xss.desc">
+              Thư viện Java sanitize input để ngăn chặn XSS attacks.
+            </p>
+            <div class="tech-stack">
+              <span class="tech">Java</span>
+              <span class="tech">Spring Boot</span>
+              <span class="tech">OWASP</span>
+            </div>
+            <a
+              href="https://github.com/haiphamcoder/xss-clean"
+              target="_blank"
+              class="project-link">🔗 GitHub Repository</a
+            >
+          </div>
+        </section>
+
+        <section class="cv-section">
+          <h2 data-i18n="about.goals">🎯 Định hướng nghề nghiệp</h2>
+          <div class="goals-grid">
+            <div class="goal-group">
+              <h4 data-i18n="about.goals.short">Ngắn hạn (6-12 tháng)</h4>
+              <ul>
+                <li data-i18n="about.goals.short.1">
+                  Nâng cao kỹ năng Spring Security, Microservices.
+                </li>
+                <li data-i18n="about.goals.short.2">
+                  Thực hành sâu với Docker và Containerization.
+                </li>
+              </ul>
+            </div>
+            <div class="goal-group">
+              <h4 data-i18n="about.goals.long">Dài hạn (1-3 năm)</h4>
+              <ul>
+                <li data-i18n="about.goals.long.1">
+                  Trở thành Senior Backend Engineer.
+                </li>
+                <li data-i18n="about.goals.long.2">
+                  Chuyên sâu về Distributed Systems và Big Data.
+                </li>
+              </ul>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .cv-container {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+  }
+
+  .cv-layout {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: 3rem;
+    align-items: start;
+  }
+
+  /* Sidebar */
+  .cv-sidebar {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 2rem;
+    text-align: center;
+    position: sticky;
+    top: 100px;
+  }
+
+  .cv-avatar {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    margin: 0 auto 1.5rem;
+    border: 3px solid var(--border);
+    object-fit: cover;
+  }
+
+  .cv-contact {
+    margin-bottom: 2rem;
+    text-align: left;
+  }
+
+  .cv-contact h3,
+  .cv-skills h3 {
+    font-size: 1.1rem;
+    color: var(--text);
+    border-bottom: 2px solid var(--border);
+    padding-bottom: 0.5rem;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .contact-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.75rem;
+    font-size: 0.9rem;
+    color: var(--muted);
+  }
+
+  .contact-item a {
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.2s;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .contact-item a:hover {
+    color: var(--brand);
+  }
+
+  .skill-group {
+    margin-bottom: 1.5rem;
+    text-align: left;
+  }
+
+  .skill-group h4 {
+    font-size: 0.95rem;
+    margin: 0 0 0.5rem;
+    color: var(--text);
+  }
+
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .tag {
+    font-size: 0.8rem;
+    padding: 0.2rem 0.6rem;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    color: var(--muted);
+  }
+
+  /* Main Content */
+  .cv-header {
+    margin-bottom: 3rem;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 2rem;
+  }
+
+  .cv-header h1 {
+    font-size: 2.5rem;
+    margin: 0 0 0.5rem;
+    color: var(--text);
+  }
+
+  .cv-title {
+    font-size: 1.25rem;
+    color: var(--brand);
+    font-weight: 500;
+    margin: 0 0 1rem;
+  }
+
+  .cv-summary {
+    color: var(--muted);
+    line-height: 1.7;
+    max-width: 800px;
+  }
+
+  .cv-section {
+    margin-bottom: 3rem;
+  }
+
+  .cv-section h2 {
+    font-size: 1.5rem;
+    color: var(--text);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .cv-item {
+    margin-bottom: 2rem;
+  }
+
+  .cv-item-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 0.5rem;
+  }
+
+  .cv-item h3 {
+    margin: 0;
+    font-size: 1.2rem;
+    color: var(--text);
+  }
+
+  .date {
+    font-family: monospace;
+    color: var(--muted);
+    font-size: 0.9rem;
+  }
+
+  .sub-title {
+    color: var(--text);
+    font-weight: 500;
+    margin: 0;
+  }
+
+  .role {
+    color: var(--muted);
+    margin: 0.2rem 0 0;
+    font-style: italic;
+  }
+
+  .tech-stack {
+    display: flex;
+    gap: 0.5rem;
+    margin: 0.5rem 0;
+  }
+
+  .tech {
+    font-size: 0.8rem;
+    color: var(--brand);
+    background: var(--brand-light);
+    padding: 0.1rem 0.5rem;
+    border-radius: 4px;
+  }
+  /* Dark mode adjustment for brand-light if needed, generally brand-light might be too bright in dark mode */
+  :global(html[data-theme="dark"]) .tech {
+    background: rgba(33, 150, 243, 0.2);
+  }
+
+  .project-link {
+    font-size: 0.9rem;
+    display: inline-block;
+    margin-top: 0.5rem;
+  }
+
+  .goals-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+
+  .goal-group h4 {
+    color: var(--text);
+    margin-top: 0;
+  }
+
+  .goal-group ul {
+    padding-left: 1.2rem;
+    color: var(--muted);
+  }
+
+  .goal-group li {
+    margin-bottom: 0.5rem;
+  }
+
+  @media (max-width: 768px) {
+    .cv-layout {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    .cv-sidebar {
+      position: static;
+      text-align: left;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+
+    .cv-avatar-wrapper {
+      text-align: center;
+    }
+
+    .goals-grid {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+  }
+</style>

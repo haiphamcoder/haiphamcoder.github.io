@@ -1,0 +1,35 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+import PostCard from "../../components/PostCard.astro";
+
+const posts = (await getCollection("blog")).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
+);
+---
+
+<Layout
+  title="Blog | Hải Phạm"
+  description="Technical Deep Dives into Backend Engineering"
+>
+  <section class="section-header">
+    <h1>Blog</h1>
+  </section>
+
+  <div class="post-grid">
+    {
+      posts.map((post) => (
+        <PostCard
+          title={post.data.title}
+          date={post.data.date.toISOString().split("T")[0]}
+          tags={post.data.tags}
+          excerpt={post.data.excerpt || ""}
+          href={`/blog/${post.slug}`}
+          lang={post.data.lang}
+          series={post.data.series}
+          seriesOrder={post.data.seriesOrder}
+        />
+      ))
+    }
+  </div>
+</Layout>
