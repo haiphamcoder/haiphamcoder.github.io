@@ -1,0 +1,125 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "../../../layouts/Layout.astro";
+import PostCard from "../../../components/PostCard.astro";
+import Pagination from "../../../components/Pagination.astro";
+import Search from "../../../components/Search.astro";
+
+export async function getStaticPaths({ paginate }: any) {
+  const languages = ["vi", "en"];
+  const allPosts = await getCollection("blog");
+
+  return languages.flatMap((lang) => {
+    const langPosts = allPosts
+      .filter((post) => post.data.lang === lang)
+      .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+    return paginate(langPosts, {
+      params: { lang },
+      pageSize: 8,
+    });
+  });
+}
+
+const { page } = Astro.props;
+const { lang } = Astro.params;
+
+// Prepare data for search component (minified)
+const allPostsForSearch = (await getCollection("blog"))
+  .filter((post) => post.data.lang === lang)
+  .map((post) => ({
+    title: post.data.title,
+    excerpt: post.data.excerpt || "",
+    tags: post.data.tags,
+    href: `/blog/${post.slug}`,
+    date: post.data.date.toISOString().split("T")[0],
+  }));
+
+const t = {
+  vi: {
+    title: "Blog & Chia sẻ kiến thức",
+    desc: "Nơi chia sẻ kiến thức về lập trình, kiến trúc hệ thống và kinh nghiệm làm việc.",
+    searchPlaceholder: "Tìm kiếm bài viết...",
+    noResults: "Không tìm thấy bài viết nào phù hợp.",
+  },
+  en: {
+    title: "Blog & Knowledge Sharing",
+    desc: "Technical deep dives into backend engineering, architecture, and developer experience.",
+    searchPlaceholder: "Search posts...",
+    noResults: "No posts found matching your search.",
+  },
+}[lang as "vi" | "en"];
+---
+
+<Layout title={`${t.title} | Hải Phạm`} lang={lang} description={t.desc}>
+  <div transition:persist="blog-header-section">
+    <section class="blog-hero">
+      <div class="hero-content">
+        <h1 class="gradient-text">{t.title}</h1>
+        <p>{t.desc}</p>
+      </div>
+      <Search
+        placeholder={t.searchPlaceholder}
+        allPosts={allPostsForSearch}
+        noResultsText={t.noResults}
+        lang={lang}
+        transition:persist
+      />
+    </section>
+  </div>
+
+  <div class="content-wrapper" id="blog-content-wrapper">
+    <div class="post-grid" id="main-post-grid" transition:animate="fade">
+      {
+        page.data.map((post: any) => (
+          <PostCard
+            title={post.data.title}
+            date={post.data.date.toISOString().split("T")[0]}
+            tags={post.data.tags}
+            excerpt={post.data.excerpt || ""}
+            href={`/blog/${post.slug}`}
+            lang={post.data.lang}
+            series={post.data.series}
+            seriesOrder={post.data.seriesOrder}
+          />
+        ))
+      }
+    </div>
+
+    <div id="pagination-wrapper">
+      <Pagination page={page} lang={lang} />
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .blog-hero {
+    padding: 60px 0 40px;
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .blog-hero h1 {
+    font-size: 3rem;
+    font-weight: 800;
+    margin-bottom: 1rem;
+    letter-spacing: -0.02em;
+  }
+
+  .blog-hero p {
+    font-size: 1.25rem;
+    color: var(--muted);
+    margin-bottom: 2rem;
+  }
+
+  .content-wrapper {
+    padding-bottom: 80px;
+  }
+
+  @media (max-width: 768px) {
+    .blog-hero h1 {
+      font-size: 2.25rem;
+    }
+  }
+</style>

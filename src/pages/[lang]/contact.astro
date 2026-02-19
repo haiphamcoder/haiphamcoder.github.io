@@ -1,8 +1,15 @@
 ---
-import Layout from "../layouts/Layout.astro";
+import Layout from "../../layouts/Layout.astro";
+
+export function getStaticPaths() {
+  return [{ params: { lang: "vi" } }, { params: { lang: "en" } }];
+}
+
+const { lang } = Astro.params;
+const title = lang === "vi" ? "Liên hệ | Hải Phạm" : "Contact | Hải Phạm";
 ---
 
-<Layout title="Contact | Hải Phạm">
+<Layout title={title} lang={lang}>
   <div class="container narrow">
     <section class="contact-header">
       <h1 data-i18n="contact.title">Liên hệ</h1>

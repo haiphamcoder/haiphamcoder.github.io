@@ -1,0 +1,180 @@
+---
+interface Props {
+  allPosts: any[];
+  placeholder: string;
+  noResultsText: string;
+  lang: string;
+}
+
+const { allPosts, placeholder, noResultsText, lang } = Astro.props;
+---
+
+<div class="search-container">
+  <div class="search-input-wrapper">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      class="search-icon"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
+      <circle cx="11" cy="11" r="8"></circle>
+      <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+    </svg>
+    <input
+      type="text"
+      id="blog-search"
+      placeholder={placeholder}
+      autocomplete="off"
+    />
+  </div>
+  <div id="search-status" class="search-status" aria-live="polite"></div>
+</div>
+
+<script is:inline define:vars={{ allPosts, noResultsText, lang }}>
+  // Wrap in a function to run after DOM is ready
+  function initSearch() {
+    const searchInput = document.getElementById("blog-search");
+    const postGrid = document.getElementById("main-post-grid");
+    const paginationWrapper = document.getElementById("pagination-wrapper");
+    const searchStatus = document.getElementById("search-status");
+
+    if (!searchInput || !postGrid || !paginationWrapper) {
+      // If elements not found, retry after a short delay (for Astro content loads)
+      setTimeout(initSearch, 100);
+      return;
+    }
+
+    // Store original content to restore when search is cleared
+    let originalGridHTML = postGrid.innerHTML;
+
+    searchInput.addEventListener("input", (e) => {
+      const query = e.target.value.toLowerCase().trim();
+
+      if (query === "") {
+        postGrid.innerHTML = originalGridHTML;
+        paginationWrapper.style.display = "flex";
+        searchStatus.textContent = "";
+        return;
+      }
+
+      // Filter posts
+      const filtered = allPosts.filter(
+        (post) =>
+          post.title.toLowerCase().includes(query) ||
+          post.excerpt.toLowerCase().includes(query) ||
+          post.tags.some((tag) => tag.toLowerCase().includes(query)),
+      );
+
+      // Hide pagination in search mode
+      paginationWrapper.style.display = "none";
+
+      // Update UI
+      if (filtered.length === 0) {
+        postGrid.innerHTML = `<div class="no-results">${noResultsText}</div>`;
+        searchStatus.textContent = noResultsText;
+      } else {
+        searchStatus.textContent = `${filtered.length} results found`;
+        postGrid.innerHTML = filtered
+          .map(
+            (post) => `
+          <article class="card post-card scroll-animate animate-in">
+            <a href="/${lang}${post.href}" class="card-link">
+              <h3>${post.title}</h3>
+              <div class="meta">
+                <span>📅 ${post.date}</span>
+              </div>
+              <p class="excerpt">${post.excerpt}</p>
+              <div class="tags">
+                ${post.tags.map((tag) => `<span class="tag">${tag}</span>`).join("")}
+              </div>
+            </a>
+          </article>
+        `,
+          )
+          .join("");
+      }
+    });
+
+    // Handle Enter key
+    searchInput.addEventListener("keypress", (e) => {
+      if (e.key === "Enter") e.preventDefault();
+    });
+  }
+
+  // Run on initial load and on Astro page transitions
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initSearch);
+  } else {
+    initSearch();
+  }
+  document.addEventListener("astro:page-load", initSearch);
+</script>
+
+<style>
+  .search-container {
+    max-width: 500px;
+    margin: 2rem auto;
+    position: relative;
+  }
+
+  .search-input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+
+  .search-icon {
+    position: absolute;
+    left: 1rem;
+    width: 20px;
+    height: 20px;
+    color: var(--muted);
+    pointer-events: none;
+  }
+
+  input {
+    width: 100%;
+    padding: 0.75rem 1rem 0.75rem 3rem;
+    background: rgba(var(--card-bg-rgb), 0.5);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--border);
+    border-radius: 99px;
+    color: var(--text);
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  }
+
+  input:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 4px rgba(var(--accent-rgb), 0.1);
+    background: rgba(var(--card-bg-rgb), 0.8);
+  }
+
+  .search-status {
+    font-size: 0.875rem;
+    color: var(--muted);
+    margin-top: 0.5rem;
+    text-align: center;
+  }
+
+  :global(.no-results) {
+    grid-column: 1 / -1;
+    padding: 4rem 2rem;
+    text-align: center;
+    color: var(--muted);
+    font-size: 1.125rem;
+    background: rgba(var(--card-bg-rgb), 0.3);
+    border-radius: 1rem;
+    border: 1px dashed var(--border);
+  }
+
+  [data-theme="dark"] input {
+    background: rgba(30, 41, 59, 0.5);
+  }
+</style>

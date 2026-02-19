@@ -1,5 +1,13 @@
 ---
-const year = new Date().getFullYear();
+import { ui } from "../i18n/ui";
+
+interface Props {
+  lang?: string;
+}
+
+const { lang = "vi" } = Astro.props;
+const t = ui[lang as keyof typeof ui];
+const currentYear = new Date().getFullYear();
 ---
 
 <footer class="site-footer">
@@ -10,9 +18,8 @@ const year = new Date().getFullYear();
           <span class="logo-text">Hải Phạm</span>
           <span class="logo-dot">.</span>
         </div>
-        <p class="footer-desc" data-i18n="footer.about.desc">
-          Backend Engineer chuyên Java & Spring Boot, đam mê hệ thống phân tán
-          và kiến trúc phần mềm.
+        <p class="footer-desc">
+          {t["footer.about.desc"]}
         </p>
         <div class="footer-social">
           <a
@@ -29,7 +36,7 @@ const year = new Date().getFullYear();
             </svg>
           </a>
           <a
-            href="https://www.linkedin.com/in/hai-pham-ngoc-b095041b4"
+            href="https://www.linkedin.com/in/haiphamcoder"
             target="_blank"
             rel="noopener"
             aria-label="LinkedIn"
@@ -41,54 +48,44 @@ const year = new Date().getFullYear();
               ></path>
             </svg>
           </a>
-          <a
-            href="mailto:ngochai285nd@gmail.com"
-            aria-label="Email"
-            title="Email"
-          >
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-              <path
-                d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-.904.732-1.636 1.636-1.636h.91L12 10.09l9.455-6.27h.909c.904 0 1.636.732 1.636 1.636z"
-              ></path>
-            </svg>
-          </a>
         </div>
       </div>
 
       <div class="footer-section">
-        <h3 class="footer-title" data-i18n="footer.links">Liên kết</h3>
+        <h3 class="footer-title">{t["footer.links"]}</h3>
         <nav class="footer-nav">
-          <a href="/" data-i18n="nav.home">Trang chủ</a>
-          <a href="/blog" data-i18n="nav.blog">Blog</a>
-          <a href="/about" data-i18n="nav.about">Về tôi</a>
-          <a href="/contact" data-i18n="nav.contact">Liên hệ</a>
+          <a href={`/${lang}/`}>{t["nav.home"]}</a>
+          <a href={`/${lang}/blog`}>{t["nav.blog"]}</a>
+          <a href={`/${lang}/about`}>{t["nav.about"]}</a>
+          <a href={`/${lang}/contact`}>{t["nav.contact"]}</a>
         </nav>
       </div>
 
       <div class="footer-section">
-        <h3 class="footer-title" data-i18n="footer.resources">Tài nguyên</h3>
+        <h3 class="footer-title">{t["footer.connect"]}</h3>
         <nav class="footer-nav">
           <a
-            href="https://github.com/haiphamcoder/haiphamcoder.github.io"
+            href="https://github.com/haiphamcoder"
             target="_blank"
-            rel="noopener">Mã nguồn</a
+            rel="noopener">GitHub</a
           >
-          <a href="/rss.xml">RSS Feed</a>
-          <a href="/sitemap-index.xml">Sitemap</a>
+          <a
+            href="https://linkedin.com/in/haiphamcoder"
+            target="_blank"
+            rel="noopener">LinkedIn</a
+          >
         </nav>
       </div>
     </div>
 
     <div class="footer-bottom">
       <div class="footer-copy">
-        <span data-i18n="footer.rights"
-          >© {year} Hải Phạm. Tất cả quyền được bảo lưu.</span
-        >
+        <span>&copy; {currentYear} {t["footer.rights"]}</span>
       </div>
       <div class="footer-tech">
-        <span data-i18n="footer.builtWith">Xây dựng với</span>
+        <span>{t["footer.builtWith"]}</span>
         <span class="tech-heart">❤️</span>
-        <span>Astro</span>
+        <a href="https://astro.build" target="_blank" rel="noopener">Astro</a>
       </div>
     </div>
   </div>

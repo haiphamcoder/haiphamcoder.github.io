@@ -40,8 +40,18 @@
   --radius: 8px;
   --radius-lg: 12px;
   --radius-xl: 16px;
-  --transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-  --transition-slow: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition:
+    transform 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.3s ease,
+    color 0.3s ease, border-color 0.3s ease;
+  --transition-slow:
+    transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.5s ease,
+    color 0.5s ease, border-color 0.5s ease;
+
+  /* Blog Redesign RGB Colors */
+  --card-bg-rgb: 255, 255, 255;
+  --accent-rgb: 56, 178, 172;
 }
 
 html[data-theme="dark"] {
@@ -69,6 +79,7 @@ html[data-theme="dark"] {
     0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.2);
   --shadow-xl:
     0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.2);
+  --card-bg-rgb: 26, 32, 44;
 }
 
 * {
@@ -1748,7 +1759,9 @@ html[data-theme="dark"] .site-header {
 .scroll-animate {
   opacity: 0;
   transform: translateY(30px);
-  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  transition:
+    opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1),
+    transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .scroll-animate.animate-in {
@@ -1756,23 +1769,23 @@ html[data-theme="dark"] .site-header {
   transform: translateY(0);
 }
 
-/* Staggered animation for cards */
-.card:nth-child(1) {
+/* Staggered animation for card entrance (only for initial reveal) */
+.card.scroll-animate.animate-in:nth-child(1) {
   transition-delay: 0.1s;
 }
-.card:nth-child(2) {
+.card.scroll-animate.animate-in:nth-child(2) {
   transition-delay: 0.2s;
 }
-.card:nth-child(3) {
+.card.scroll-animate.animate-in:nth-child(3) {
   transition-delay: 0.3s;
 }
-.card:nth-child(4) {
+.card.scroll-animate.animate-in:nth-child(4) {
   transition-delay: 0.4s;
 }
-.card:nth-child(5) {
+.card.scroll-animate.animate-in:nth-child(5) {
   transition-delay: 0.5s;
 }
-.card:nth-child(6) {
+.card.scroll-animate.animate-in:nth-child(6) {
   transition-delay: 0.6s;
 }
 
@@ -1793,7 +1806,12 @@ html[data-theme="dark"] .site-header {
   box-shadow: var(--shadow-lg);
   opacity: 0;
   visibility: hidden;
-  transition: all 0.3s ease;
+  transition:
+    opacity 0.3s ease,
+    visibility 0.3s ease,
+    background-color 0.3s ease,
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
   z-index: 1000;
   display: flex;
   align-items: center;
@@ -2097,4 +2115,41 @@ html[data-theme="dark"] .callout.warning {
 }
 html[data-theme="dark"] .callout.danger {
   background: rgba(245, 101, 101, 0.15);
+}
+
+/* Blog Redesign Styles */
+.gradient-text {
+  background: linear-gradient(135deg, var(--brand) 0%, var(--accent) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.blog-hero {
+  /* Animation removed to prevent re-triggering during pagination with transition:persist */
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Ensure post cards are accessible in search mode */
+.no-results {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }

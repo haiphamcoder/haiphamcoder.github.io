@@ -1,16 +1,53 @@
 ---
+import { ui } from "../i18n/ui";
 
+interface Props {
+  lang?: string;
+}
+
+const { lang = "vi" } = Astro.props;
+const t = ui[lang as keyof typeof ui];
+
+// Navigation links with lang prefix
+const navLinks = [
+  { href: `/${lang}/`, label: t["nav.home"] },
+  { href: `/${lang}/blog`, label: t["nav.blog"] },
+  { href: `/${lang}/about`, label: t["nav.about"] },
+  { href: `/${lang}/contact`, label: t["nav.contact"] },
+];
+
+const currentPath = Astro.url.pathname;
+
+// Determine target lang for toggle
+const targetLang = lang === "vi" ? "en" : "vi";
+// Target URL: replace /vi/ with /en/ or vice versa at the beginning
+let targetUrl = currentPath
+  .replace(/\/vi(\/|$)/, `/${targetLang}$1`)
+  .replace(/\/en(\/|$)/, `/${targetLang}$1`);
+if (targetUrl === "") targetUrl = `/${targetLang}/`;
+
+// Flag SVGs
+const FLAGS = {
+  vi: `<svg viewBox="0 0 30 20" xmlns="http://www.w3.org/2000/svg" class="flag-icon"><rect width="30" height="20" fill="#da251d"/><polygon points="15,4 16.176,7.618 20,7.618 16.912,10.056 18.088,14.674 15,11.854 11.912,14.674 13.088,10.056 10,7.618 13.824,7.618" fill="#ffff00"/></svg>`,
+  en: `<svg viewBox="7.5 0 45 30" xmlns="http://www.w3.org/2000/svg" class="flag-icon"><clipPath id="s"><path d="M0,0 v30 h60 v-30 z"/></clipPath><path d="M0,0 v30 h60 v-30 z" fill="#012169"/><path d="M0,0 L60,30 M60,0 L0,30" stroke="#fff" stroke-width="6"/><path d="M0,0 L60,30 M60,0 L0,30" clip-path="url(#s)" stroke="#C8102E" stroke-width="4"/><path d="M30,0 v30 M0,15 h60" stroke="#fff" stroke-width="10"/><path d="M30,0 v30 M0,15 h60" stroke="#C8102E" stroke-width="6"/></svg>`,
+};
 ---
 
 <header class="site-header">
   <div class="container header-inner">
-    <a class="brand" href="/">Hải Phạm</a>
+    <a class="brand" href={`/${lang}/`}>Hải Phạm</a>
     <div class="header-actions">
       <nav class="nav" aria-label="Primary" id="navMenu">
-        <a href="/" class="nav-link" data-i18n="nav.home">Home</a>
-        <a href="/blog" class="nav-link" data-i18n="nav.blog">Blog</a>
-        <a href="/about" class="nav-link" data-i18n="nav.about">About</a>
-        <a href="/contact" class="nav-link" data-i18n="nav.contact">Contact</a>
+        {
+          navLinks.map((link) => (
+            <a
+              href={link.href}
+              class={`nav-link ${currentPath === link.href || (link.href !== `/${lang}/` && currentPath.startsWith(link.href)) ? "active" : ""}`}
+            >
+              {link.label}
+            </a>
+          ))
+        }
       </nav>
       <button
         class="nav-toggle"
@@ -23,166 +60,95 @@
       <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
         <!-- Icon will be set by JS -->
       </button>
-      <button class="theme-toggle" id="langToggle" aria-label="Toggle language">
-        <!-- Flag icon will be set by JS -->
-      </button>
+      <a
+        class="theme-toggle lang-link"
+        href={targetUrl}
+        aria-label="Toggle language"
+      >
+        <Fragment set:html={FLAGS[lang as keyof typeof FLAGS]} />
+      </a>
     </div>
   </div>
 </header>
-<script>
-  import { ui } from "../i18n/ui";
-
-  const langToggle = document.getElementById("langToggle");
-  const html = document.documentElement;
-  const STORAGE_KEY_LANG = "lang-preference";
-
-  // Flag SVGs
-  const FLAGS = {
-    vi: `<svg viewBox="0 0 30 20" xmlns="http://www.w3.org/2000/svg" class="flag-icon"><rect width="30" height="20" fill="#da251d"/><polygon points="15,4 16.176,7.618 20,7.618 16.912,10.056 18.088,14.674 15,11.854 11.912,14.674 13.088,10.056 10,7.618 13.824,7.618" fill="#ffff00"/></svg>`,
-    en: `<svg viewBox="7.5 0 45 30" xmlns="http://www.w3.org/2000/svg" class="flag-icon"><clipPath id="s"><path d="M0,0 v30 h60 v-30 z"/></clipPath><path d="M0,0 v30 h60 v-30 z" fill="#012169"/><path d="M0,0 L60,30 M60,0 L0,30" stroke="#fff" stroke-width="6"/><path d="M0,0 L60,30 M60,0 L0,30" clip-path="url(#s)" stroke="#C8102E" stroke-width="4"/><path d="M30,0 v30 M0,15 h60" stroke="#fff" stroke-width="10"/><path d="M30,0 v30 M0,15 h60" stroke="#C8102E" stroke-width="6"/></svg>`,
-  };
-
-  // Get lang from HTML attribute (set by Layout for detail pages) or use storage
-  const pageLang = html.getAttribute("lang");
-  // Check if we are on a detail page (translated-slug is present or null explicitly checked)
-  const isDetailPage = html.hasAttribute("data-translated-slug");
-
-  function getLangPreference() {
-    return localStorage.getItem(STORAGE_KEY_LANG) || "vi";
-  }
-
-  function setLangPreference(lang: string) {
-    localStorage.setItem(STORAGE_KEY_LANG, lang);
-  }
-
-  function toggleLang() {
-    const current = getLangPreference();
-    const next = current === "vi" ? "en" : "vi";
-
-    // Always save preference
-    setLangPreference(next);
-
-    // If Detail Page with translation: Navigate
-    const translatedSlug = html.getAttribute("data-translated-slug");
-    if (isDetailPage && translatedSlug) {
-      window.location.href = `/blog/${translatedSlug}`;
-      return;
-    }
-
-    // Otherwise (List page or Detail page without translation): Just update UI
-    applyLangFilter(next);
-  }
-
-  function applyLangFilter(lang: string) {
-    // Update button icon
-    if (langToggle) {
-      langToggle.innerHTML = FLAGS[lang as keyof typeof FLAGS] || FLAGS.vi;
-    }
-
-    // Setup i18n text
-    const i18nText = ui[lang as keyof typeof ui] || ui["vi"];
-
-    // Update UI text (nav, footer, etc matching data-i18n)
-    const elements = document.querySelectorAll("[data-i18n]");
-    elements.forEach((el) => {
-      const key = el.getAttribute("data-i18n");
-      if (key && key in i18nText) {
-        el.textContent = i18nText[key as keyof typeof i18nText];
-      }
-    });
-
-    // If Detail Page, we stop here (don't filter content, as it's static)
-    if (isDetailPage) {
-      return;
-    }
-
-    // List page filtering
-    const posts = document.querySelectorAll<HTMLElement>(".post-card");
-    posts.forEach((post) => {
-      const postLang = post.getAttribute("data-lang");
-      // Show if lang matches OR if post has no lang (legacy/universal)
-      if (!postLang || postLang === lang) {
-        post.style.display = "";
-      } else {
-        post.style.display = "none";
-      }
-    });
-  }
-
-  // Init
-  const savedLang = getLangPreference();
-
-  // Apply saved language to UI immediately
-  applyLangFilter(savedLang);
-
-  langToggle?.addEventListener("click", toggleLang);
-</script>
 
 <script>
-  // Active Link Logic
-  const navLinks = document.querySelectorAll(".nav-link");
-  const currentPath = window.location.pathname;
+  function initHeader() {
+    // Mobile Menu Logic
+    const toggle = document.getElementById("navToggle");
+    const nav = document.getElementById("navMenu");
 
-  navLinks.forEach((link) => {
-    if (
-      link.getAttribute("href") === currentPath ||
-      (link.getAttribute("href") !== "/" &&
-        currentPath.startsWith(link.getAttribute("href") as string))
-    ) {
-      link.classList.add("active");
+    if (toggle && nav) {
+      // Remove old listener if any (though usually not needed with swapping)
+      const newToggle = toggle.cloneNode(true) as HTMLElement;
+      toggle.parentNode?.replaceChild(newToggle, toggle);
+
+      newToggle.addEventListener("click", () => {
+        const isOpen = nav.classList.toggle("open");
+        newToggle.setAttribute("aria-expanded", String(isOpen));
+      });
+
+      document.addEventListener("click", (e) => {
+        if (
+          !nav.contains(e.target as Node) &&
+          !newToggle.contains(e.target as Node) &&
+          nav.classList.contains("open")
+        ) {
+          nav.classList.remove("open");
+          newToggle.setAttribute("aria-expanded", "false");
+        }
+      });
     }
-  });
 
-  // Mobile Menu Logic
-  const toggle = document.getElementById("navToggle");
-  const nav = document.getElementById("navMenu");
+    // Theme Toggle Logic
+    const themeToggle = document.getElementById("themeToggle");
+    const html = document.documentElement;
+    const STORAGE_KEY = "theme-preference";
 
-  if (toggle && nav) {
-    toggle.addEventListener("click", () => {
-      const isOpen = nav.classList.toggle("open");
-      toggle.setAttribute("aria-expanded", String(isOpen));
-    });
+    function getPreference() {
+      return (
+        localStorage.getItem(STORAGE_KEY) ||
+        (window.matchMedia("(prefers-color-scheme: dark)").matches
+          ? "dark"
+          : "light")
+      );
+    }
 
-    document.addEventListener("click", (e) => {
-      if (
-        !nav.contains(e.target as Node) &&
-        !toggle.contains(e.target as Node) &&
-        nav.classList.contains("open")
-      ) {
-        nav.classList.remove("open");
-        toggle.setAttribute("aria-expanded", "false");
+    function setTheme(theme: string) {
+      html.setAttribute("data-theme", theme);
+      localStorage.setItem(STORAGE_KEY, theme);
+      updateToggleUI(theme);
+    }
+
+    function updateToggleUI(theme: string) {
+      const themeToggle = document.getElementById("themeToggle");
+      if (themeToggle) {
+        themeToggle.textContent = theme === "dark" ? "☼" : "☾";
+        themeToggle.setAttribute("aria-pressed", String(theme === "dark"));
       }
-    });
-  }
+    }
 
-  // Theme Toggle Logic
-  const themeToggle = document.getElementById("themeToggle");
-  const html = document.documentElement;
-  const STORAGE_KEY = "theme-preference";
+    // Init UI for current theme
+    const currentTheme = html.getAttribute("data-theme") || getPreference();
+    updateToggleUI(currentTheme);
 
-  function getPreference() {
-    return (
-      localStorage.getItem(STORAGE_KEY) ||
-      (window.matchMedia("(prefers-color-scheme: dark)").matches
-        ? "dark"
-        : "light")
-    );
-  }
-
-  function setTheme(theme: string) {
-    html.setAttribute("data-theme", theme);
-    localStorage.setItem(STORAGE_KEY, theme);
     if (themeToggle) {
-      themeToggle.textContent = theme === "dark" ? "☼" : "☾";
-      themeToggle.setAttribute("aria-pressed", String(theme === "dark"));
+      themeToggle.addEventListener("click", () => {
+        const current = html.getAttribute("data-theme") || getPreference();
+        setTheme(current === "dark" ? "light" : "dark");
+      });
     }
   }
 
-  // Init
-  setTheme(getPreference());
-
-  themeToggle?.addEventListener("click", () => {
-    const current = getPreference();
-    setTheme(current === "dark" ? "light" : "dark");
-  });
+  // Run on initial load and every navigation
+  initHeader();
+  document.addEventListener("astro:page-load", initHeader);
 </script>
+
+<style>
+  .lang-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+  }
+</style>

@@ -1,0 +1,179 @@
+---
+const { page, lang } = Astro.props;
+
+const baseUrl = `/${lang}/blog`;
+const prevUrl = page.url.prev;
+const nextUrl = page.url.next;
+
+// Generate page numbers
+const totalPages = page.lastPage;
+const currentPage = page.currentPage;
+
+let pageNumbers = [];
+for (let i = 1; i <= totalPages; i++) {
+  pageNumbers.push(i);
+}
+---
+
+<nav class="pagination" aria-label="Pagination">
+  {
+    prevUrl ? (
+      <a href={prevUrl} class="page-link prev" aria-label="Previous Page">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <polyline points="15 18 9 12 15 6" />
+        </svg>
+        <span>Prev</span>
+      </a>
+    ) : (
+      <span class="page-link disabled prev">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <polyline points="15 18 9 12 15 6" />
+        </svg>
+        <span>Prev</span>
+      </span>
+    )
+  }
+
+  <div class="page-numbers">
+    {
+      pageNumbers.map((num) => (
+        <a
+          href={num === 1 ? baseUrl : `${baseUrl}/${num}`}
+          class={`page-number ${num === currentPage ? "active" : ""}`}
+          aria-current={num === currentPage ? "page" : undefined}
+        >
+          {num}
+        </a>
+      ))
+    }
+  </div>
+
+  {
+    nextUrl ? (
+      <a href={nextUrl} class="page-link next" aria-label="Next Page">
+        <span>Next</span>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <polyline points="9 18 15 12 9 6" />
+        </svg>
+      </a>
+    ) : (
+      <span class="page-link disabled next">
+        <span>Next</span>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <polyline points="9 18 15 12 9 6" />
+        </svg>
+      </span>
+    )
+  }
+</nav>
+
+<style>
+  .pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+    margin-top: 4rem;
+  }
+
+  .page-link {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    border: 1px solid var(--border);
+    color: var(--text);
+    text-decoration: none;
+    transition: all 0.2s ease;
+    font-weight: 500;
+  }
+
+  .page-link:not(.disabled):hover {
+    background: var(--accent);
+    color: white;
+    border-color: var(--accent);
+    transform: translateY(-2px);
+  }
+
+  .page-link.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    color: var(--muted);
+  }
+
+  .page-numbers {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .page-number {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 0.5rem;
+    border: 1px solid var(--border);
+    color: var(--text);
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+
+  .page-number:hover:not(.active) {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  .page-number.active {
+    background: var(--accent);
+    color: white;
+    border-color: var(--accent);
+  }
+
+  @media (max-width: 640px) {
+    .page-link span {
+      display: none;
+    }
+  }
+</style>

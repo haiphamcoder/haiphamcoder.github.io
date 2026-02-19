@@ -1,60 +1,8 @@
 ---
-import Layout from "../layouts/Layout.astro";
-import PostCard from "../components/PostCard.astro";
-import { getCollection } from "astro:content";
 
-const posts = (await getCollection("blog"))
-  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
-  .slice(0, 3);
 ---
 
-<Layout title="Hải Phạm | Backend Blog">
-  <section class="hero">
-    <img src="/assets/avatar.jpg" alt="Avatar" class="avatar" />
-    <div class="hero-text">
-      <h1 data-i18n="home.hero.title">Xin chào, mình là Hải Phạm</h1>
-      <p data-i18n="home.hero.desc">
-        Backend Engineer • Java & Spring Boot • Quan tâm hệ thống phân tán, Big
-        Data, hiệu năng và kiến trúc.
-      </p>
-      <div class="hero-actions">
-        <a class="btn" href="/blog" data-i18n="home.hero.readBlog">Đọc blog</a>
-        <a class="btn-outline" href="/about" data-i18n="home.hero.about"
-          >Tìm hiểu thêm</a
-        >
-      </div>
-      <div class="socials">
-        <a href="https://github.com/haiphamcoder" target="_blank" rel="noopener"
-          >GitHub</a
-        >
-        <span>·</span>
-        <a
-          href="https://www.linkedin.com/in/haiphamcoder"
-          target="_blank"
-          rel="noopener">LinkedIn</a
-        >
-      </div>
-    </div>
-  </section>
-
-  <section class="latest">
-    <div class="section-header">
-      <h2 data-i18n="home.latest.title">Bài viết mới</h2>
-      <a href="/blog" data-i18n="home.latest.viewAll">Xem tất cả →</a>
-    </div>
-    <div class="post-grid">
-      {
-        posts.map((post) => (
-          <PostCard
-            title={post.data.title}
-            date={post.data.date.toISOString().split("T")[0]}
-            tags={post.data.tags}
-            excerpt={post.data.excerpt || ""}
-            href={`/blog/${post.slug}`}
-            lang={post.data.lang}
-          />
-        ))
-      }
-    </div>
-  </section>
-</Layout>
+<meta http-equiv="refresh" content="0;url=/vi/" />
+<script is:inline>
+  window.location.pathname = "/vi/";
+</script>

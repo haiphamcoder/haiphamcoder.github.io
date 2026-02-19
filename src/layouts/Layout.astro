@@ -2,17 +2,18 @@
 import "../styles/global.css";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
+import { ClientRouter } from "astro:transitions";
 
 interface Props {
-  title?: string;
+  title: string;
   description?: string;
   lang?: string;
   translatedSlug?: string;
 }
 
 const {
-  title = "Hải Phạm | Backend Engineer",
-  description = "Personal blog of Hai Pham - Backend Engineer specializing in Java, Spring Boot, and Distributed Systems.",
+  title,
+  description = "Hải Phạm's personal website and blog",
   lang = "vi",
   translatedSlug,
 } = Astro.props;
@@ -52,12 +53,63 @@ const {
     </script>
 
     <title>{title}</title>
+    <script is:inline>
+      (function () {
+        const STORAGE_KEY = "theme-preference";
+        const theme =
+          localStorage.getItem(STORAGE_KEY) ||
+          (window.matchMedia("(prefers-color-scheme: dark)").matches
+            ? "dark"
+            : "light");
+        document.documentElement.setAttribute("data-theme", theme);
+      })();
+    </script>
+    <ClientRouter />
   </head>
-  <body>
-    <Header />
+  <body class="smooth-scroll">
+    <Header lang={lang} />
     <main class="container">
       <slot />
     </main>
-    <Footer />
+    <Footer lang={lang} />
+
+    <script>
+      // Scroll Reveal Animation Logic
+      const observerOptions = {
+        root: null,
+        rootMargin: "0px",
+        threshold: 0.1,
+      };
+
+      const handleIntersect = (
+        entries: IntersectionObserverEntry[],
+        observer: IntersectionObserver,
+      ) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("animate-in");
+            // Once animated, we don't need to observe it anymore
+            observer.unobserve(entry.target);
+          }
+        });
+      };
+
+      const observer = new IntersectionObserver(
+        handleIntersect,
+        observerOptions,
+      );
+
+      // Function to observe elements
+      const observeElements = () => {
+        const elements = document.querySelectorAll(".scroll-animate");
+        elements.forEach((el) => observer.observe(el));
+      };
+
+      // Initial observation
+      observeElements();
+
+      // Re-run observation if content changes (e.g., for future client-side navigation)
+      document.addEventListener("astro:page-load", observeElements);
+    </script>
   </body>
 </html>

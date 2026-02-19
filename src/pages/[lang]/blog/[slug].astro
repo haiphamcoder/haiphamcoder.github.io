@@ -1,27 +1,38 @@
 ---
 import { getCollection } from "astro:content";
-import Layout from "../../layouts/Layout.astro";
-import TableOfContents from "../../components/TableOfContents.astro";
+import Layout from "../../../layouts/Layout.astro";
+import TableOfContents from "../../../components/TableOfContents.astro";
 
 export async function getStaticPaths() {
   const posts = await getCollection("blog");
   return posts.map((post) => {
-    const slug = post.slug;
-    const isEn = slug.endsWith(".en");
-    const targetSlug = isEn ? slug.replace(/\.en$/, "") : `${slug}.en`;
-    const hasTranslation = posts.some((p) => p.slug === targetSlug);
-
+    // Determine the lang from the post data
+    const lang = post.data.lang;
+    // Slug should be the same as in content collection, or we can strip .en if we want
+    // But for now let's keep it simple: the slug is what it is in the file.
     return {
-      params: { slug: post.slug },
-      props: {
-        post,
-        translatedSlug: hasTranslation ? targetSlug : undefined,
-      },
+      params: { lang, slug: post.slug },
+      props: { post, allPosts: posts },
     };
   });
 }
 
-const { post, translatedSlug } = Astro.props;
+const { post, allPosts } = Astro.props;
+const { lang } = Astro.params;
+
+// Translation logic
+// Find if there is a post with the same "base" slug but different language
+// Note: This needs a way to link posts. For now, let's assume same title or metadata.
+// Or we can use the existing logic if we strip .en
+const baseSlug = post.slug.replace(/\.en$/, "");
+const targetLang = lang === "vi" ? "en" : "vi";
+const translatedPost = allPosts.find(
+  (p) =>
+    p.data.lang === targetLang &&
+    (p.slug === baseSlug || p.slug === `${baseSlug}.en`),
+);
+const translatedSlug = translatedPost ? translatedPost.slug : undefined;
+
 const { Content, headings } = await post.render();
 
 // Series Logic

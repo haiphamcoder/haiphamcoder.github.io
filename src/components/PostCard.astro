@@ -10,24 +10,36 @@ interface Props {
   seriesOrder?: number;
 }
 
-const { title, date, tags, excerpt, href, lang, series, seriesOrder } =
-  Astro.props;
+const {
+  title,
+  date,
+  tags,
+  excerpt,
+  href,
+  lang = "vi",
+  series,
+  seriesOrder,
+} = Astro.props;
+
+const localizedHref = `/${lang}${href}`;
 ---
 
-<a href={href} class="post-card card" data-lang={lang}>
-  <h3>{title}</h3>
-  <div class="meta">
-    <span>📅 {date}</span>
-    {
-      series && (
-        <span class="series-badge">
-          📚 {series} #{seriesOrder}
-        </span>
-      )
-    }
-  </div>
-  <p class="excerpt">{excerpt}</p>
-  <div class="tags">
-    {tags.map((tag) => <span class="tag">{tag}</span>)}
-  </div>
-</a>
+<article class="card post-card scroll-animate">
+  <a href={localizedHref} class="card-link">
+    <h3>{title}</h3>
+    <div class="meta">
+      <span>📅 {date}</span>
+      {
+        series && (
+          <span class="series-badge">
+            📚 {series} #{seriesOrder}
+          </span>
+        )
+      }
+    </div>
+    <p class="excerpt">{excerpt}</p>
+    <div class="tags">
+      {tags.map((tag) => <span class="tag">{tag}</span>)}
+    </div>
+  </a>
+</article>

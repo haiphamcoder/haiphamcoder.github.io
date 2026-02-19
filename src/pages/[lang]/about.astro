@@ -1,8 +1,15 @@
 ---
-import Layout from "../layouts/Layout.astro";
+import Layout from "../../layouts/Layout.astro";
+
+export function getStaticPaths() {
+  return [{ params: { lang: "vi" } }, { params: { lang: "en" } }];
+}
+
+const { lang } = Astro.params;
+const title = lang === "vi" ? "Giới thiệu | Hải Phạm" : "About | Hải Phạm";
 ---
 
-<Layout title="About | Hải Phạm">
+<Layout title={title} lang={lang}>
   <div class="container cv-container">
     <div class="cv-layout">
       <!-- Sidebar -->
