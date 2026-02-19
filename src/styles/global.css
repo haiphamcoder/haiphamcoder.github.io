@@ -250,9 +250,8 @@ html[data-theme="dark"] .site-header {
 }
 
 .flag-icon {
+  width: 24px;
   height: 16px;
-  width: auto;
-  max-width: 32px;
   border-radius: 2px;
   display: block;
 }
