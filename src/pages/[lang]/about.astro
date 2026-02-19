@@ -1,11 +1,13 @@
 ---
+import { ui } from "../../i18n/ui";
 import Layout from "../../layouts/Layout.astro";
 
 export function getStaticPaths() {
   return [{ params: { lang: "vi" } }, { params: { lang: "en" } }];
 }
 
-const { lang } = Astro.params;
+const { lang = "vi" } = Astro.params;
+const t = ui[lang as keyof typeof ui];
 const title = lang === "vi" ? "Giới thiệu | Hải Phạm" : "About | Hải Phạm";
 ---
 
@@ -19,7 +21,7 @@ const title = lang === "vi" ? "Giới thiệu | Hải Phạm" : "About | Hải P
         </div>
 
         <div class="cv-contact">
-          <h3 data-i18n="about.contact">Liên hệ</h3>
+          <h3>{t["about.contact"]}</h3>
           <div class="contact-item">
             <span class="icon">📧</span>
             <a href="mailto:ngochai285nd@gmail.com">ngochai285nd@gmail.com</a>
@@ -42,20 +44,21 @@ const title = lang === "vi" ? "Giới thiệu | Hải Phạm" : "About | Hải P
         </div>
 
         <div class="cv-skills">
-          <h3 data-i18n="about.skills">Kỹ năng</h3>
+          <h3>{t["about.skills"]}</h3>
 
           <div class="skill-group">
-            <h4 data-i18n="about.skills.languages">Ngôn ngữ lập trình</h4>
+            <h4>{t["about.skills.languages"]}</h4>
             <div class="tags">
+              <span class="tag">C/C++</span>
               <span class="tag">Java</span>
-              <span class="tag">SQL</span>
+              <span class="tag">Python</span>
               <span class="tag">Rust</span>
               <span class="tag">JavaScript</span>
             </div>
           </div>
 
           <div class="skill-group">
-            <h4 data-i18n="about.skills.frameworks">Frameworks</h4>
+            <h4>{t["about.skills.frameworks"]}</h4>
             <div class="tags">
               <span class="tag">Spring Boot</span>
               <span class="tag">Hibernate</span>
@@ -64,7 +67,7 @@ const title = lang === "vi" ? "Giới thiệu | Hải Phạm" : "About | Hải P
           </div>
 
           <div class="skill-group">
-            <h4 data-i18n="about.skills.tools">Tools & DevOps</h4>
+            <h4>{t["about.skills.tools"]}</h4>
             <div class="tags">
               <span class="tag">Docker</span>
               <span class="tag">Git</span>
@@ -74,7 +77,7 @@ const title = lang === "vi" ? "Giới thiệu | Hải Phạm" : "About | Hải P
           </div>
 
           <div class="skill-group">
-            <h4 data-i18n="about.skills.knowledge">Kiến thức</h4>
+            <h4>{t["about.skills.knowledge"]}</h4>
             <div class="tags">
               <span class="tag">OOP</span>
               <span class="tag">REST API</span>
@@ -89,46 +92,73 @@ const title = lang === "vi" ? "Giới thiệu | Hải Phạm" : "About | Hải P
       <main class="cv-content">
         <header class="cv-header">
           <h1>Hải Phạm</h1>
-          <p class="cv-title" data-i18n="about.role">
-            Junior Backend Engineer | Java | Spring Boot
+          <p class="cv-title">
+            {t["about.role"]}
           </p>
-          <p class="cv-summary" data-i18n="about.summary">
-            Tôi là một Junior Backend Engineer đam mê phát triển các hệ thống
-            backend mạnh mẽ và hiệu quả. Với nền tảng vững chắc về Java và
-            Spring Boot, tôi luôn tìm hiểu và áp dụng các công nghệ mới để xây
-            dựng những giải pháp phần mềm chất lượng cao.
+          <p class="cv-summary">
+            {t["about.summary"]}
           </p>
         </header>
 
         <section class="cv-section">
-          <h2 data-i18n="about.education">🎓 Học vấn</h2>
+          <h2>💼 {t["about.experience"]}</h2>
+
           <div class="cv-item">
             <div class="cv-item-header">
-              <h3 data-i18n="about.education.school">
-                Đại học Bách khoa Hà Nội
+              <h3>{t["about.experience.vccorp.developer"]}</h3>
+              <span class="date">06/2024 - {lang === "vi" ? "Hiện tại" : "Present"}</span>
+            </div>
+            <p class="sub-title">{t["about.experience.vccorp.dept"]}</p>
+            <p class="role">{t["about.experience.vccorp.company"]}</p>
+          </div>
+
+          <div class="cv-item">
+            <div class="cv-item-header">
+              <h3>{t["about.experience.vccorp.collaborator"]}</h3>
+              <span class="date">02/2024 - 06/2024</span>
+            </div>
+            <p class="sub-title">{t["about.experience.vccorp.dept"]}</p>
+            <p class="role">{t["about.experience.vccorp.company"]}</p>
+          </div>
+
+          <div class="cv-item">
+            <div class="cv-item-header">
+              <h3>{t["about.experience.vccorp.intern"]}</h3>
+              <span class="date">10/2023 - 02/2024</span>
+            </div>
+            <p class="sub-title">{t["about.experience.vccorp.dept"]}</p>
+            <p class="role">{t["about.experience.vccorp.company"]}</p>
+          </div>
+        </section>
+
+        <section class="cv-section">
+          <h2>🎓 {t["about.education"]}</h2>
+          <div class="cv-item">
+            <div class="cv-item-header">
+              <h3>
+                {t["about.education.school"]}
               </h3>
               <span class="date">2020 - 2025</span>
             </div>
-            <p class="sub-title" data-i18n="about.education.program">
-              Trường Công nghệ Thông tin và Truyền Thông
+            <p class="sub-title">
+              {t["about.education.program"]}
             </p>
-            <p class="role" data-i18n="about.education.degree">
-              Kỹ sư Công nghệ Thông tin
+            <p class="role">
+              {t["about.education.degree"]}
             </p>
           </div>
         </section>
 
         <section class="cv-section">
-          <h2 data-i18n="about.projects">🚀 Dự án cá nhân</h2>
+          <h2>🚀 {t["about.projects"]}</h2>
 
           <div class="cv-item">
             <div class="cv-item-header">
               <h3>Crypto Utils - Java Cryptography Library</h3>
               <span class="date">2025</span>
             </div>
-            <p data-i18n="about.projects.crypto.desc">
-              Thư viện Java toàn diện cho cryptography, hashing, encoding và xử
-              lý dữ liệu.
+            <p>
+              {t["about.projects.crypto.desc"]}
             </p>
             <div class="tech-stack">
               <span class="tech">Java</span>
@@ -147,9 +177,8 @@ const title = lang === "vi" ? "Giới thiệu | Hải Phạm" : "About | Hải P
               <h3>Kafka KRaft with SCRAM</h3>
               <span class="date">2025</span>
             </div>
-            <p data-i18n="about.projects.kafka.desc">
-              Triển khai cluster Kafka sử dụng KRaft protocal và SCRAM
-              authentication với Docker.
+            <p>
+              {t["about.projects.kafka.desc"]}
             </p>
             <div class="tech-stack">
               <span class="tech">Kafka</span>
@@ -168,8 +197,8 @@ const title = lang === "vi" ? "Giới thiệu | Hải Phạm" : "About | Hải P
               <h3>XSS Clean</h3>
               <span class="date">2025</span>
             </div>
-            <p data-i18n="about.projects.xss.desc">
-              Thư viện Java sanitize input để ngăn chặn XSS attacks.
+            <p>
+              {t["about.projects.xss.desc"]}
             </p>
             <div class="tech-stack">
               <span class="tech">Java</span>
@@ -185,27 +214,27 @@ const title = lang === "vi" ? "Giới thiệu | Hải Phạm" : "About | Hải P
         </section>
 
         <section class="cv-section">
-          <h2 data-i18n="about.goals">🎯 Định hướng nghề nghiệp</h2>
+          <h2>🎯 {t["about.goals"]}</h2>
           <div class="goals-grid">
             <div class="goal-group">
-              <h4 data-i18n="about.goals.short">Ngắn hạn (6-12 tháng)</h4>
+              <h4>{t["about.goals.short"]}</h4>
               <ul>
-                <li data-i18n="about.goals.short.1">
-                  Nâng cao kỹ năng Spring Security, Microservices.
+                <li>
+                  {t["about.goals.short.1"]}
                 </li>
-                <li data-i18n="about.goals.short.2">
-                  Thực hành sâu với Docker và Containerization.
+                <li>
+                  {t["about.goals.short.2"]}
                 </li>
               </ul>
             </div>
             <div class="goal-group">
-              <h4 data-i18n="about.goals.long">Dài hạn (1-3 năm)</h4>
+              <h4>{t["about.goals.long"]}</h4>
               <ul>
-                <li data-i18n="about.goals.long.1">
-                  Trở thành Senior Backend Engineer.
+                <li>
+                  {t["about.goals.long.1"]}
                 </li>
-                <li data-i18n="about.goals.long.2">
-                  Chuyên sâu về Distributed Systems và Big Data.
+                <li>
+                  {t["about.goals.long.2"]}
                 </li>
               </ul>
             </div>
