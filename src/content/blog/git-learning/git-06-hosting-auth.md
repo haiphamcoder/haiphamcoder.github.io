@@ -1,6 +1,5 @@
 ---
 title: "Chương 6: Hosting & Authentication"
-slug: "git-06-hosting-auth"
 date: 2025-09-16
 tags: ["git", "tutorial", "version-control"]
 lang: "vi"

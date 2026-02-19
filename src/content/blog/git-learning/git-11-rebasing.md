@@ -1,6 +1,5 @@
 ---
 title: "Chương 11: Rebasing"
-slug: "git-11-rebasing"
 date: 2025-09-21
 tags: ["git", "tutorial", "version-control"]
 lang: "vi"

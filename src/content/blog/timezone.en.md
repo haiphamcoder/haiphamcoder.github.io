@@ -3,7 +3,6 @@ title: "The Fascinating World of Timezones"
 date: 2025-09-05
 tags: ["backend", "system-design", "best-practices"]
 lang: "en"
-slug: "timezone.en"
 excerpt: "Explore the complex world of timezones, DST, UTC and golden rules for backend engineers."
 ---
 

@@ -1,6 +1,5 @@
 ---
 title: "Chương 12: Pull Requests"
-slug: "git-12-pull-requests"
 date: 2025-09-22
 tags: ["git", "tutorial", "version-control"]
 lang: "vi"

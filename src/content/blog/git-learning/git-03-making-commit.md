@@ -1,6 +1,5 @@
 ---
 title: "Chương 3: Making a Commit"
-slug: "git-03-making-commit"
 date: 2025-09-13
 tags: ["git", "tutorial", "version-control"]
 lang: "vi"

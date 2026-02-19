@@ -3,9 +3,10 @@ import { ui } from "../i18n/ui";
 
 interface Props {
   lang?: string;
+  translatedSlug?: string;
 }
 
-const { lang = "vi" } = Astro.props;
+const { lang = "vi", translatedSlug } = Astro.props;
 const t = ui[lang as keyof typeof ui];
 
 // Navigation links with lang prefix
@@ -24,7 +25,12 @@ const targetLang = lang === "vi" ? "en" : "vi";
 let targetUrl = currentPath
   .replace(/\/vi(\/|$)/, `/${targetLang}$1`)
   .replace(/\/en(\/|$)/, `/${targetLang}$1`);
-if (targetUrl === "") targetUrl = `/${targetLang}/`;
+
+if (translatedSlug) {
+  targetUrl = `/${targetLang}/blog/${translatedSlug}`;
+}
+
+if (targetUrl === "" || targetUrl === "/") targetUrl = `/${targetLang}/`;
 
 // Flag SVGs
 const FLAGS = {

@@ -1,6 +1,5 @@
 ---
 title: "Chương 10: Merge Conflicts"
-slug: "git-10-merge-conflicts"
 date: 2025-09-20
 tags: ["git", "tutorial", "version-control"]
 lang: "vi"

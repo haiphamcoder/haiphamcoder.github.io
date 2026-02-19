@@ -1,6 +1,5 @@
 ---
 title: "Chương 7: Remote Repositories"
-slug: "git-07-remote-repos"
 date: 2025-09-17
 tags: ["git", "tutorial", "version-control"]
 lang: "vi"

@@ -1,6 +1,5 @@
 ---
 title: "Chương 2: Local Repositories"
-slug: "git-02-local-repositories"
 date: 2025-09-12
 tags: ["git", "tutorial", "version-control"]
 lang: "vi"

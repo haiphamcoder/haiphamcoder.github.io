@@ -1,6 +1,5 @@
 ---
 title: "Chương 4: Branches"
-slug: "git-04-branches"
 date: 2025-09-14
 tags: ["git", "tutorial", "version-control"]
 lang: "vi"

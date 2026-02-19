@@ -1,6 +1,5 @@
 ---
 title: "Chương 9: Three-Way Merges"
-slug: "git-09-three-way-merge"
 date: 2025-09-19
 tags: ["git", "tutorial", "version-control"]
 lang: "vi"

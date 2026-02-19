@@ -1,6 +1,5 @@
 ---
 title: "Chương 5: Merging"
-slug: "git-05-merging"
 date: 2025-09-15
 tags: ["git", "tutorial", "version-control"]
 lang: "vi"

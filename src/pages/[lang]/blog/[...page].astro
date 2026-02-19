@@ -31,7 +31,7 @@ const allPostsForSearch = (await getCollection("blog"))
     title: post.data.title,
     excerpt: post.data.excerpt || "",
     tags: post.data.tags,
-    href: `/blog/${post.slug}`,
+    href: `/blog/${post.id.replace(/\.(en\.)?md$/, "").split("/").pop()}`,
     date: post.data.date.toISOString().split("T")[0],
   }));
 
@@ -77,7 +77,7 @@ const t = {
             date={post.data.date.toISOString().split("T")[0]}
             tags={post.data.tags}
             excerpt={post.data.excerpt || ""}
-            href={`/blog/${post.slug}`}
+            href={`/blog/${post.id.replace(/\.(en\.)?md$/, "").split("/").pop()}`}
             lang={post.data.lang}
             series={post.data.series}
             seriesOrder={post.data.seriesOrder}

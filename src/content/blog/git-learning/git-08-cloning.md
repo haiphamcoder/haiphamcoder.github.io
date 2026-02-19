@@ -1,6 +1,5 @@
 ---
 title: "Chương 8: Cloning & Fetching"
-slug: "git-08-cloning"
 date: 2025-09-18
 tags: ["git", "tutorial", "version-control"]
 lang: "vi"

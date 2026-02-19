@@ -3,15 +3,17 @@ import { getCollection } from "astro:content";
 import Layout from "../../../layouts/Layout.astro";
 import TableOfContents from "../../../components/TableOfContents.astro";
 
+const getCleanSlug = (id: string) => {
+  return id.replace(/\.(en\.)?md$/, "").split("/").pop() || "";
+};
+
 export async function getStaticPaths() {
   const posts = await getCollection("blog");
   return posts.map((post) => {
-    // Determine the lang from the post data
     const lang = post.data.lang;
-    // Slug should be the same as in content collection, or we can strip .en if we want
-    // But for now let's keep it simple: the slug is what it is in the file.
+    const cleanSlug = post.id.replace(/\.(en\.)?md$/, "").split("/").pop() || "";
     return {
-      params: { lang, slug: post.slug },
+      params: { lang, slug: cleanSlug },
       props: { post, allPosts: posts },
     };
   });
@@ -20,18 +22,12 @@ export async function getStaticPaths() {
 const { post, allPosts } = Astro.props;
 const { lang } = Astro.params;
 
-// Translation logic
-// Find if there is a post with the same "base" slug but different language
-// Note: This needs a way to link posts. For now, let's assume same title or metadata.
-// Or we can use the existing logic if we strip .en
-const baseSlug = post.slug.replace(/\.en$/, "");
+const currentCleanSlug = getCleanSlug(post.id);
 const targetLang = lang === "vi" ? "en" : "vi";
-const translatedPost = allPosts.find(
-  (p) =>
-    p.data.lang === targetLang &&
-    (p.slug === baseSlug || p.slug === `${baseSlug}.en`),
-);
-const translatedSlug = translatedPost ? translatedPost.slug : undefined;
+const translatedPost = allPosts.find((p) => {
+  return p.data.lang === targetLang && getCleanSlug(p.id) === currentCleanSlug;
+});
+const translatedSlug = translatedPost ? getCleanSlug(translatedPost.id) : undefined;
 
 const { Content, headings } = await post.render();
 
@@ -41,7 +37,6 @@ let prevPost = null;
 let nextPost = null;
 
 if (post.data.series) {
-  const allPosts = await getCollection("blog");
   seriesPosts = allPosts
     .filter(
       (p) =>
@@ -49,7 +44,7 @@ if (post.data.series) {
     )
     .sort((a, b) => (a.data.seriesOrder || 0) - (b.data.seriesOrder || 0));
 
-  const currentIndex = seriesPosts.findIndex((p) => p.slug === post.slug);
+  const currentIndex = seriesPosts.findIndex((p) => p.id === post.id);
   if (currentIndex > 0) prevPost = seriesPosts[currentIndex - 1];
   if (currentIndex < seriesPosts.length - 1)
     nextPost = seriesPosts[currentIndex + 1];
@@ -86,8 +81,8 @@ if (post.data.series) {
             <div class="series-content">
               <ul class="series-list">
                 {seriesPosts.map((p) => (
-                  <li class={p.slug === post.slug ? "active" : ""}>
-                    <a href={`/${lang}/blog/${p.slug}`}>
+                  <li class={p.id === post.id ? "active" : ""}>
+                    <a href={`/${lang}/blog/${getCleanSlug(p.id)}`}>
                       <span class="order">{p.data.seriesOrder}.</span>
                       <span class="title">{p.data.title}</span>
                     </a>
@@ -98,13 +93,13 @@ if (post.data.series) {
 
             <div class="series-links">
               {prevPost && (
-                <a href={`/${lang}/blog/${prevPost.slug}`} class="series-link prev">
+                <a href={`/${lang}/blog/${getCleanSlug(prevPost.id)}`} class="series-link prev">
                   <span>← Bài trước</span>
                   <span class="link-title">{prevPost.data.title}</span>
                 </a>
               )}
               {nextPost && (
-                <a href={`/${lang}/blog/${nextPost.slug}`} class="series-link next">
+                <a href={`/${lang}/blog/${getCleanSlug(nextPost.id)}`} class="series-link next">
                   <span>Bài tiếp theo →</span>
                   <span class="link-title">{nextPost.data.title}</span>
                 </a>

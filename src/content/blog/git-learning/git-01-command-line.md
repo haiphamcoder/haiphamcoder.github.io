@@ -1,6 +1,5 @@
 ---
 title: "Chương 1: Git và Command Line"
-slug: "git-01-command-line"
 date: 2025-09-11
 tags: ["git", "tutorial", "version-control"]
 lang: "vi"

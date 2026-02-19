@@ -1,6 +1,5 @@
 ---
 title: "Giới thiệu: Hành trình làm chủ Git"
-slug: "git-00-introduction"
 date: 2025-09-10
 tags: ["git", "tutorial", "version-control"]
 lang: "vi"
