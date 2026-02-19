@@ -35,8 +35,16 @@ All commands are run from the root of the project, from a terminal:
 | `npm run dev`             | Starts local dev server at `localhost:4321`      |
 | `npm run build`           | Build your production site to `./dist/`          |
 | `npm run preview`         | Preview your build locally, before deploying     |
+| `npm run format`          | Format your code with Prettier                   |
+| `npm run format:check`    | Check if code is formatted correctly             |
 | `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+
+## 🛠 Troubleshooting Cache
+
+If you don't see the latest updates on your browser after a deployment:
+
+1. **Hard Refresh**: Press `Ctrl + F5` (Windows/Linux) or `Cmd + Shift + R` (Mac).
+2. **Ghost Service Workers**: If updates are still missing, your browser might be running a Service Worker from another project on the same domain. I've added a script to automatically unregister these, but you can also manually clear them in **DevTools** > **Application** > **Storage** > **Clear site data**.
 
 ## 👀 Want to learn more?
 

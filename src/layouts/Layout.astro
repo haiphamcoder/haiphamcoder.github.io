@@ -30,6 +30,27 @@ const {
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
+
+    <!-- Cache Control & Service Worker Cleanup -->
+    <meta
+      http-equiv="Cache-Control"
+      content="no-cache, no-store, must-revalidate"
+    />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <script is:inline>
+      // Automatically unregister any Service Worker to prevent "Ghost" Service Workers from other projects
+      if ("serviceWorker" in navigator) {
+        navigator.serviceWorker.getRegistrations().then((registrations) => {
+          for (let registration of registrations) {
+            registration.unregister().then((success) => {
+              if (success) console.log("[Cache] Service Worker unregistered");
+            });
+          }
+        });
+      }
+    </script>
+
     <title>{title}</title>
   </head>
   <body>
