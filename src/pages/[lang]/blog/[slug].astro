@@ -87,7 +87,7 @@ if (post.data.series) {
               <ul class="series-list">
                 {seriesPosts.map((p) => (
                   <li class={p.slug === post.slug ? "active" : ""}>
-                    <a href={`/blog/${p.slug}`}>
+                    <a href={`/${lang}/blog/${p.slug}`}>
                       <span class="order">{p.data.seriesOrder}.</span>
                       <span class="title">{p.data.title}</span>
                     </a>
@@ -98,13 +98,13 @@ if (post.data.series) {
 
             <div class="series-links">
               {prevPost && (
-                <a href={`/blog/${prevPost.slug}`} class="series-link prev">
+                <a href={`/${lang}/blog/${prevPost.slug}`} class="series-link prev">
                   <span>← Bài trước</span>
                   <span class="link-title">{prevPost.data.title}</span>
                 </a>
               )}
               {nextPost && (
-                <a href={`/blog/${nextPost.slug}`} class="series-link next">
+                <a href={`/${lang}/blog/${nextPost.slug}`} class="series-link next">
                   <span>Bài tiếp theo →</span>
                   <span class="link-title">{nextPost.data.title}</span>
                 </a>
