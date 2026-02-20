@@ -13,6 +13,12 @@ const { allPosts, placeholder, noResultsText, resultsFoundText, lang } =
 
 <div class="search-container">
   <div class="search-input-wrapper">
+    <input
+      type="text"
+      id="blog-search"
+      placeholder={placeholder}
+      autocomplete="off"
+    />
     <svg
       xmlns="http://www.w3.org/2000/svg"
       class="search-icon"
@@ -26,12 +32,6 @@ const { allPosts, placeholder, noResultsText, resultsFoundText, lang } =
       <circle cx="11" cy="11" r="8"></circle>
       <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
     </svg>
-    <input
-      type="text"
-      id="blog-search"
-      placeholder={placeholder}
-      autocomplete="off"
-    />
   </div>
   <div id="search-status" class="search-status" aria-live="polite"></div>
 </div>
@@ -139,6 +139,7 @@ const { allPosts, placeholder, noResultsText, resultsFoundText, lang } =
     height: 20px;
     color: var(--muted);
     pointer-events: none;
+    z-index: 10;
   }
 
   input {
