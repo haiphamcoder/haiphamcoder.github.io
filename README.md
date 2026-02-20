@@ -1,51 +1,59 @@
-# Astro Starter Kit: Minimal
+# Hải Phạm | Personal Blog & Portfolio
 
-```sh
-npm create astro@latest -- --template minimal
-```
+Welcome to my personal blog and portfolio website. I am a Backend Engineer specializing in Java & Spring Boot, passionate about distributed systems, big data, performance, and software architecture.
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+This site serves as a place where I share my knowledge and experiences in the tech world.
 
-## 🚀 Project Structure
+## 🚀 Features
 
-Inside of your Astro project, you'll see the following folders and files:
+- **🌐 Multi-language Support**: Full Internationalization (i18n) support for English and Vietnamese.
+- **🔍 Blog Search**: Fast, client-side search functionality to find articles easily.
+- **🌗 Dark Mode**: Premium dark/light mode toggle with system preference detection.
+- **📱 Responsive Design**: Fully responsive UI/UX designed for all devices.
+- **✨ Micro-interactions**: Smooth transitions and hover effects for a premium feel.
+- **📊 Technical Diagrams**: Integrated Mermaid.js support for clear technical visualizations.
+
+## 🛠 Tech Stack
+
+- **Framework**: [Astro](https://astro.build/) (v5+)
+- **Styling**: Vanilla CSS (Modern CSS variables)
+- **Content**: Markdown/MDX for blog posts
+- **Icons**: Lucide-like SVG icons
+- **Visuals**: Mermaid.js for architecture diagrams
+
+## 📂 Project Structure
 
 ```text
 /
-├── public/
 ├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
+│   ├── components/    # Reusable Astro components
+│   ├── layouts/       # Site layouts
+│   ├── pages/         # Routing (nested by [lang])
+│   ├── content/       # Blog posts (.md/mdx)
+│   ├── i18n/          # Translation keys and utilities
+│   └── styles/        # Global and component-specific CSS
+├── public/            # Static assets (images, favicon)
+└── package.json       # Dependencies and scripts
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+## Genie Commands
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+All commands are run from the root of the project:
 
-Any static assets, like images, can be placed in the `public/` directory.
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                | Action                                           |
-| :--------------------- | :----------------------------------------------- |
-| `npm install`          | Installs dependencies                            |
-| `npm run dev`          | Starts local dev server at `localhost:4321`      |
-| `npm run build`        | Build your production site to `./dist/`          |
-| `npm run preview`      | Preview your build locally, before deploying     |
-| `npm run format`       | Format your code with Prettier                   |
-| `npm run format:check` | Check if code is formatted correctly             |
-| `npm run astro ...`    | Run CLI commands like `astro add`, `astro check` |
+| Command | Action |
+| :--- | :--- |
+| `npm install` | Installs dependencies |
+| `npm run dev` | Starts local dev server at `localhost:4321` |
+| `npm run build` | Build your production site to `./dist/` |
+| `npm run preview` | Preview your build locally |
+| `npm run format` | Format code with Prettier |
 
 ## 🛠 Troubleshooting Cache
 
-If you don't see the latest updates on your browser after a deployment:
+If you don't see the latest updates:
 
-1. **Hard Refresh**: Press `Ctrl + F5` (Windows/Linux) or `Cmd + Shift + R` (Mac).
-2. **Ghost Service Workers**: If updates are still missing, your browser might be running a Service Worker from another project on the same domain. I've added a script to automatically unregister these, but you can also manually clear them in **DevTools** > **Application** > **Storage** > **Clear site data**.
+1. **Hard Refresh**: `Ctrl + F5` (Windows/Linux) or `Cmd + Shift + R` (Mac).
+2. **Clear Cache**: In DevTools > Application > Storage > Clear site data.
 
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+---
+Built with ❤️ by Hải Phạm.
