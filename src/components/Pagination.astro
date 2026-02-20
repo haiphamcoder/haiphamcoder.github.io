@@ -1,5 +1,8 @@
 ---
+import { useTranslations } from "../i18n/utils";
+
 const { page, lang } = Astro.props;
+const t = useTranslations(lang as any);
 
 const baseUrl = `/${lang}/blog`;
 const prevUrl = page.url.prev;
@@ -32,7 +35,7 @@ for (let i = 1; i <= totalPages; i++) {
         >
           <polyline points="15 18 9 12 15 6" />
         </svg>
-        <span>Prev</span>
+        <span>{t("blog.pagination.prev")}</span>
       </a>
     ) : (
       <span class="page-link disabled prev">
@@ -49,7 +52,7 @@ for (let i = 1; i <= totalPages; i++) {
         >
           <polyline points="15 18 9 12 15 6" />
         </svg>
-        <span>Prev</span>
+        <span>{t("blog.pagination.prev")}</span>
       </span>
     )
   }
@@ -71,7 +74,7 @@ for (let i = 1; i <= totalPages; i++) {
   {
     nextUrl ? (
       <a href={nextUrl} class="page-link next" aria-label="Next Page">
-        <span>Next</span>
+        <span>{t("blog.pagination.next")}</span>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="20"
@@ -88,7 +91,7 @@ for (let i = 1; i <= totalPages; i++) {
       </a>
     ) : (
       <span class="page-link disabled next">
-        <span>Next</span>
+        <span>{t("blog.pagination.next")}</span>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="20"

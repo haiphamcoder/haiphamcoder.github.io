@@ -22,18 +22,28 @@ const currentPath = Astro.url.pathname;
 
 // Determine target lang for toggle
 const targetLang = lang === "vi" ? "en" : "vi";
-// Target URL: replace /vi/ with /en/ or vice versa at the beginning
+
+// Target URL: replace /vi/ with /en/ or vice versa
 let targetUrl = currentPath
   .replace(/\/vi(\/|$)/, `/${targetLang}$1`)
   .replace(/\/en(\/|$)/, `/${targetLang}$1`);
 
-if (translatedSlug) {
-  targetUrl = `/${targetLang}/blog/${translatedSlug}`;
+if (
+  currentPath.includes("/blog/") &&
+  !currentPath.endsWith("/blog") &&
+  !currentPath.endsWith("/blog/")
+) {
+  if (translatedSlug) {
+    targetUrl = `/${targetLang}/blog/${translatedSlug}`;
+  } else {
+    // If no translation, go to the blog list of the target language
+    targetUrl = `/${targetLang}/blog`;
+  }
 }
 
 if (targetUrl === "" || targetUrl === "/") targetUrl = `/${targetLang}/`;
 
-// Flag SVGs
+// Flag SVGs - We show the CURRENT language flag
 const FLAGS = {
   vi: `<svg viewBox="0 0 30 20" xmlns="http://www.w3.org/2000/svg" class="flag-icon"><rect width="30" height="20" fill="#da251d"/><polygon points="15,4 16.176,7.618 20,7.618 16.912,10.056 18.088,14.674 15,11.854 11.912,14.674 13.088,10.056 10,7.618 13.824,7.618" fill="#ffff00"/></svg>`,
   en: `<svg viewBox="7.5 0 45 30" xmlns="http://www.w3.org/2000/svg" class="flag-icon"><clipPath id="s"><path d="M0,0 v30 h60 v-30 z"/></clipPath><path d="M0,0 v30 h60 v-30 z" fill="#012169"/><path d="M0,0 L60,30 M60,0 L0,30" stroke="#fff" stroke-width="6"/><path d="M0,0 L60,30 M60,0 L0,30" clip-path="url(#s)" stroke="#C8102E" stroke-width="4"/><path d="M30,0 v30 M0,15 h60" stroke="#fff" stroke-width="10"/><path d="M30,0 v30 M0,15 h60" stroke="#C8102E" stroke-width="6"/></svg>`,
@@ -70,6 +80,9 @@ const FLAGS = {
       <a
         class="theme-toggle lang-link"
         href={targetUrl}
+        title={targetLang === "en"
+          ? "Switch to English"
+          : "Chuyển sang tiếng Việt"}
         aria-label="Toggle language"
       >
         <Fragment set:html={FLAGS[lang as keyof typeof FLAGS]} />
@@ -129,7 +142,8 @@ const FLAGS = {
     function updateToggleUI(theme: string) {
       const themeToggle = document.getElementById("themeToggle");
       if (themeToggle) {
-        themeToggle.textContent = theme === "dark" ? "☼" : "☾";
+        // Show current state: Moon for dark, Sun for light
+        themeToggle.textContent = theme === "dark" ? "☾" : "☼";
         themeToggle.setAttribute("aria-pressed", String(theme === "dark"));
       }
     }

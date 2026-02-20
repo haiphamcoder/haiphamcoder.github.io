@@ -203,7 +203,8 @@ if (post.data.series) {
       if (
         pre.closest(".mermaid-wrapper") ||
         pre.classList.contains("mermaid") ||
-        pre.closest(".code-wrapper")
+        pre.closest(".code-wrapper") ||
+        pre.querySelector("code.language-mermaid")
       )
         return;
 
@@ -229,15 +230,24 @@ if (post.data.series) {
       });
       wrapper.appendChild(button);
     });
+
+    // Re-bind Modal Listeners
+    const modal = document.getElementById("mermaid-modal");
+    const closeBtn = document.querySelector(".close-modal");
+    if (modal && closeBtn) {
+      closeBtn.onclick = () => (modal.style.display = "none");
+      modal.onclick = (e) => {
+        if (e.target === modal) modal.style.display = "none";
+      };
+    }
   }
 
   // Mermaid Modal Logic
-  const modal = document.getElementById("mermaid-modal");
-  const modalBody = document.getElementById("mermaid-modal-body");
-  const closeBtn = document.querySelector(".close-modal");
-
   function openMermaidModal(id) {
+    const modal = document.getElementById("mermaid-modal");
+    const modalBody = document.getElementById("mermaid-modal-body");
     if (!modal || !modalBody) return;
+    
     const original = document.getElementById(id);
     if (!original) return;
 
@@ -249,18 +259,6 @@ if (post.data.series) {
       svg.removeAttribute("style");
     }
     modal.style.display = "flex";
-  }
-
-  if (closeBtn) {
-    closeBtn.addEventListener("click", () => {
-      if (modal) modal.style.display = "none";
-    });
-  }
-
-  if (modal) {
-    modal.addEventListener("click", (e) => {
-      if (e.target === modal) modal.style.display = "none";
-    });
   }
 
   // Initial load or transition

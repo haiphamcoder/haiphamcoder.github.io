@@ -4,6 +4,7 @@ import Layout from "../../../layouts/Layout.astro";
 import PostCard from "../../../components/PostCard.astro";
 import Pagination from "../../../components/Pagination.astro";
 import Search from "../../../components/Search.astro";
+import { useTranslations } from "../../../i18n/utils";
 
 export async function getStaticPaths({ paginate }: any) {
   const languages = ["vi", "en"];
@@ -23,6 +24,7 @@ export async function getStaticPaths({ paginate }: any) {
 
 const { page } = Astro.props;
 const { lang } = Astro.params;
+const t = useTranslations(lang as any);
 
 // Prepare data for search component (minified)
 const allPostsForSearch = (await getCollection("blog"))
@@ -34,42 +36,31 @@ const allPostsForSearch = (await getCollection("blog"))
     href: `/blog/${post.id.replace(/\.(en\.)?md$/, "").split("/").pop()}`,
     date: post.data.date.toISOString().split("T")[0],
   }));
-
-const t = {
-  vi: {
-    title: "Blog & Chia sẻ kiến thức",
-    desc: "Nơi chia sẻ kiến thức về lập trình, kiến trúc hệ thống và kinh nghiệm làm việc.",
-    searchPlaceholder: "Tìm kiếm bài viết...",
-    noResults: "Không tìm thấy bài viết nào phù hợp.",
-  },
-  en: {
-    title: "Blog & Knowledge Sharing",
-    desc: "Technical deep dives into backend engineering, architecture, and developer experience.",
-    searchPlaceholder: "Search posts...",
-    noResults: "No posts found matching your search.",
-  },
-}[lang as "vi" | "en"];
 ---
 
-<Layout title={`${t.title} | Hải Phạm`} lang={lang} description={t.desc}>
-  <div transition:persist="blog-header-section">
+<Layout
+  title={`${t("blog.title")} | Hải Phạm`}
+  lang={lang}
+  description={t("blog.desc")}
+>
+  <div>
     <section class="blog-hero">
       <div class="hero-content">
-        <h1 class="gradient-text">{t.title}</h1>
-        <p>{t.desc}</p>
+        <h1 class="gradient-text">{t("blog.title")}</h1>
+        <p>{t("blog.desc")}</p>
       </div>
       <Search
-        placeholder={t.searchPlaceholder}
+        placeholder={t("blog.search.placeholder")}
         allPosts={allPostsForSearch}
-        noResultsText={t.noResults}
+        noResultsText={t("blog.search.noResults")}
+        resultsFoundText={t("blog.search.resultsFound")}
         lang={lang}
-        transition:persist
       />
     </section>
   </div>
 
   <div class="content-wrapper" id="blog-content-wrapper">
-    <div class="post-grid" id="main-post-grid" transition:animate="fade">
+    <div class="post-grid" id="main-post-grid">
       {
         page.data.map((post: any) => (
           <PostCard

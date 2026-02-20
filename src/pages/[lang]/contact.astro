@@ -1,41 +1,29 @@
 ---
 import Layout from "../../layouts/Layout.astro";
+import { useTranslations } from "../../i18n/utils";
 
 export function getStaticPaths() {
   return [{ params: { lang: "vi" } }, { params: { lang: "en" } }];
 }
 
 const { lang } = Astro.params;
+const t = useTranslations(lang as any);
 const title = lang === "vi" ? "Liên hệ | Hải Phạm" : "Contact | Hải Phạm";
 ---
 
 <Layout title={title} lang={lang}>
-  <div class="container narrow">
+  <div class="container">
     <section class="contact-header">
-      <h1 data-i18n="contact.title">Liên hệ</h1>
-      <p class="intro" data-i18n="contact.intro">
-        Mình luôn sẵn sàng trao đổi về công nghệ hoặc các cơ hội hợp tác.
+      <h1 class="gradient-text">{t("contact.title")}</h1>
+      <p class="intro">
+        {t("contact.intro")}
       </p>
     </section>
 
-    <div class="contact-content">
-      <div class="contact-card">
-        <h3 data-i18n="contact.email">Email</h3>
-        <p data-i18n="contact.email.desc">Gửi mail cho mình tại:</p>
-        <a href="mailto:haiphamcoder@gmail.com" class="contact-link"
-          >haiphamcoder@gmail.com</a
-        >
-      </div>
-
-      <div class="contact-card">
-        <h3 data-i18n="contact.social">Mạng xã hội</h3>
-        <p data-i18n="contact.social.desc">Kết nối với mình qua mạng xã hội:</p>
-        <div class="social-links">
-          <a
-            href="https://github.com/haiphamcoder"
-            target="_blank"
-            aria-label="GitHub"
-          >
+    <div class="contact-grid">
+      <div class="contact-info">
+        <div class="contact-card info-card">
+          <div class="card-icon">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="24"
@@ -47,15 +35,21 @@ const title = lang === "vi" ? "Liên hệ | Hải Phạm" : "Contact | Hải Ph�
               stroke-linecap="round"
               stroke-linejoin="round"
               ><path
-                d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36.5-8 0C6 2 5 2 4 3c-1.2 1.76-1.5 4.54-.5 5.5-.73 1.02-1.08 2.25-1 3.5.2 3.5 3 5.5 6 5.5-.9 1.2-1 2.5-1 4v4h4z"
-              ></path></svg
+                d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"
+              ></path><polyline points="22,6 12,13 2,6"></polyline></svg
             >
-          </a>
-          <a
-            href="https://www.linkedin.com/in/haiphamcoder"
-            target="_blank"
-            aria-label="LinkedIn"
-          >
+          </div>
+          <div class="card-content">
+            <h3>{t("contact.email")}</h3>
+            <p>{t("contact.email.desc")}</p>
+            <a href="mailto:haiphamcoder@gmail.com" class="contact-link"
+              >haiphamcoder@gmail.com</a
+            >
+          </div>
+        </div>
+
+        <div class="contact-card info-card">
+          <div class="card-icon">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="24"
@@ -73,28 +67,140 @@ const title = lang === "vi" ? "Liên hệ | Hải Phạm" : "Contact | Hải Ph�
                 cy="4"
                 r="2"></circle></svg
             >
-          </a>
-          <a
-            href="https://facebook.com/haiphamcoder"
-            target="_blank"
-            aria-label="Facebook"
-          >
+          </div>
+          <div class="card-content">
+            <h3>{t("contact.social")}</h3>
+            <p>{t("contact.social.desc")}</p>
+            <div class="social-links">
+              <a
+                href="https://github.com/haiphamcoder"
+                target="_blank"
+                aria-label="GitHub"
+                class="social-btn"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  ><path
+                    d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36.5-8 0C6 2 5 2 4 3c-1.2 1.76-1.5 4.54-.5 5.5-.73 1.02-1.08 2.25-1 3.5.2 3.5 3 5.5 6 5.5-.9 1.2-1 2.5-1 4v4h4z"
+                  ></path></svg
+                >
+              </a>
+              <a
+                href="https://www.linkedin.com/in/haiphamcoder"
+                target="_blank"
+                aria-label="LinkedIn"
+                class="social-btn"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  ><path
+                    d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"
+                  ></path><rect x="2" y="9" width="4" height="12"></rect><circle
+                    cx="4"
+                    cy="4"
+                    r="2"></circle></svg
+                >
+              </a>
+              <a
+                href="https://facebook.com/haiphamcoder"
+                target="_blank"
+                aria-label="Facebook"
+                class="social-btn"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  ><path
+                    d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"
+                  ></path></svg
+                >
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="contact-form-container">
+        <form class="contact-form" onsubmit="return false;">
+          <div class="form-group">
+            <label for="name">{t("contact.form.name")}</label>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              placeholder={t("contact.form.placeholder.name")}
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="email">{t("contact.form.email")}</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              placeholder={t("contact.form.placeholder.email")}
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="subject">{t("contact.form.subject")}</label>
+            <input
+              type="text"
+              id="subject"
+              name="subject"
+              placeholder={t("contact.form.placeholder.subject")}
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="message">{t("contact.form.message")}</label>
+            <textarea
+              id="message"
+              name="message"
+              rows="5"
+              placeholder={t("contact.form.placeholder.message")}
+              required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary">
+            {t("contact.form.send")}
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
+              width="18"
+              height="18"
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
               stroke-width="2"
               stroke-linecap="round"
               stroke-linejoin="round"
-              ><path
-                d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"
-              ></path></svg
+              ><line x1="22" y1="2" x2="11" y2="13"></line><polygon
+                points="22 2 15 22 11 13 2 9 22 2"></polygon></svg
             >
-          </a>
-        </div>
+          </button>
+        </form>
       </div>
     </div>
   </div>
@@ -102,56 +208,231 @@ const title = lang === "vi" ? "Liên hệ | Hải Phạm" : "Contact | Hải Ph�
 
 <style>
   .contact-header {
-    margin: 4rem 0 3rem;
+    margin: 4rem 0 4rem;
     text-align: center;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .gradient-text {
+    font-size: 3.5rem;
+    font-weight: 800;
+    margin-bottom: 1.5rem;
+    background: linear-gradient(135deg, var(--brand) 0%, var(--accent) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: -0.02em;
   }
 
   .intro {
     font-size: 1.25rem;
     color: var(--muted);
+    line-height: 1.6;
   }
 
-  .contact-content {
+  .contact-grid {
     display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 3rem;
+    align-items: start;
+    margin-bottom: 6rem;
+  }
+
+  .contact-info {
+    display: flex;
+    flex-direction: column;
     gap: 2rem;
-    max-width: 600px;
-    margin: 0 auto;
   }
 
   .contact-card {
     background: var(--card);
-    padding: 2rem;
-    border-radius: var(--radius-lg);
+    padding: 2.5rem;
+    border-radius: var(--radius-xl);
     border: 1px solid var(--border);
-    text-align: center;
+    transition: var(--transition-slow);
+    display: flex;
+    gap: 1.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .info-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: var(--brand);
+    opacity: 0;
     transition: var(--transition);
   }
 
-  .contact-card:hover {
-    box-shadow: var(--shadow-lg);
-    border-color: var(--brand);
-    transform: translateY(-2px);
+  .info-card:hover {
+    box-shadow: var(--shadow-xl);
+    border-color: var(--brand-light);
+    transform: translateY(-5px);
+  }
+
+  .info-card:hover::before {
+    opacity: 1;
+  }
+
+  .card-icon {
+    width: 50px;
+    height: 50px;
+    background: var(--brand-light);
+    color: var(--brand);
+    border-radius: var(--radius-lg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .card-content h3 {
+    margin: 0 0 0.5rem;
+    font-size: 1.5rem;
+    font-weight: 700;
+  }
+
+  .card-content p {
+    color: var(--muted);
+    margin-bottom: 1rem;
   }
 
   .contact-link {
-    font-size: 1.25rem;
+    font-size: 1.125rem;
     font-weight: 600;
     color: var(--brand);
+    transition: var(--transition);
+  }
+
+  .contact-link:hover {
+    color: var(--brand-hover);
+    text-decoration: underline;
   }
 
   .social-links {
     display: flex;
+    gap: 1rem;
+    margin-top: 0.5rem;
+  }
+
+  .social-btn {
+    width: 42px;
+    height: 42px;
+    background: var(--border-light);
+    color: var(--muted);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
     justify-content: center;
+    transition: var(--transition);
+    border: 1px solid var(--border);
+  }
+
+  .social-btn:hover {
+    background: var(--brand);
+    color: white;
+    border-color: var(--brand);
+    transform: translateY(-3px);
+  }
+
+  .contact-form-container {
+    background: var(--card);
+    padding: 3rem;
+    border-radius: var(--radius-xl);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .contact-form {
+    display: flex;
+    flex-direction: column;
     gap: 1.5rem;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .form-group label {
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--text);
+  }
+
+  .form-group input,
+  .form-group textarea {
+    padding: 0.875rem 1rem;
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    background: var(--bg);
+    color: var(--text);
+    font-family: inherit;
+    font-size: 1rem;
+    transition: var(--transition);
+  }
+
+  .form-group input:focus,
+  .form-group textarea:focus {
+    outline: none;
+    border-color: var(--brand);
+    box-shadow: 0 0 0 3px var(--brand-light);
+  }
+
+  .btn-primary {
+    cursor: pointer;
+    background: var(--brand);
+    color: white;
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: var(--radius);
+    font-weight: 700;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    transition: var(--transition);
+    width: fit-content;
     margin-top: 1rem;
   }
 
-  .social-links a {
-    color: var(--muted);
-    font-weight: 500;
+  .btn-primary:hover {
+    background: var(--brand-hover);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
   }
 
-  .social-links a:hover {
-    color: var(--brand);
+  @media (max-width: 968px) {
+    .contact-grid {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    .contact-header h1 {
+      font-size: 2.5rem;
+    }
+
+    .contact-form-container {
+      padding: 2rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .contact-card {
+      flex-direction: column;
+      padding: 1.5rem;
+    }
+
+    .btn-primary {
+      width: 100%;
+    }
   }
 </style>

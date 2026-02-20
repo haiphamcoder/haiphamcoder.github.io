@@ -3,10 +3,12 @@ interface Props {
   allPosts: any[];
   placeholder: string;
   noResultsText: string;
+  resultsFoundText: string;
   lang: string;
 }
 
-const { allPosts, placeholder, noResultsText, lang } = Astro.props;
+const { allPosts, placeholder, noResultsText, resultsFoundText, lang } =
+  Astro.props;
 ---
 
 <div class="search-container">
@@ -34,7 +36,7 @@ const { allPosts, placeholder, noResultsText, lang } = Astro.props;
   <div id="search-status" class="search-status" aria-live="polite"></div>
 </div>
 
-<script is:inline define:vars={{ allPosts, noResultsText, lang }}>
+<script is:inline define:vars={{ allPosts, noResultsText, resultsFoundText, lang }}>
   // Wrap in a function to run after DOM is ready
   function initSearch() {
     const searchInput = document.getElementById("blog-search");
@@ -77,12 +79,12 @@ const { allPosts, placeholder, noResultsText, lang } = Astro.props;
         postGrid.innerHTML = `<div class="no-results">${noResultsText}</div>`;
         searchStatus.textContent = noResultsText;
       } else {
-        searchStatus.textContent = `${filtered.length} results found`;
+        searchStatus.textContent = `${filtered.length} ${resultsFoundText}`;
         postGrid.innerHTML = filtered
           .map(
             (post) => `
-          <article class="card post-card scroll-animate animate-in">
-            <a href="/${lang}${post.href}" class="card-link">
+          <article class="card post-card">
+            <a href="/${lang || 'vi'}${post.href}" class="card-link">
               <h3>${post.title}</h3>
               <div class="meta">
                 <span>📅 ${post.date}</span>

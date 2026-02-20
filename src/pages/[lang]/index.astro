@@ -2,12 +2,14 @@
 import Layout from "../../layouts/Layout.astro";
 import PostCard from "../../components/PostCard.astro";
 import { getCollection } from "astro:content";
+import { useTranslations } from "../../i18n/utils";
 
 export function getStaticPaths() {
   return [{ params: { lang: "vi" } }, { params: { lang: "en" } }];
 }
 
 const { lang } = Astro.params;
+const t = useTranslations(lang as any);
 const posts = (await getCollection("blog"))
   .filter((post) => post.data.lang === lang)
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
@@ -18,19 +20,13 @@ const posts = (await getCollection("blog"))
   <section class="hero">
     <img src="/assets/avatar.jpg" alt="Avatar" class="avatar" />
     <div class="hero-text">
-      <h1 data-i18n="home.hero.title">Xin chào, mình là Hải Phạm</h1>
-      <p data-i18n="home.hero.desc">
-        Backend Engineer • Java & Spring Boot • Quan tâm hệ thống phân tán, Big
-        Data, hiệu năng và kiến trúc.
+      <h1>{t("home.hero.title")}</h1>
+      <p>
+        {t("home.hero.desc")}
       </p>
       <div class="hero-actions">
-        <a class="btn" href={`/${lang}/blog`} data-i18n="home.hero.readBlog"
-          >Đọc blog</a
-        >
-        <a
-          class="btn-outline"
-          href={`/${lang}/about`}
-          data-i18n="home.hero.about">Tìm hiểu thêm</a
+        <a class="btn" href={`/${lang}/blog`}>{t("home.hero.readBlog")}</a>
+        <a class="btn-outline" href={`/${lang}/about`}>{t("home.hero.about")}</a
         >
       </div>
       <div class="socials">
@@ -49,8 +45,8 @@ const posts = (await getCollection("blog"))
 
   <section class="latest">
     <div class="section-header">
-      <h2 data-i18n="home.latest.title">Bài viết mới</h2>
-      <a href={`/${lang}/blog`} data-i18n="home.latest.viewAll">Xem tất cả →</a>
+      <h2>{t("home.latest.title")}</h2>
+      <a href={`/${lang}/blog`}>{t("home.latest.viewAll")}</a>
     </div>
     <div class="post-grid">
       {
@@ -60,7 +56,10 @@ const posts = (await getCollection("blog"))
             date={post.data.date.toISOString().split("T")[0]}
             tags={post.data.tags}
             excerpt={post.data.excerpt || ""}
-            href={`/blog/${post.slug}`}
+            href={`/blog/${post.id
+              .replace(/\.(en\.)?md$/, "")
+              .split("/")
+              .pop()}`}
             lang={post.data.lang}
           />
         ))
