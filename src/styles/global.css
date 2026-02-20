@@ -52,6 +52,7 @@
   /* Blog Redesign RGB Colors */
   --card-bg-rgb: 255, 255, 255;
   --accent-rgb: 56, 178, 172;
+  --brand-rgb: 49, 130, 206;
 }
 
 html[data-theme="dark"] {
@@ -80,6 +81,7 @@ html[data-theme="dark"] {
   --shadow-xl:
     0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.2);
   --card-bg-rgb: 26, 32, 44;
+  --brand-rgb: 99, 179, 237;
 }
 
 * {
@@ -571,6 +573,16 @@ html[data-theme="dark"] .site-header {
   margin-bottom: 32px;
   transform: translateZ(0);
   will-change: transform;
+  position: relative;
+  background: radial-gradient(
+    circle at 0% 0%,
+    rgba(var(--brand-rgb), 0.03) 0%,
+    transparent 50%
+  ), radial-gradient(
+    circle at 100% 100%,
+    rgba(var(--accent-rgb), 0.03) 0%,
+    transparent 50%
+  );
 }
 
 .avatar {
@@ -603,8 +615,10 @@ html[data-theme="dark"] .site-header {
 .hero-text p {
   font-size: 1.125rem;
   color: var(--muted);
-  line-height: 1.6;
+  line-height: 1.7;
   margin: 0 0 24px;
+  font-weight: 450;
+  opacity: 0.9;
 }
 
 .hero-actions {
@@ -634,8 +648,8 @@ html[data-theme="dark"] .site-header {
 .btn:hover {
   background: var(--brand-hover);
   border-color: var(--brand-hover);
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-lg);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px -4px rgba(var(--brand-rgb), 0.4);
   text-decoration: none;
   color: var(--brand-contrast);
 }
@@ -661,8 +675,8 @@ html[data-theme="dark"] .site-header {
   background: var(--card-hover);
   border-color: var(--brand);
   color: var(--brand);
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-lg);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 15px -4px rgba(0, 0, 0, 0.1);
   text-decoration: none;
 }
 
