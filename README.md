@@ -40,13 +40,13 @@ This site serves as a place where I share my knowledge and experiences in the te
 
 All commands are run from the root of the project:
 
-| Command | Action |
-| :--- | :--- |
-| `npm install` | Installs dependencies |
-| `npm run dev` | Starts local dev server at `localhost:4321` |
-| `npm run build` | Build your production site to `./dist/` |
-| `npm run preview` | Preview your build locally |
-| `npm run format` | Format code with Prettier |
+| Command           | Action                                      |
+| :---------------- | :------------------------------------------ |
+| `npm install`     | Installs dependencies                       |
+| `npm run dev`     | Starts local dev server at `localhost:4321` |
+| `npm run build`   | Build your production site to `./dist/`     |
+| `npm run preview` | Preview your build locally                  |
+| `npm run format`  | Format code with Prettier                   |
 
 ## 🛠 Troubleshooting Cache
 
@@ -56,4 +56,5 @@ If you don't see the latest updates:
 2. **Clear Cache**: In DevTools > Application > Storage > Clear site data.
 
 ---
+
 Built with ❤️ by Hải Phạm.
