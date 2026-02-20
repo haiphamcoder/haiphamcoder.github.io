@@ -2125,9 +2125,7 @@ html[data-theme="dark"] .callout.danger {
   background-clip: text;
 }
 
-.blog-hero {
-  /* Animation removed to prevent re-triggering during pagination with transition:persist */
-}
+
 
 @keyframes fadeInDown {
   from {
