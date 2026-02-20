@@ -1,5 +1,6 @@
 ---
 import { ui } from "../../i18n/ui";
+import { useTranslations } from "../../i18n/utils";
 import Layout from "../../layouts/Layout.astro";
 
 export function getStaticPaths() {
@@ -7,7 +8,7 @@ export function getStaticPaths() {
 }
 
 const { lang = "vi" } = Astro.params;
-const t = ui[lang as keyof typeof ui];
+const t = useTranslations(lang as keyof typeof ui);
 const title = lang === "vi" ? "Giới thiệu | Hải Phạm" : "About | Hải Phạm";
 ---
 
@@ -21,7 +22,7 @@ const title = lang === "vi" ? "Giới thiệu | Hải Phạm" : "About | Hải P
         </div>
 
         <div class="cv-contact">
-          <h3>{t["about.contact"]}</h3>
+          <h3>{t("about.contact")}</h3>
           <div class="contact-item">
             <span class="icon">📧</span>
             <a href="mailto:ngochai285nd@gmail.com">ngochai285nd@gmail.com</a>
@@ -44,30 +45,40 @@ const title = lang === "vi" ? "Giới thiệu | Hải Phạm" : "About | Hải P
         </div>
 
         <div class="cv-skills">
-          <h3>{t["about.skills"]}</h3>
+          <h3>{t("about.skills")}</h3>
 
           <div class="skill-group">
-            <h4>{t["about.skills.languages"]}</h4>
+            <h4>{t("about.skills.languages")}</h4>
             <div class="tags">
-              <span class="tag">C/C++</span>
               <span class="tag">Java</span>
               <span class="tag">Python</span>
+              <span class="tag">C/C++</span>
               <span class="tag">Rust</span>
-              <span class="tag">JavaScript</span>
+              <span class="tag">SQL</span>
             </div>
           </div>
 
           <div class="skill-group">
-            <h4>{t["about.skills.frameworks"]}</h4>
+            <h4>{t("about.skills.frameworks")}</h4>
             <div class="tags">
               <span class="tag">Spring Boot</span>
+              <span class="tag">Spring Security</span>
               <span class="tag">Hibernate</span>
+            </div>
+          </div>
+
+          <div class="skill-group">
+            <h4>{t("about.skills.databases")}</h4>
+            <div class="tags">
+              <span class="tag">MySQL</span>
+              <span class="tag">PostgreSQL</span>
+              <span class="tag">Redis</span>
               <span class="tag">Apache Kafka</span>
             </div>
           </div>
 
           <div class="skill-group">
-            <h4>{t["about.skills.tools"]}</h4>
+            <h4>{t("about.skills.tools")}</h4>
             <div class="tags">
               <span class="tag">Docker</span>
               <span class="tag">Git</span>
@@ -77,11 +88,12 @@ const title = lang === "vi" ? "Giới thiệu | Hải Phạm" : "About | Hải P
           </div>
 
           <div class="skill-group">
-            <h4>{t["about.skills.knowledge"]}</h4>
+            <h4>{t("about.skills.knowledge")}</h4>
             <div class="tags">
               <span class="tag">OOP</span>
               <span class="tag">REST API</span>
               <span class="tag">Distributed Systems</span>
+              <span class="tag">Microservices</span>
               <span class="tag">Security</span>
             </div>
           </div>
@@ -93,64 +105,64 @@ const title = lang === "vi" ? "Giới thiệu | Hải Phạm" : "About | Hải P
         <header class="cv-header">
           <h1>Hải Phạm</h1>
           <p class="cv-title">
-            {t["about.role"]}
+            {t("about.role")}
           </p>
           <p class="cv-summary">
-            {t["about.summary"]}
+            {t("about.summary")}
           </p>
         </header>
 
         <section class="cv-section">
-          <h2>💼 {t["about.experience"]}</h2>
+          <h2>💼 {t("about.experience")}</h2>
 
           <div class="cv-item">
             <div class="cv-item-header">
-              <h3>{t["about.experience.vccorp.developer"]}</h3>
+              <h3>{t("about.experience.vccorp.developer")}</h3>
               <span class="date">06/2024 - {lang === "vi" ? "Hiện tại" : "Present"}</span>
             </div>
-            <p class="sub-title">{t["about.experience.vccorp.dept"]}</p>
-            <p class="role">{t["about.experience.vccorp.company"]}</p>
+            <p class="sub-title">{t("about.experience.vccorp.dept")}</p>
+            <p class="role">{t("about.experience.vccorp.company")}</p>
           </div>
 
           <div class="cv-item">
             <div class="cv-item-header">
-              <h3>{t["about.experience.vccorp.collaborator"]}</h3>
+              <h3>{t("about.experience.vccorp.collaborator")}</h3>
               <span class="date">02/2024 - 06/2024</span>
             </div>
-            <p class="sub-title">{t["about.experience.vccorp.dept"]}</p>
-            <p class="role">{t["about.experience.vccorp.company"]}</p>
+            <p class="sub-title">{t("about.experience.vccorp.dept")}</p>
+            <p class="role">{t("about.experience.vccorp.company")}</p>
           </div>
 
           <div class="cv-item">
             <div class="cv-item-header">
-              <h3>{t["about.experience.vccorp.intern"]}</h3>
+              <h3>{t("about.experience.vccorp.intern")}</h3>
               <span class="date">10/2023 - 02/2024</span>
             </div>
-            <p class="sub-title">{t["about.experience.vccorp.dept"]}</p>
-            <p class="role">{t["about.experience.vccorp.company"]}</p>
+            <p class="sub-title">{t("about.experience.vccorp.dept")}</p>
+            <p class="role">{t("about.experience.vccorp.company")}</p>
           </div>
         </section>
 
         <section class="cv-section">
-          <h2>🎓 {t["about.education"]}</h2>
+          <h2>🎓 {t("about.education")}</h2>
           <div class="cv-item">
             <div class="cv-item-header">
               <h3>
-                {t["about.education.school"]}
+                {t("about.education.school")}
               </h3>
               <span class="date">2020 - 2025</span>
             </div>
             <p class="sub-title">
-              {t["about.education.program"]}
+              {t("about.education.program")}
             </p>
             <p class="role">
-              {t["about.education.degree"]}
+              {t("about.education.degree")}
             </p>
           </div>
         </section>
 
         <section class="cv-section">
-          <h2>🚀 {t["about.projects"]}</h2>
+          <h2>🚀 {t("about.projects")}</h2>
 
           <div class="cv-item">
             <div class="cv-item-header">
@@ -158,7 +170,7 @@ const title = lang === "vi" ? "Giới thiệu | Hải Phạm" : "About | Hải P
               <span class="date">2025</span>
             </div>
             <p>
-              {t["about.projects.crypto.desc"]}
+              {t("about.projects.crypto.desc")}
             </p>
             <div class="tech-stack">
               <span class="tech">Java</span>
@@ -178,7 +190,7 @@ const title = lang === "vi" ? "Giới thiệu | Hải Phạm" : "About | Hải P
               <span class="date">2025</span>
             </div>
             <p>
-              {t["about.projects.kafka.desc"]}
+              {t("about.projects.kafka.desc")}
             </p>
             <div class="tech-stack">
               <span class="tech">Kafka</span>
@@ -198,7 +210,7 @@ const title = lang === "vi" ? "Giới thiệu | Hải Phạm" : "About | Hải P
               <span class="date">2025</span>
             </div>
             <p>
-              {t["about.projects.xss.desc"]}
+              {t("about.projects.xss.desc")}
             </p>
             <div class="tech-stack">
               <span class="tech">Java</span>
@@ -214,27 +226,27 @@ const title = lang === "vi" ? "Giới thiệu | Hải Phạm" : "About | Hải P
         </section>
 
         <section class="cv-section">
-          <h2>🎯 {t["about.goals"]}</h2>
+          <h2>🎯 {t("about.goals")}</h2>
           <div class="goals-grid">
             <div class="goal-group">
-              <h4>{t["about.goals.short"]}</h4>
+              <h4>{t("about.goals.short")}</h4>
               <ul>
                 <li>
-                  {t["about.goals.short.1"]}
+                  {t("about.goals.short.1")}
                 </li>
                 <li>
-                  {t["about.goals.short.2"]}
+                  {t("about.goals.short.2")}
                 </li>
               </ul>
             </div>
             <div class="goal-group">
-              <h4>{t["about.goals.long"]}</h4>
+              <h4>{t("about.goals.long")}</h4>
               <ul>
                 <li>
-                  {t["about.goals.long.1"]}
+                  {t("about.goals.long.1")}
                 </li>
                 <li>
-                  {t["about.goals.long.2"]}
+                  {t("about.goals.long.2")}
                 </li>
               </ul>
             </div>

@@ -22,6 +22,7 @@ export const ui = {
     "about.skills": "Kỹ năng",
     "about.skills.languages": "Ngôn ngữ lập trình",
     "about.skills.frameworks": "Frameworks",
+    "about.skills.databases": "Databases & Messaging",
     "about.skills.tools": "Tools & DevOps",
     "about.skills.knowledge": "Kiến thức",
     "about.role": "Junior Backend Engineer | Java | Spring Boot",
@@ -82,6 +83,7 @@ export const ui = {
     "about.skills": "Skills",
     "about.skills.languages": "Programming Languages",
     "about.skills.frameworks": "Frameworks",
+    "about.skills.databases": "Databases & Messaging",
     "about.skills.tools": "Tools & DevOps",
     "about.skills.knowledge": "Knowledge",
     "about.role": "Junior Backend Engineer | Java | Spring Boot",
@@ -121,3 +123,4 @@ export const ui = {
     "contact.social.desc": "Connect with me on social media:",
   },
 } as const;
+// Last updated to fix i18n type sync issue

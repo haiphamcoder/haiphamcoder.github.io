@@ -1,5 +1,6 @@
 ---
 import { ui } from "../i18n/ui";
+import { useTranslations } from "../i18n/utils";
 
 interface Props {
   lang?: string;
@@ -7,14 +8,14 @@ interface Props {
 }
 
 const { lang = "vi", translatedSlug } = Astro.props;
-const t = ui[lang as keyof typeof ui];
+const t = useTranslations(lang as keyof typeof ui);
 
 // Navigation links with lang prefix
 const navLinks = [
-  { href: `/${lang}/`, label: t["nav.home"] },
-  { href: `/${lang}/blog`, label: t["nav.blog"] },
-  { href: `/${lang}/about`, label: t["nav.about"] },
-  { href: `/${lang}/contact`, label: t["nav.contact"] },
+  { href: `/${lang}/`, label: t("nav.home") },
+  { href: `/${lang}/blog`, label: t("nav.blog") },
+  { href: `/${lang}/about`, label: t("nav.about") },
+  { href: `/${lang}/contact`, label: t("nav.contact") },
 ];
 
 const currentPath = Astro.url.pathname;
