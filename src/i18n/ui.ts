@@ -50,7 +50,8 @@ export const ui = {
     "about.experience.vccorp.intern": "Thực tập sinh Backend",
     "about.experience.vccorp.collaborator": "Cộng tác viên Backend",
     "about.experience.vccorp.developer": "Lập trình viên Backend",
-    "about.experience.vccorp.dept": "Bộ phận Data Mining, Phòng Adtech, Khối Admicro",
+    "about.experience.vccorp.dept":
+      "Bộ phận Data Mining, Phòng Adtech, Khối Admicro",
     "about.experience.vccorp.company": "Công ty cổ phần VCCorp",
     "contact.title": "Liên hệ",
     "contact.intro":
@@ -69,7 +70,8 @@ export const ui = {
     "contact.form.placeholder.subject": "Bạn muốn trao đổi về vấn đề gì?",
     "contact.form.placeholder.message": "Hãy để lại lời nhắn cho mình...",
     "blog.title": "Blog & Chia sẻ kiến thức",
-    "blog.desc": "Nơi chia sẻ kiến thức về lập trình, kiến trúc hệ thống và kinh nghiệm làm việc.",
+    "blog.desc":
+      "Nơi chia sẻ kiến thức về lập trình, kiến trúc hệ thống và kinh nghiệm làm việc.",
     "blog.search.placeholder": "Tìm kiếm bài viết...",
     "blog.search.noResults": "Không tìm thấy bài viết nào phù hợp.",
     "blog.search.resultsFound": "kết quả được tìm thấy",
@@ -128,7 +130,8 @@ export const ui = {
     "about.experience.vccorp.intern": "Backend Intern",
     "about.experience.vccorp.collaborator": "Backend Collaborator",
     "about.experience.vccorp.developer": "Backend Developer",
-    "about.experience.vccorp.dept": "Data Mining Unit, Adtech Center, Admicro Division",
+    "about.experience.vccorp.dept":
+      "Data Mining Unit, Adtech Center, Admicro Division",
     "about.experience.vccorp.company": "VCCorp Corporation",
     "contact.title": "Contact",
     "contact.intro":
@@ -147,7 +150,8 @@ export const ui = {
     "contact.form.placeholder.subject": "What would you like to discuss?",
     "contact.form.placeholder.message": "Write your message here...",
     "blog.title": "Blog & Knowledge Sharing",
-    "blog.desc": "Technical deep dives into backend engineering, architecture, and developer experience.",
+    "blog.desc":
+      "Technical deep dives into backend engineering, architecture, and developer experience.",
     "blog.search.placeholder": "Search posts...",
     "blog.search.noResults": "No posts found matching your search.",
     "blog.search.resultsFound": "results found",

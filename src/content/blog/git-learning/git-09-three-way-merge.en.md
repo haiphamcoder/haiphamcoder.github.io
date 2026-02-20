@@ -8,9 +8,9 @@ seriesOrder: 9
 excerpt: "Lesson 9 in the Learning Git series: Chapter 9: Three-Way Merges"
 ---
 
-|                                                                                                                                                                                                                                                                                                                                        |
-| :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| In the previous chapter, we performed a **Fast-forward merge** when the commit history was a straight line. |
+|                                                                                                                                                                                                               |
+| :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| In the previous chapter, we performed a **Fast-forward merge** when the commit history was a straight line.                                                                                                   |
 | In this chapter, you will face a more realistic situation: **Diverging History**. When you and a colleague change code in parallel, Git needs a smarter mechanism to merge, which is the **Three-Way Merge**. |
 
 ## Why need a Three-Way Merge?

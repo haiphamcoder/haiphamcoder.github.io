@@ -8,9 +8,9 @@ seriesOrder: 7
 excerpt: "Lesson 7 in the Learning Git series: Chapter 7: Remote Repositories"
 ---
 
-|                                                                                                                                                                                                                         |
-| :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| In the previous chapter, we chose a hosting service and set up authentication (SSH/HTTPS) to connect securely.                                                                                                         |
+|                                                                                                                                                                 |
+| :-------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| In the previous chapter, we chose a hosting service and set up authentication (SSH/HTTPS) to connect securely.                                                  |
 | In this chapter, we will learn how to use a Remote Repository. You will practice creating a remote repository for the `rainbow` project and pushing data to it. |
 
 ## Current Status of the Local Repository

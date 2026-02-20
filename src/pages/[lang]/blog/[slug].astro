@@ -4,14 +4,23 @@ import Layout from "../../../layouts/Layout.astro";
 import TableOfContents from "../../../components/TableOfContents.astro";
 
 const getCleanSlug = (id: string) => {
-  return id.replace(/\.(en\.)?md$/, "").split("/").pop() || "";
+  return (
+    id
+      .replace(/\.(en\.)?md$/, "")
+      .split("/")
+      .pop() || ""
+  );
 };
 
 export async function getStaticPaths() {
   const posts = await getCollection("blog");
   return posts.map((post) => {
     const lang = post.data.lang;
-    const cleanSlug = post.id.replace(/\.(en\.)?md$/, "").split("/").pop() || "";
+    const cleanSlug =
+      post.id
+        .replace(/\.(en\.)?md$/, "")
+        .split("/")
+        .pop() || "";
     return {
       params: { lang, slug: cleanSlug },
       props: { post, allPosts: posts },
@@ -27,7 +36,9 @@ const targetLang = lang === "vi" ? "en" : "vi";
 const translatedPost = allPosts.find((p) => {
   return p.data.lang === targetLang && getCleanSlug(p.id) === currentCleanSlug;
 });
-const translatedSlug = translatedPost ? getCleanSlug(translatedPost.id) : undefined;
+const translatedSlug = translatedPost
+  ? getCleanSlug(translatedPost.id)
+  : undefined;
 
 const { Content, headings } = await post.render();
 
@@ -93,13 +104,19 @@ if (post.data.series) {
 
             <div class="series-links">
               {prevPost && (
-                <a href={`/${lang}/blog/${getCleanSlug(prevPost.id)}`} class="series-link prev">
+                <a
+                  href={`/${lang}/blog/${getCleanSlug(prevPost.id)}`}
+                  class="series-link prev"
+                >
                   <span>← Bài trước</span>
                   <span class="link-title">{prevPost.data.title}</span>
                 </a>
               )}
               {nextPost && (
-                <a href={`/${lang}/blog/${getCleanSlug(nextPost.id)}`} class="series-link next">
+                <a
+                  href={`/${lang}/blog/${getCleanSlug(nextPost.id)}`}
+                  class="series-link next"
+                >
                   <span>Bài tiếp theo →</span>
                   <span class="link-title">{nextPost.data.title}</span>
                 </a>
@@ -142,7 +159,7 @@ if (post.data.series) {
       });
 
       const mermaidBlocks = document.querySelectorAll(
-        "pre.mermaid, pre > code.language-mermaid, pre[data-language=\"mermaid\"]",
+        'pre.mermaid, pre > code.language-mermaid, pre[data-language="mermaid"]',
       );
 
       if (mermaidBlocks.length > 0) {
@@ -247,7 +264,7 @@ if (post.data.series) {
     const modal = document.getElementById("mermaid-modal");
     const modalBody = document.getElementById("mermaid-modal-body");
     if (!modal || !modalBody) return;
-    
+
     const original = document.getElementById(id);
     if (!original) return;
 

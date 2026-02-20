@@ -8,9 +8,9 @@ seriesOrder: 11
 excerpt: "Lesson 11 in the Learning Git series: Chapter 11: Rebasing"
 ---
 
-|                                                                                                                                                                                                |
-| :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| In previous chapters, we used `git merge` to integrate code. It's safe, but it creates "Merge Commits" which can make history somewhat messy.                                               |
+|                                                                                                                                               |
+| :-------------------------------------------------------------------------------------------------------------------------------------------- |
+| In previous chapters, we used `git merge` to integrate code. It's safe, but it creates "Merge Commits" which can make history somewhat messy. |
 | **Rebasing** is a powerful Git technique that helps you "rewrite history," turning a parallel development branch into a single straight line. |
 
 ## Rebasing vs. Merging

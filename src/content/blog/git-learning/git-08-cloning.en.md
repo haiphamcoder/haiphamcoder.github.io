@@ -8,9 +8,9 @@ seriesOrder: 8
 excerpt: "Lesson 8 in the Learning Git series: Chapter 8: Cloning & Fetching"
 ---
 
-|                                                                                                                                                                                                                                                                                                                                        |
-| :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| In the previous chapter, you created and pushed code to a remote repository.                                                                                                                                                                                                                                                         |
+|                                                                                                                                                                                                                                                          |
+| :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| In the previous chapter, you created and pushed code to a remote repository.                                                                                                                                                                             |
 | In this chapter, we will simulate team collaboration by playing the role of a colleague. You will learn how to copy (**cloning**) a remote repository to your machine, as well as how to get new data (**fetching**) when there are changes from others. |
 
 ## Collaboration Simulation

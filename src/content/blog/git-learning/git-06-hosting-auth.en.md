@@ -8,10 +8,10 @@ seriesOrder: 6
 excerpt: "Lesson 6 in the Learning Git series: Chapter 6: Hosting & Authentication"
 ---
 
-|                                                                                                                                                                                                                                                         |
-| :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| In the previous chapter, you learned about merging and how this Git feature allows integrating changes from one branch to another.                                                                                                                      |
-| Until now, you have only worked with **local repositories** located directly on your computer.                                                                                                                                                        |
+|                                                                                                                                                                                                                                                                               |
+| :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| In the previous chapter, you learned about merging and how this Git feature allows integrating changes from one branch to another.                                                                                                                                            |
+| Until now, you have only worked with **local repositories** located directly on your computer.                                                                                                                                                                                |
 | This chapter marks the beginning of Part 2, where we will work with **hosting services** and **remote repositories**. The goal of this chapter is to help you choose a hosting service and set up authentication to connect securely to a remote repository via HTTPS or SSH. |
 
 ## Hosting Services and Remote Repositories
@@ -47,10 +47,10 @@ When working with a Remote Repository, there are two ways to interact:
 
 Case 2 requires "Authentication" so the server knows who you are and whether you have permission to write data to that repository. There are two main protocols for connecting: **HTTPS** and **SSH**.
 
-| Protocol | Advantages                                                                                                                                    | Disadvantages                                                                                                                                                     |
-| :------- | :-------------------------------------------------------------------------------------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **HTTPS** | Simple to understand, works easily through firewalls.                                                                                       | Requires entering a password (or Personal Access Token) frequently if not using a Credential Helper. No longer supports regular login passwords (must use a Token). |
-| **SSH**   | High security, no need to enter a password every time you push (if using an SSH key without a passphrase or with ssh-agent). Standard for Linux/Unix environments. | Requires a slightly more complex initial setup.                                                                                                                   |
+| Protocol  | Advantages                                                                                                                                                         | Disadvantages                                                                                                                                                       |
+| :-------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **HTTPS** | Simple to understand, works easily through firewalls.                                                                                                              | Requires entering a password (or Personal Access Token) frequently if not using a Credential Helper. No longer supports regular login passwords (must use a Token). |
+| **SSH**   | High security, no need to enter a password every time you push (if using an SSH key without a passphrase or with ssh-agent). Standard for Linux/Unix environments. | Requires a slightly more complex initial setup.                                                                                                                     |
 
 **Advice for Linux users:** Use **SSH**. This is the "standard" (native) method for Unix/Linux environments, helping you manage security keys better and not having to worry about managing Personal Access Tokens that expire every 30-90 days like HTTPS.
 

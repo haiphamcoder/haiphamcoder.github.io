@@ -618,17 +618,17 @@ html[data-theme="dark"] .site-header {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 12px 24px;
+  padding: 10px 22px;
   background: var(--brand);
   color: var(--brand-contrast);
   border-radius: var(--radius);
   border: 1px solid var(--brand);
   font-weight: 600;
-  font-size: 16px;
+  font-size: 15px;
   text-decoration: none;
   transition: var(--transition);
   box-shadow: var(--shadow);
-  min-width: 140px;
+  min-width: 120px;
 }
 
 .btn:hover {
@@ -644,17 +644,17 @@ html[data-theme="dark"] .site-header {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 12px 24px;
+  padding: 10px 22px;
   background: transparent;
   color: var(--text);
   border-radius: var(--radius);
   border: 1px solid var(--border);
   font-weight: 600;
-  font-size: 16px;
+  font-size: 15px;
   text-decoration: none;
   transition: var(--transition);
   box-shadow: var(--shadow);
-  min-width: 140px;
+  min-width: 120px;
 }
 
 .btn-outline:hover {
@@ -675,18 +675,29 @@ html[data-theme="dark"] .site-header {
 }
 
 .socials a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
   color: var(--muted);
   text-decoration: none;
   font-weight: 500;
   transition: var(--transition);
-  padding: 4px 8px;
+  padding: 6px 12px;
   border-radius: var(--radius);
+  border: 1px solid transparent;
 }
 
 .socials a:hover {
   color: var(--brand);
   background: var(--card-hover);
+  border-color: var(--border);
   text-decoration: none;
+}
+
+.socials svg {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
 }
 
 .section-header {
@@ -2124,8 +2135,6 @@ html[data-theme="dark"] .callout.danger {
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
-
-
 
 @keyframes fadeInDown {
   from {

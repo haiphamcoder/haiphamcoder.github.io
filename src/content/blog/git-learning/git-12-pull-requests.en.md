@@ -8,10 +8,10 @@ seriesOrder: 12
 excerpt: "Lesson 12 in the Learning Git series: Chapter 12: Pull Requests"
 ---
 
-|                                                                                                                                                                                                                         |
-| :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| We have learned how to merge code (merge/rebase) on the local machine. But in a team environment, having everyone freely merging into the main branch (`main`) is very dangerous.                               |
-| **Pull Request (PR)** (or _Merge Request_ on GitLab) is the standard mechanism to propose changes, review code, and test before officially merging into the project. |
+|                                                                                                                                                                                   |
+| :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| We have learned how to merge code (merge/rebase) on the local machine. But in a team environment, having everyone freely merging into the main branch (`main`) is very dangerous. |
+| **Pull Request (PR)** (or _Merge Request_ on GitLab) is the standard mechanism to propose changes, review code, and test before officially merging into the project.              |
 
 ## What is a Pull Request?
 

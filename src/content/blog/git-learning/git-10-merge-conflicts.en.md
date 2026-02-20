@@ -8,9 +8,9 @@ seriesOrder: 10
 excerpt: "Lesson 10 in the Learning Git series: Chapter 10: Merge Conflicts"
 ---
 
-|                                                                                                                                                                                                                         |
-| :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| In Chapter 9, we performed a successful **Three-Way Merge** when two people edited two different files. |
+|                                                                                                                                                              |
+| :----------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| In Chapter 9, we performed a successful **Three-Way Merge** when two people edited two different files.                                                      |
 | But what happens if both people edit the **same line** in the **same file**? Git won't know whose code to choose. That is when a **Merge Conflict** appears. |
 
 ## What is a Merge Conflict?
