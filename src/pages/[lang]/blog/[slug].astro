@@ -168,6 +168,16 @@ if (post.data.series) {
           const pre = block.tagName === "CODE" ? block.parentElement : block;
           if (!pre || pre.closest(".mermaid-wrapper")) return;
 
+          // CLEANUP: If the copy button script already ran, remove its wrapper/button
+          const existingWrapper = pre.closest(".code-wrapper");
+          if (existingWrapper) {
+            const copyBtn = existingWrapper.querySelector(".copy-btn");
+            if (copyBtn) copyBtn.remove();
+            // Unwrap pre from code-wrapper
+            existingWrapper.parentNode.insertBefore(pre, existingWrapper);
+            existingWrapper.remove();
+          }
+
           const code = pre.textContent || "";
           const wrapper = document.createElement("div");
           wrapper.className = "mermaid-wrapper";
@@ -220,8 +230,11 @@ if (post.data.series) {
       if (
         pre.closest(".mermaid-wrapper") ||
         pre.classList.contains("mermaid") ||
+        pre.classList.contains("language-mermaid") ||
+        pre.getAttribute("data-language") === "mermaid" ||
         pre.closest(".code-wrapper") ||
-        pre.querySelector("code.language-mermaid")
+        pre.querySelector('code[class*="mermaid"]') ||
+        pre.querySelector('code[data-language="mermaid"]')
       )
         return;
 
