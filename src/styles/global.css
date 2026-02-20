@@ -52,7 +52,6 @@
   /* Blog Redesign RGB Colors */
   --card-bg-rgb: 255, 255, 255;
   --accent-rgb: 56, 178, 172;
-  --brand-rgb: 49, 130, 206;
 }
 
 html[data-theme="dark"] {
@@ -81,7 +80,6 @@ html[data-theme="dark"] {
   --shadow-xl:
     0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.2);
   --card-bg-rgb: 26, 32, 44;
-  --brand-rgb: 99, 179, 237;
 }
 
 * {
@@ -111,33 +109,24 @@ body {
     "Oxygen",
     "Ubuntu",
     "Cantarell",
-    sans-serif;
-  line-height: 1.5;
+    "Fira Sans",
+    "Droid Sans",
+    "Helvetica Neue",
+    sans-serif,
+    "Apple Color Emoji",
+    "Segoe UI Emoji",
+    "Noto Color Emoji";
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.7;
+  font-size: 16px;
+  font-weight: 400;
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
-  position: relative;
-}
-
-body::before {
-  content: "";
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  z-index: -1;
-  pointer-events: none;
-  background: radial-gradient(
-      circle at 10% 0%,
-      rgba(var(--brand-rgb), 0.03) 0%,
-      transparent 45%
-    ),
-    radial-gradient(
-      circle at 90% 60%,
-      rgba(var(--accent-rgb), 0.03) 0%,
-      transparent 45%
-    );
 }
 .container {
   width: 100%;
@@ -614,10 +603,8 @@ html[data-theme="dark"] .site-header {
 .hero-text p {
   font-size: 1.125rem;
   color: var(--muted);
-  line-height: 1.7;
+  line-height: 1.6;
   margin: 0 0 24px;
-  font-weight: 450;
-  opacity: 0.9;
 }
 
 .hero-actions {
@@ -647,8 +634,8 @@ html[data-theme="dark"] .site-header {
 .btn:hover {
   background: var(--brand-hover);
   border-color: var(--brand-hover);
-  transform: translateY(-3px);
-  box-shadow: 0 8px 20px -4px rgba(var(--brand-rgb), 0.4);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
   text-decoration: none;
   color: var(--brand-contrast);
 }
@@ -674,8 +661,8 @@ html[data-theme="dark"] .site-header {
   background: var(--card-hover);
   border-color: var(--brand);
   color: var(--brand);
-  transform: translateY(-3px);
-  box-shadow: 0 8px 15px -4px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
   text-decoration: none;
 }
 
